@@ -8,30 +8,28 @@ import Reveal from '../../utils/Reveal'
 
 import Test from '../../components/ui/Test'
 
-import React, { useRef } from "react";
+import React from "react";
 
 
 export default function Home() {
-  const scrollRef = useRef(null)
+  
 
 
   return (
-    <div ref={scrollRef} 
-        className="flex flex-col w-full h-auto -z-50">
+    <div className="flex flex-col w-full h-auto -z-50">
         <Navbar />
         <VideoPlayer src={"/assets/videos/time_lapse.mp4"} />
 
-        <Test />  
 
-        <Reveal>
+        <Test>
           <Aims />
-        </Reveal>
-        
-      
+        </Test>
+
+
+
+        <Cards />
     
 
-        <Values />  
-        <Cards />
         
     </div>
   );

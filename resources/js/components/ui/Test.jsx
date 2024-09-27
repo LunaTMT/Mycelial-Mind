@@ -1,21 +1,40 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-
-export default function Test() {
-    const scrollRef = useRef(null);
-    const isInView = useInView(scrollRef, { once: false }); // Use useInView to track visibility
+import { useRef, useEffect} from "react";
+import { useInView } from "react-intersection-observer";
+import { motion, useAnimation} from "framer-motion"
 
 
-    return (
-      <div ref={scrollRef} style={{ height: "200px", overflow: "scroll" }}>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+export default function Test({ children }) {
+  const { ref, inView, entry } = useInView({
+    threshold: 0.5,
+    triggerOnce: true
+  });
 
-          viewport={{ amount: 0.5 }}
-          style={{ height: "400px", backgroundColor: "lightblue" }} // Example content height
-        />
-        <h1>This is a test</h1>
-      </div>
-    );
+  const mainControls = useAnimation();
+
+  useEffect(() => {
+    if (inView){
+      mainControls.start("visible")
+    }
+  }, [inView]);
+
+  useEffect(() => {
+    console.log("Element is in view: ", inView)
+  }, [inView])
+
+
+  return (
+    <div ref={ref}>
+      <motion.div
+        variants={{
+            hidden: { opacity: 0, y: 75 },
+            visible: { opacity: 1, y: 0 },
+        }}
+        initial="hidden"
+        animate={mainControls}
+        transition={{ duration: 0.5, delay: 0.25 }}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
 }
