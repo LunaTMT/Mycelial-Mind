@@ -1,13 +1,20 @@
 import React from 'react';
 
-export default function Card({ src, title, text }) {
+// Define the props interface
+interface CardProps {
+  src: string;    // The source URL of the image
+  title: string;  // The title of the card
+  text: string;   // The text content of the card
+}
+
+const Card: React.FC<CardProps> = ({ src, title, text }) => {
   return (
-    <div className="block  rounded-lg w-full h-full bg-white p-2">
+    <div className="block rounded-lg w-full h-full bg-white p-2">
       <a href="#!">
         <img
-            className="rounded-t-lg w-full h-72 object-cover" // Adjust height for different screen sizes
-            src={src}
-            alt={title} // Add alt text for better accessibility
+          className="rounded-t-lg w-full h-72 object-cover" // Adjust height for different screen sizes
+          src={src}
+          alt={title} // Add alt text for better accessibility
         />
       </a>
       <div className="p-6">
@@ -26,4 +33,6 @@ export default function Card({ src, title, text }) {
       </div>
     </div>
   );
-}
+};
+
+export default Card;

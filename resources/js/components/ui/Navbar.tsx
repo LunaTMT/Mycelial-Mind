@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import Hamburger from 'hamburger-react'
+import Hamburger from 'hamburger-react';
 
-const Navbar = () => {
-  const [nav, setNav] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [isOpen, setOpen] = useState(false)
+// Define the type for navigation items
+interface NavItem {
+  id: number;
+  text: string;
+}
 
-  const navItems = [
+const Navbar: React.FC = () => {
+  const [nav, setNav] = useState<boolean>(false);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [visible, setVisible] = useState<boolean>(false);
+  const [isOpen, setOpen] = useState<boolean>(false);
+
+  const navItems: NavItem[] = [
     { id: 1, text: 'Home' },
     { id: 2, text: 'Company' },
     { id: 3, text: 'Resources' },
@@ -16,12 +22,9 @@ const Navbar = () => {
     { id: 5, text: 'Contact' },
   ];
 
-
   const handleNav = () => setNav(prev => !prev);
 
   // Effect to handle scroll events
-
-  // When 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > window.innerHeight);
@@ -35,10 +38,9 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isScrolled]);
 
-
-  //Used for setting the components of the navbar to visible after 2 seconds
+  // Used for setting the components of the navbar to visible after 2 seconds
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 2000); 
+    const timer = setTimeout(() => setVisible(true), 2000);
     return () => clearTimeout(timer); // Cleanup on unmount
   }, []);
 
@@ -46,12 +48,9 @@ const Navbar = () => {
     <div className={`absolute 
                     flex justify-between items-center 
                     w-full h-auto 
-                    p-7 z-10 
-                   text-white 
+                    p-7 z-20 
+                   text-white
                   `}>
-      
-      
-      
       {/* Blurry Background Overlay */}
       <div className={`absolute 
                       w-full h-full 
@@ -59,7 +58,6 @@ const Navbar = () => {
                       pt-24 inset-0 
                       transition-all duration-1000 
                       ${visible ? 'blur-none' : 'blur-2xl'}`}>
-
         {/* Desktop Navigation */}
         <ul className={`hidden 
                         md:flex 
@@ -70,7 +68,7 @@ const Navbar = () => {
                                          m-4 px-4 py-1 
                                          cursor-pointer group'>
               {item.text}
-               {/* Line under text*/}
+              {/* Line under text */}
               <div className="absolute left-0 bottom-0 
                               h-[2px] w-0
                             bg-white  
@@ -82,10 +80,6 @@ const Navbar = () => {
         </ul>
       </div>
 
-
-
-
-
       {/* Mobile Navigation Icon */}
       <div onClick={handleNav} className={`
             fixed 
@@ -94,40 +88,31 @@ const Navbar = () => {
             md:hidden  
             transition-all duration-1000 
             ${visible ? 'blur-none' : 'blur-2xl'}`}>
-
           <Hamburger toggled={isOpen} toggle={setOpen} />
       </div>  
 
+      {/* Mobile Navigation Menu */}
+      <ul className={`
+        md:hidden
 
-      
-
-
-    {/* Mobile Navigation Menu */}
-    <ul className={`
-      md:hidden
-
-      fixed left-0 top-0
-      w-auto h-auto 
-      bg-transparent text-white border-none
-      border-red-600
-      z-10
-      pl-10
-      pt-10
-      transition-transform duration-1000 ease-in-out 
-      ${nav ? 'translate-x-0 ' : '-translate-x-full'}
-      ${isScrolled ? 'hidden' : ''}
-    `}>
-      {navItems.map(item => (
-        <li key={item.id} className='w-auto relative p-4 cursor-pointer group'>
-          {item.text}
-          <div className="absolute left-0 bottom-0 h-[2px] bg-white w-0 group-hover:w-full transition-all duration-500"></div>
-        </li>
-      ))}
-    </ul>
-
-
-
-   
+        fixed left-0 top-0
+        w-auto h-auto 
+        bg-transparent text-white border-none
+        border-red-600
+        z-10
+        pl-10
+        pt-10
+        transition-transform duration-1000 ease-in-out 
+        ${nav ? 'translate-x-0 ' : '-translate-x-full'}
+        ${isScrolled ? 'hidden' : ''}
+      `}>
+        {navItems.map(item => (
+          <li key={item.id} className='w-auto relative p-4 cursor-pointer group'>
+            {item.text}
+            <div className="absolute left-0 bottom-0 h-[2px] bg-white w-0 group-hover:w-full transition-all duration-500"></div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

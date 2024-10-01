@@ -1,3 +1,4 @@
+// bootstrap.ts
 import axios from 'axios';
 window.axios = axios;
 

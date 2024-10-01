@@ -1,7 +1,12 @@
 import React, { useRef } from 'react';
 
-const VideoPlayer = ({ src }) => {
-  const videoRef = useRef(null); // Create a ref for the video element
+// Define the props interface
+interface VideoPlayerProps {
+  src: string; // The source URL for the video
+}
+
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
+  const videoRef = useRef<HTMLVideoElement | null>(null); // Create a ref for the video element
 
   const handleEnded = () => {
     // Reset the video to the start

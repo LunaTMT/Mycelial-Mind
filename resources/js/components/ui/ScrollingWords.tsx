@@ -1,7 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-const ScrollingWords = () => {
-  const gradients = [
+interface ScrollingWordsProps {
+  text: string;
+  words: string[]; // Define a prop type for the words array
+}
+
+const ScrollingWords: React.FC<ScrollingWordsProps> = ({ text, words }) => {
+  const gradients: string[] = [
     "from-[#12c2e9] via-[#c471ed] to-[#f64f59]",
     "from-[#59c173] via-[#a17fe0] to-[#5d26c1]",
     "from-[#f12711] to-[#f5af19]",
@@ -10,18 +15,9 @@ const ScrollingWords = () => {
     "from-[#da4453] to-[#89216b]",
   ];
 
-  const services = [
-    "Mushroom Cultivation",
-    "Advanced technology",
-    "Gourmet Mushrooms",
-    "Medicine",
-    "Paraphernalia",
-    "Research"
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [fadeOut, setFadeOut] = useState(false);
-  const currentIndexRef = useRef(currentIndex);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [fadeOut, setFadeOut] = useState<boolean>(false);
+  const currentIndexRef = useRef<number>(currentIndex);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,7 +25,7 @@ const ScrollingWords = () => {
 
       setTimeout(() => {
         setCurrentIndex((prevIndex) => {
-          const newIndex = (prevIndex + 1) % services.length;
+          const newIndex = (prevIndex + 1) % words.length; // Use words array length
           currentIndexRef.current = newIndex;
           return newIndex;
         });
@@ -39,13 +35,13 @@ const ScrollingWords = () => {
     }, 2000); // Change service every 2 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [words.length]);
 
   return (
     <div className="inline-block w-full">
       <h1 className="text-3xl relative">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua&nbsp;
-        
+        { text }&nbsp;
+
         <span
           key={currentIndex}
           className={`absolute bg-gradient-to-r
@@ -55,8 +51,7 @@ const ScrollingWords = () => {
                       transition-all duration-500 ease-in-out
                       ${fadeOut ? 'translate-y-[-20px] opacity-0' : 'translate-y-0 opacity-100'}`}
         >
-          {services[currentIndex]}
-          
+          {words[currentIndex]} {/* Use words from props */}
         </span>
       </h1>
     </div>
