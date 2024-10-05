@@ -4,6 +4,17 @@ import Navbar from '../../components/ui/Navbar';
 import CompanyInfo from './CompanyInfo';
 import Cards from '../../components/ui/Cards';
 
+import ParallaxVideo from '../../components/ui/ParallaxVideo'
+import Lenis from 'lenis'
+
+const lenis = new Lenis()
+
+
+
+lenis.on('scroll', (e) => {
+  console.log(e)
+})
+
 
 export default function Home() {
   return (
@@ -12,7 +23,7 @@ export default function Home() {
         <VideoPlayer src={"/assets/videos/time_lapse.mp4"} />
         <Navbar />
 
-        <VideoPlayer src={"/assets/videos/Mushroom_Growth.mp4"} />
+        <ParallaxVideo src={"/assets/videos/Mushroom_Growth.mp4"} />
 
         <Reveal>
           <CompanyInfo />
