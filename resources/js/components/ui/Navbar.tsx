@@ -65,14 +65,17 @@ const Navbar: React.FC = () => {
                         ${visible ? 'translate-y-0 blur-0' : '-translate-y-full blur-none'}`}>
           {navItems.map(item => (
             <li key={item.id} className='relative 
-                                         m-4 px-4 py-1 
-                                         cursor-pointer group'>
+                            m-4 px-4 py-1 
+                            text-lg 
+                            md:text-xl 
+                            lg:text-2xl 
+                            cursor-pointer group'>
               {item.text}
               {/* Line under text */}
               <div className="absolute left-0 bottom-0 
-                              h-[2px] w-0
-                            bg-white  
-                              filter blur-lg
+                              h-[2px] w-0 
+                              bg-white 
+                              filter blur-lg 
                               group-hover:w-full group-hover:blur-none 
                               transition-all duration-500"></div>
             </li>
