@@ -1,65 +1,52 @@
-import React, { useEffect, useState, useRef } from 'react';
-import Reveal from '../../utils/Reveal';
-
-
-
-
-
+import React, { useEffect, useState } from 'react';
 
 interface ScrollingWordsProps {
   text: string;
-  words: string[]; 
+  words: string[];
 }
 
 const ScrollingWords: React.FC<ScrollingWordsProps> = ({ text, words }) => {
-  const gradients: string[] = [
-    "from-[#12c2e9] via-[#c471ed] to-[#f64f59]",
-    "from-[#59c173] via-[#a17fe0] to-[#5d26c1]",
-    "from-[#f12711] to-[#f5af19]",
-    "from-[#654ea3] to-[#b991c1]",
-    "from-[#8a2387] via-[#e94057] to-[#f27121]",
-    "from-[#da4453] to-[#89216b]",
+  const gradients = [
+    "from-[#00c6ff] via-[#0072ff] to-[#00c6ff]", // Bright blue to vibrant blue
+    "from-[#ff7e5f] via-[#feb47b] to-[#ff7e5f]", // Soft pink to peachy gradient
+    "from-[#ff5f6d] to-[#ffc371]", // Deep red to golden yellow
+    "from-[#8e2de2] via-[#4a00e0] to-[#8e2de2]", // Purple gradient
+    "from-[#f6d365] to-[#fda085]", // Warm pastel orange to pink
   ];
-
+  
+  
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [fadeOut, setFadeOut] = useState<boolean>(false);
-  const currentIndexRef = useRef<number>(currentIndex);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFadeOut(true); 
+      setFadeOut(true);
 
       setTimeout(() => {
-        setCurrentIndex((prevIndex) => {
-          currentIndexRef.current = (prevIndex + 1) % words.length;
-          return currentIndexRef.current;
-        });
-
-      setFadeOut(false); 
-
-      }, 500); // Wait for the fade-out effect to complete before changing text
-    }, 2000); // Change service every 2 seconds
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % words.length);
+        setFadeOut(false);
+      }, 500); // Wait for fade-out animation to complete
+    }, 2000); // Change word every 2 seconds
 
     return () => clearInterval(interval);
-  });
+  }, [words.length]);
 
   return (
-    <div className="inline-block w-full">
-      
-      <h1 className="text-3xl inline">
-        { text }&nbsp;
+    <div className="inline-block text-left mr-40">
+      <h1 className="text-3xl inline text-white">
+        {text}&nbsp;
+        <span
+          className={`
+            inline-block bg-gradient-to-r
+            bg-clip-text text-transparent
+            transition-all duration-500 ease-in-out
+            ${fadeOut ? "opacity-0 translate-y-[-20px]" : "opacity-100 translate-y-0"}
+            ${gradients[currentIndex]}
+          `}
+        >
+          {words[currentIndex]}
+        </span>
       </h1>
-      
-      <h1 className={`
-          text-3xl inline bg-gradient-to-r
-          bg-black 
-          bg-clip-text text-transparent 
-          transition-all duration-500 ease-in-out
-          ${fadeOut ? 'translate-y-[-20px] opacity-0' : 'translate-y-0 opacity-100'}
-          ${gradients[currentIndex]} `}>
-          {words[currentIndex]} 
-      </h1>
-
     </div>
   );
 };

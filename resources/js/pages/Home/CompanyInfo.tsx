@@ -5,61 +5,75 @@ const CompanyInfo: React.FC = () => {
     return (
         <div
             className={`relative
-                        flex flex-col items-start justify-center h-full
-                        w-[80%]
+                        flex flex-col lg:flex-row items-center justify-center 
+                        w-full h-screen
                         mx-auto
-                        p-5 pt-20 z-20`}
+                        z-20
+                        gap-32
+                        bg-black`}
         >
-            <img
-                className="
-                    w-[60%]        /* Base width for extra small screens (mobile) */
-                    sm:w-[50%]      /* Small screens */
-                    md:w-[40%]      /* Medium screens */
-                    lg:w-[30%]      /* Large screens */
-                    xl:w-[30%]      /* Extra large screens */
-                    2xl:w-[30%]     /* 2XL screens */
-                    h-auto
-                    pb-5"
-                src="/assets/images/logo2.png"
-                alt="Mycenic Logo"
-            />
+            {/* Left Column: Image */}
+            <div className="flex justify-center lg:justify-end w-full lg:w-1/2">
+                <img
+                    className="
+                        w-[60%]        /* Base width for extra small screens (mobile) */
+                        sm:w-[50%]      /* Small screens */
+                        md:w-[40%]      /* Medium screens */
+                        lg:w-[80%]      /* Adjust size for large screens */
+                        xl:w-[70%]      /* Extra large screens */
+                        h-auto"
+                    src="/assets/images/logo2.png"
+                    alt="Mycenic Logo"
+                />
+            </div>
 
-            <h1 className="mb-4 
-                            font-extrabold leading-none tracking-tight text-gray-900 
-                            text-5xl
-                            sm:text-6xl
-                            pb-2
-                            dark:text-white">
-                Mycenic
-            </h1>
+            {/* Right Column: Text and Content */}
+            <div className="flex flex-col items-start justify-center text-center lg:text-left w-1/2 h-screen bg-black gap-10">
+                <h1 className="                                  
+                                font-extrabold italic leading-none tracking-tight text-white 
+                                     
+                                sm:text-[7rem] 
+                                lg:text-8xl
+                                text-right        
+                                dark:text-white">
+                    Mycenic
+                </h1>
 
-            <ScrollingWords 
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-            words={["Mushroom Cultivation", "Advanced technology", "Gourmet Mushrooms", "Medicine", "Paraphernalia", "Research"]} />
+                <ScrollingWords 
+                    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+                    words={["Mushroom Cultivation", "Advanced technology", "Gourmet Mushrooms", "Medicine", "Paraphernalia", "Research"]} 
+                />
 
-            <a 
-                href="#" 
-                className="inline-flex items-center justify-center 
-                            px-5 py-3 my-5 
-                            text-base font-medium text-center text-white 
+                <a 
+                    href="#" 
+                    className="inline-flex items-center justify-center 
+                            px-5 py-3 my-5  
+                            text-2xl font-medium text-center text-white 
                             bg-black rounded-lg border-2
-                            hover:bg-white hover:border-black hover:text-black">
-                Learn more
-                <svg 
-                    className="w-3.5 h-3.5 ms-2 rtl:rotate-180" 
-                    aria-hidden="true" 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    fill="none" 
-                    viewBox="0 0 14 10">
-                    <path 
-                        stroke="currentColor" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        strokeWidth="2" 
-                        d="M1 5h12m0 0L9 1m4 4L9 9"
-                    />
-                </svg>
-            </a>
+                            hover:bg-white hover:border-black hover:text-black hover:scale-110
+                            transform transition-all duration-300 ease-in-out
+                            ">
+                    Learn more
+                    <svg 
+                        className="w-6 h-6 ms-2 rtl:rotate-180 
+                                transition-all duration-300 ease-in-out
+                                group-hover:scale-150" 
+                        aria-hidden="true" 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 14 10">
+                        <path 
+                            stroke="currentColor" 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round" 
+                            strokeWidth="2" 
+                            d="M1 5h12m0 0L9 1m4 4L9 9"
+                        />
+                    </svg>
+                </a>
+
+
+            </div>
         </div>
     );
 };

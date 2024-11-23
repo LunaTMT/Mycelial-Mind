@@ -23,7 +23,7 @@ const Reveal: React.FC<RevealProps> = ({ children }) => {
   }, [inView]);
 
   return (
-    <div ref={ref} className="w-full h-full">
+    <div ref={ref} className="w-full h-full bg-black">
       <motion.div
         variants={{
           hidden: { opacity: 0, y: 100 },
