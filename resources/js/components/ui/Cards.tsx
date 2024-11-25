@@ -31,9 +31,9 @@ export default function Cards() {
       {cards.map(item => (
         //with small width div show text as scrolling down instead of touch. Could underline it line menu on click 
         <div key={item.id} className="flex justify-center 
-                                      w-full h-full items-stretch
+                                      w-full h-1/2 items-stretch
                                       
-                                      sm:w-1/2  sm:h-1/2
+                                      
                                       md:w-1/2 md:items-center 
                                       lg:w-1/3
                                       ">

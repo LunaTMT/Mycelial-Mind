@@ -11,4 +11,7 @@ export default {
     extend: {},
   },
   plugins: [],
+  fontFamily: {
+    Audrey : ['Audrey-Normal']
+  }
 }

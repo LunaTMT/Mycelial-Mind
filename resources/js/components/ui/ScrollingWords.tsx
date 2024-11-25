@@ -32,21 +32,27 @@ const ScrollingWords: React.FC<ScrollingWordsProps> = ({ text, words }) => {
   }, [words.length]);
 
   return (
-    <div className="inline-block text-left mr-40">
-      <h1 className="text-3xl inline text-white">
-        {text}&nbsp;
-        <span
-          className={`
-            inline-block bg-gradient-to-r
-            bg-clip-text text-transparent
-            transition-all duration-500 ease-in-out
-            ${fadeOut ? "opacity-0 translate-y-[-20px]" : "opacity-100 translate-y-0"}
-            ${gradients[currentIndex]}
-          `}
-        >
-          {words[currentIndex]}
-        </span>
-      </h1>
+    <div className="inline-block text-center 
+                    lg:mr-5 lg:text-left
+                    w-full
+                    ">
+        <h1 className="text-3xl text-white text-wrap">
+          <span className="block">
+            {text}
+          </span>
+          <span
+            className={`
+              inline-block bg-gradient-to-r
+              bg-clip-text text-transparent
+              transition-all duration-500 ease-in-out
+              ${fadeOut ? "opacity-0 translate-y-[-20px]" : "opacity-100 translate-y-0"}
+              ${gradients[currentIndex]}
+            `}
+          >
+            {words[currentIndex]}
+          </span>
+        </h1>
+
     </div>
   );
 };

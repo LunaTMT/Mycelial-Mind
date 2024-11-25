@@ -5,43 +5,73 @@ const CompanyInfo: React.FC = () => {
     return (
         <div
             className={`relative
-                        flex flex-col lg:flex-row items-center justify-center 
+                        flex flex-col items-center justify-center 
                         w-full h-screen
                         mx-auto
                         z-20
-                        gap-32
-                        bg-black`}
+                        gap-10
+                        bg-black
+
+                        sm:gap-8
+                        md:gap-5 md:p-5 
+                        lg:gap-10 lg:flex-row
+                        xl:gap-20 xl:px-24
+                        `}
         >
             {/* Left Column: Image */}
-            <div className="flex justify-center lg:justify-end w-full lg:w-1/2">
+            <div className="flex justify-center w-1/2
+                            
+                            
+                            md:w-[35%]
+                            lg:justify-end
+                            xl:justify-start xl:w-[25%]
+                            ">
+                                
                 <img
                     className="
-                        w-[60%]        /* Base width for extra small screens (mobile) */
-                        sm:w-[50%]      /* Small screens */
-                        md:w-[40%]      /* Medium screens */
-                        lg:w-[80%]      /* Adjust size for large screens */
-                        xl:w-[70%]      /* Extra large screens */
-                        h-auto"
+                        w-auto         
+                        h-auto
+                        "
                     src="/assets/images/logo2.png"
                     alt="Mycenic Logo"
                 />
             </div>
 
             {/* Right Column: Text and Content */}
-            <div className="flex flex-col items-start justify-center text-center lg:text-left w-1/2 h-screen bg-black gap-10">
+            <div className="flex flex-col                
+                            
+                            justify-start  items-center 
+                            text-center
+                            h-auto w-[70%]
+
+                            gap-5
+
+                            md:w-[80%]
+
+                            lg:justify-center lg:items-start  lg:text-left 
+                            lg:h-screen 
+
+                            xl:w-2/3
+
+                            ">
                 <h1 className="                                  
-                                font-extrabold italic leading-none tracking-tight text-white 
-                                     
-                                sm:text-[7rem] 
+                                leading-none tracking-tight text-white 
+                                
+                                
+                                text-7xl
+                                font-thin    
+                                                             
+                                dark:text-white
+
                                 lg:text-8xl
-                                text-right        
-                                dark:text-white">
+                                xl:text-
+                                ">
                     Mycenic
                 </h1>
 
                 <ScrollingWords 
                     text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-                    words={["Mushroom Cultivation", "Advanced technology", "Gourmet Mushrooms", "Medicine", "Paraphernalia", "Research"]} 
+                    words={["Cultivation", "Technology", "Gourmet", "Medicine", "Paraphernalia", "Research"]} 
                 />
 
                 <a 
