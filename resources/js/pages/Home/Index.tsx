@@ -17,13 +17,13 @@ export default function Home() {
         <VideoPlayer src={"/assets/videos/time_lapse.mp4"} />
         <Navbar />
 
-        <Reveal>
-          <CompanyInfo />
-        </Reveal>
+        
+        <CompanyInfo />
+        
       
-        <Reveal>
-          <Cards />
-        </Reveal>
+        
+        <Cards />
+        
 
     </div>
   );
