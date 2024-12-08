@@ -45,12 +45,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <div className={`absolute 
-                    flex justify-between items-center 
-                    w-full h-auto 
-                    p-7 z-20 
-                   text-white
-                  `}>
+    <>
       {/* Blurry Background Overlay */}
       <div className={`absolute 
                       w-full h-full 
@@ -116,7 +111,7 @@ const Navbar: React.FC = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 };
 

@@ -17,7 +17,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
   };
 
   return (
-    <div className="w-full h-screen -z-40"> {/* Full viewport height */}
+    <div className="fixed w-full h-screen -z-40"> {/* Full viewport height */}
       <video
         ref={videoRef}
         className="w-full h-full object-cover" // Full width and height

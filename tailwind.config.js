@@ -8,7 +8,11 @@ export default {
     "./resources/**/*.tsx",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        custom_SkinColour : '#E0AC69',
+      },
+    },
   },
   plugins: [],
   fontFamily: {
