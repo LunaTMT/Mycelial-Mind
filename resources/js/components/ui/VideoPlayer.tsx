@@ -22,8 +22,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
       initial={{ opacity: 0 }} // Initial opacity for fade-in
       animate={{ opacity: 1 }} // Animate to full opacity
       transition={{ duration: 2 }} // Duration of the fade-in effect
-      className={`fixed w-full h-screen -z-40 
-                 ]`}
+      className={`fixed w-[100vw] h-[100vh] -z-40 `}
     >
       {/* Video element */}
       <video

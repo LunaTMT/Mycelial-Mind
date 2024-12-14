@@ -29,7 +29,7 @@ const CompanyInfo: React.FC = () => {
             <div
                 className={`
                     relative
-                    flex flex-col items-center justify-center 
+                    flex flex-col items-center justify-end
                     w-full h-screen
                     mx-auto
                     gap-10
@@ -51,7 +51,7 @@ const CompanyInfo: React.FC = () => {
                         flex justify-center 
                         w-1/2 
                         z-20
-                        md:w-[35%]
+                        md:w-[35%] md:justify-end md:border-none md:border-red-600
                         lg:justify-end 
                         xl:justify-start xl:w-[25%]
                     `}

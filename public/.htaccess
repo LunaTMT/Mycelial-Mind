@@ -3,6 +3,10 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    <IfModule mod_headers.c>
+        Header set Accept-Ranges bytes
+    </IfModule>
+
     RewriteEngine On
 
     # Handle Authorization Header
