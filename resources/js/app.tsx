@@ -1,16 +1,25 @@
-import './bootstrap';
 import '../css/app.css';
+import './bootstrap';
 
 import { createInertiaApp } from '@inertiajs/react';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
-import { ComponentType } from 'react';
+
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
-  resolve: (name: string) => {
-    const pages = import.meta.glob('./pages/**/*.tsx', { eager: true });
-    return pages[`./pages/${name}.tsx`]; // Fix the path here to include the correct file extension
-  },
-  setup({ el, App, props }: { el: HTMLElement; App: ComponentType; props: Record<string, any> }) {
-    createRoot(el).render(<App {...props} />);
-  },
+    title: (title) => `${title} - ${appName}`,
+    resolve: (name) =>
+        resolvePageComponent(
+            `./Pages/${name}.tsx`,
+            import.meta.glob('./Pages/**/*.tsx'),
+        ),
+    setup({ el, App, props }) {
+        const root = createRoot(el);
+
+        root.render(<App {...props} />);
+    },
+    progress: {
+        color: '#4B5563',
+    },
 });

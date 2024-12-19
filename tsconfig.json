@@ -1,108 +1,20 @@
 {
-  "compilerOptions": {
-    /* Projects */
-    // "incremental": true,
-    // "composite": true,
-    // "tsBuildInfoFile": "./.tsbuildinfo",
-    // "disableSourceOfProjectReferenceRedirect": true,
-    // "disableSolutionSearching": true,
-    // "disableReferencedProjectLoad": true,
-
-    /* Language and Environment */
-    "target": "ESNext",                                  
-    "jsx": "react-jsx",                                 
-    // "experimentalDecorators": true,
-    // "emitDecoratorMetadata": true,
-    // "jsxFactory": "", 
-    // "jsxFragmentFactory": "",
-    // "jsxImportSource": "",
-    // "reactNamespace": "",
-    // "noLib": true,
-    // "useDefineForClassFields": true,
-    // "moduleDetection": "auto",
-
-    /* Modules */
-    "module": "Preserve",                                  
-    "moduleResolution": "Bundler",                       
-    "baseUrl": "./resources/js", // Set baseUrl to your JS directory
-    "paths": {
-      "*": ["*", "*.jsx", "*.ts", "*.tsx", "*.d.ts"] 
-    },                                    
-    // "rootDirs": [],
-
-    "types": ["vite/client"],                                     
-         
-    // "resolvePackageJsonExports": true,
-    // "resolvePackageJsonImports": true,
-    // "customConditions": [],
-    // "noUncheckedSideEffectImports": true,
-    // "resolveJsonModule": true,
-    // "allowArbitraryExtensions": true,
-    // "noResolve": true,
-
-    /* JavaScript Support */
-    "allowJs": true,                                   // Allow JavaScript files
-    "checkJs": false,                                   // Disable checking JavaScript files
-
-    /* Emit */
-    "noEmit": true,                                   
-    // "outFile": "./",
-    // "outDir": "./",
-    // "removeComments": true,
-    // "importHelpers": true,
-    // "downlevelIteration": true,
-    // "sourceRoot": "",
-    // "mapRoot": "",
-    // "inlineSources": true,
-    // "emitBOM": true,
-    // "newLine": "crlf",
-    // "stripInternal": true,
-    // "noEmitHelpers": true,
-    // "noEmitOnError": true,
-    // "preserveConstEnums": true,
-    // "declarationDir": "./",
-
-    /* Interop Constraints */                      
-    // "verbatimModuleSyntax": true,
-    // "isolatedDeclarations": true,     
-    "esModuleInterop": true,                            
-        
-
-    /* Type Checking */
-    "strict": false,                                     
-    // "noImplicitAny": true,
-    // "strictNullChecks": true,
-    // "strictFunctionTypes": true,
-    // "strictBindCallApply": true,
-    // "strictPropertyInitialization": true,
-    // "strictBuiltinIteratorReturn": true,
-    // "noImplicitThis": true,
-    // "useUnknownInCatchVariables": true,
-    // "alwaysStrict": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "exactOptionalPropertyTypes": true,
-    // "noImplicitReturns": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noUncheckedIndexedAccess": true,
-    // "noImplicitOverride": true,
-    // "noPropertyAccessFromIndexSignature": true,
-    // "allowUnusedLabels": true,
-    // "allowUnreachableCode": true,
-
-    /* Completeness */
-    // "skipDefaultLibCheck": true,
-    "skipLibCheck": true                                 
-  },
-  "include": [
-    "resources/js/**/*" // Adjust this based on your project's folder structure
-  ],
-  "exclude": [
-    "node_modules",     // Exclude node_modules folder
-    "**/*.spec.ts",     // Optionally exclude test files
-    "**/*.test.ts"
-  ]
+    "compilerOptions": {
+        "allowJs": true,
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx",
+        "strict": true,
+        "isolatedModules": true,
+        "target": "ESNext",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+        "noEmit": true,
+        "paths": {
+            "@/*": ["./resources/js/*"],
+            "ziggy-js": ["./vendor/tightenco/ziggy"]
+        }
+    },
+    "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx", "resources/js/**/*.d.ts"]
 }
-
-
-
