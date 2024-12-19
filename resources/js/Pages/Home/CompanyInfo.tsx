@@ -28,8 +28,8 @@ const CompanyInfo: React.FC = () => {
                 <motion.img
                     src="/assets/images/logo2.png"
                     alt="Mycenic Logo"
-                    initial={{ scale: 0.1 }}
-                    animate={{ scale: 1 }}
+                    initial={{ scale: 0.1, y: -100 }}
+                    animate={{ scale: 1, y: 0}}
                     transition={{ duration: 2 }}
                     className="w-[60%] z-20 
                     sm:w-[50%] md:w-[35%] lg:w-[30%] max-w-sm"

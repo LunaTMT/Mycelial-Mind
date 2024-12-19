@@ -8,7 +8,7 @@ interface NavItem {
   text: string;
 }
 
-const Navbar: React.FC = () => {
+const Menu: React.FC = () => {
   const [nav, setNav] = useState<boolean>(false);
   const [isOpen, setOpen] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(true);
@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
             onMouseEnter={() => setHoveringIndex(index)} // Set hover state when mouse enters
             onMouseLeave={() => setHoveringIndex(null)} // Reset hover state when mouse leaves
           >
-            <a href={item.url} className="text-white hover:text-blue-500">
+            <a href={item.url} className="text-white ">
               {item.text}
             </a>
             {/* Line under text */}
@@ -122,4 +122,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default Menu;

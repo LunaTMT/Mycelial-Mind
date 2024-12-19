@@ -4,6 +4,8 @@ import InputLabel from '@/Components/Login/InputLabel';
 import PrimaryButton from '@/Components/Buttons/PrimaryButton';
 import TextInput from '@/Components/Login/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
+
+import { CiLogin } from 'react-icons/ci';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
@@ -87,7 +89,11 @@ export default function Login({
                     </label>
                 </div>
 
-                <div className="mt-4 flex items-center justify-end">
+                <div className="mt-4 flex flex-col items-center justify-center">
+                    <PrimaryButton className="text-center w-[30%]" disabled={processing}>
+                        Log in
+                    </PrimaryButton>
+
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
@@ -97,11 +103,20 @@ export default function Login({
                         </Link>
                     )}
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
+                    
                 </div>
+
+                <Link
+                href={route('register')}
+                className="relative  w-full h-auto mt-10 flex items-center justify-center  z-50  text-right
+                rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                    Create Account
+                </Link>
+
             </form>
+            
         </GuestLayout>
+        
     );
 }

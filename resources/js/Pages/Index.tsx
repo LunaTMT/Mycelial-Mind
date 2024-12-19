@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import VideoPlayer from '../Components/Video/VideoPlayer';
-import Navbar from '../Components/Navbar/Navbar';
+import Navbar from '../Components/Nav/Menu';
 
 import Cards from './Home/Cards';
 import Section from './Home/Section';

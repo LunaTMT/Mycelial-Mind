@@ -11,7 +11,7 @@ Route::get('/shop', function () {
 
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Index', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 
-//Dont know if need this?
+//The dashboard is what the user can access when logged in 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import Navbar from "../Components/Navbar/Navbar";
+import Navbar from "../Components/Nav/Menu";
 import SearchBar from "../Components/Searching/SearchBar";
 import ShopFilter from "../Components/Login/Filter";
+import TopRightNav from "@/Components/Nav/TopRightNav";
 
 const categories = [
     "All",
@@ -42,6 +43,9 @@ const Shop = () => {
         >
             {/* Navbar <Navbar /> */}
             <Navbar />
+            <TopRightNav />
+
+
             
             {/* Content */}
             <div className="w-full h-full
