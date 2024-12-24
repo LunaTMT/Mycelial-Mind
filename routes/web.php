@@ -10,8 +10,13 @@ Route::get('/shop', function () {
 });
 
 
+Route::get('/index', function () {
+    return Inertia::render('Index');
+});
+
+
 Route::get('/', function () {
-    return Inertia::render('Index', [
+    return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,

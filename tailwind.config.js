@@ -13,7 +13,9 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                Aileron_Thin: ['Aileron_Thin', ...defaultTheme.fontFamily.sans],
+                Aileron_UltraLight: ['Aileron_UltraLight', ...defaultTheme.fontFamily.sans],
+                Audrey_Normal: ['Audrey_Normal', ...defaultTheme.fontFamily.sans],
             },
         },
     },

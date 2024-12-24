@@ -19,13 +19,13 @@ export default function Authenticated({
             <nav className="p-[2px]">
                 
 
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8  ">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border border-red-400 ">
                     <div className="flex h-16 justify-between ">
                         
                         <div className="flex ">
                             <div className="flex shrink-0 items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <ApplicationLogo className="block h-9 w-auto fill-current" />
                                 </Link>
                             </div>
 
@@ -169,6 +169,8 @@ export default function Authenticated({
             </nav>
             
             <div className='w-full h-2 bg-gray-100 bg-gradient-to-r from-gray-100 to-slate-950'></div>
+            
+            
             {header && (
                 <header className="bg-white  bg-gradient-to-r from-sky-500 to-slate-950  shadow">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">

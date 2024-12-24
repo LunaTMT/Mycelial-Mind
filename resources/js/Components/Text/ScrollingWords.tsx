@@ -1,59 +1,55 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface ScrollingWordsProps {
-  text: string;
   words: string[];
 }
 
-const ScrollingWords: React.FC<ScrollingWordsProps> = ({ text, words }) => {
+const ScrollingWords: React.FC<ScrollingWordsProps> = ({ words }) => {
   const gradients = [
-    "from-[#00c6ff] via-[#0072ff] to-[#00c6ff]", // Bright blue to vibrant blue
-    "from-[#ff7e5f] via-[#feb47b] to-[#ff7e5f]", // Soft pink to peachy gradient
-    "from-[#ff5f6d] to-[#ffc371]", // Deep red to golden yellow
-    "from-[#8e2de2] via-[#4a00e0] to-[#8e2de2]", // Purple gradient
-    "from-[#f6d365] to-[#fda085]", // Warm pastel orange to pink
+    "from-sky-500 to-white",
+    "from-sky-600 to-white",
+    "from-sky-700 to-white",
+    "from-sky-800 to-white",
+    "from-sky-900 to-white",
   ];
-  
-  
+
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [fadeOut, setFadeOut] = useState<boolean>(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFadeOut(true);
-
-      setTimeout(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % words.length);
-        setFadeOut(false);
-      }, 500); // Wait for fade-out animation to complete
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % words.length);
     }, 2000); // Change word every 2 seconds
 
     return () => clearInterval(interval);
   }, [words.length]);
 
   return (
-    <div className="inline-block text-center 
-                    w-full
-                    font-Aeleron_Thin
-                    ">
-        <h1 className="text-4xl text-white text-wrap">
-          <span className="block">
-            {text}
-          </span>
-          <span
-            className={`
-              inline-block bg-gradient-to-r
-              bg-clip-text text-transparent
-              transition-all duration-500 ease-in-out
-              ${fadeOut ? "opacity-0 translate-y-[-20px]" : "opacity-100 translate-y-0"}
-              ${gradients[currentIndex]}
-            `}
-          >
-            {words[currentIndex]}
-          </span>
-        </h1>
-
-    </div>
+    <motion.div
+      className="inline-block text-center w-full font-extrabold font-Aileron_Thin"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 2 }}
+      style={{ overflow: 'visible', display: 'inline-block' }} // Ensure no clipping and inline display
+    >
+      <motion.h1
+        key={currentIndex} // Use `key` to trigger re-mount on currentIndex change
+        className={`
+          text-7xl
+          bg-gradient-to-r
+          bg-clip-text text-transparent
+          transition-all duration-500 ease-in-out
+          whitespace-nowrap // Prevent wrapping of text
+          ${gradients[currentIndex]} // Update gradient based on current index
+        `}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 2 }}
+      >
+        {words[currentIndex]}
+      </motion.h1>
+    </motion.div>
   );
 };
 

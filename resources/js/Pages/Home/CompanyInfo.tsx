@@ -1,54 +1,60 @@
 import React from 'react';
-import ScrollingWords from '../../Components/Text/ScrollingWords';
-import LearnMoreButton from '../../Components/Buttons/LearnMoreButton';
-
-import { motion } from "motion/react";
+import { motion } from 'framer-motion'; // Correct the import for framer-motion
+import { MdArrowDropDown } from "react-icons/md";
 
 const CompanyInfo: React.FC = () => {
     return (
         <>
-            {/*
-            <motion.img
-                whileInView={{ y: 0, opacity: 1 }}
-                initial={{ y: '50vh', opacity: 0 }}
-                transition={{ duration: 1, ease: "easeInOut" }}
-                className="absolute bottom-0 left-0 right-0 z-20 lg:w-[50%]"
-                src="/assets/images/vines.png"
-                alt="Vines"
-                viewport={{ once: true }}
-            ></motion.img>
-            */}
-
             {/* Main Content */}
-            <div className="relative flex flex-col items-center justify-center w-screen h-screen 
-            mx-auto z-20 border-white gap-10 
-            
-            lg:justify-center lg:pt-28">
-                {/* top : Text and Content */}
+            <div className="relative flex flex-col items-center justify-center w-screen h-screen mx-auto gap-10">
+                {/* Logo Image */}
                 <motion.img
                     src="/assets/images/logo2.png"
                     alt="Mycenic Logo"
-                    initial={{ scale: 0.1, y: -100 }}
-                    animate={{ scale: 1, y: 0}}
-                    transition={{ duration: 2 }}
-                    className="w-[60%] z-20 
-                    sm:w-[50%] md:w-[35%] lg:w-[30%] max-w-sm"
+                    initial={{ scale: 0.0, opacity: 0 }} // Start with smaller scale, opacity 0
+                    animate={{ scale: 1, opacity: 1 }}  // Animate to normal size, full opacity
+                    transition={{
+                        duration: 3,  // Duration of the animation
+                        ease: "easeInOut"  // Easing function
+                    }}
+                    className="w-[60%] sm:w-[50%] md:w-[35%] lg:w-[30%] max-w-sm rounded-full"  // Make the image circular
+                    style={{
+                        transformOrigin: "center",  // Ensure the image scales from its center
+                    }}
                 />
-                {/* bottom : Text and Content */}
-                <div className="flex flex-col items-center justify-center text-center gap-5 z-20 bg-transparent border-blue-500 w-[90%] lg:w-[60%]">
+
+                {/* Text Content */}
+                <div className="flex flex-col items-center justify-center text-center gap-5 bg-transparent w-[90%] lg:w-[60%]">
+                    
                     <motion.div
-                        initial={{ opacity: 0, y: "120%" }}
+                        initial={{ opacity: 0, y: 300 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 2, ease: "easeInOut" }}
+                        transition={{ duration: 3, ease: 'easeInOut' }}
                     >
                         <h1 className="font-Audrey_Normal text-white text-7xl sm:text-8xl md:text-8xl lg:text-9xl pb-4">
                             MYCENIC
                         </h1>
-                        <ScrollingWords
-                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-                            words={["Cultivation", "Technology", "Gourmet", "Medicine", "Paraphernalia", "Research"]}
-                        />
+
                     </motion.div>
+
+                
+                    <motion.div
+                        className="absolute right-0 bottom-0 text-white w-[100%] h-auto flex items-center justify-center"
+                        initial={{ y: "100%" }}  // Start off-screen, at the bottom
+                        animate={{
+                            y: "0%",  
+                        }}
+                        transition={{
+                            duration: 4,  // Duration of the pop-up animation
+                            ease: "easeOut",  // Smooth easing effect for the animation
+                            type: "tween",  // Smooth transition
+                        }}
+                    >
+                        <MdArrowDropDown className="text-9xl" /> {/* Set the icon size here */}
+                    </motion.div>
+
+
+
                 </div>
             </div>
         </>

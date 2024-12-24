@@ -4,11 +4,23 @@ import { PropsWithChildren } from 'react';
 
 export default function Guest({ children }: PropsWithChildren) {
     return (
-        <div className="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0 bg-gradient-to-r from-sky-500 to-slate-950">
-            <div>
+        <div className="flex flex-col h-[100vh]
+                        min-h-screen
+                        items-center bg-gray-100 pt-6 justify-center sm:pt-0 
+                        bg-gradient-to-r from-sky-500 to-slate-950">
+            
+            
+            
+            <div className="h-[20%] flex items-center justify-center w-full      ">
                 <Link href="/">
                     <ApplicationLogo
-                        className="relative w-20 h-auto rounded-full opacity-[50%] hover:opacity-100 fill-current text-gray-500 hover:scale-105 hover:shadow-[0_0_20px_rgba(56,189,248,0.75)] transition-all duration-300"
+                        className="
+                        w-[15%] h-auto m-auto
+                        rounded-full opacity-[50%] 
+                        fill-current text-gray-500
+                        hover:opacity-100 hover:scale-105 hover:shadow-[0_0_20px_rgba(56,189,248,0.75)] 
+                        transition-all duration-300  "
+                        
                     />
                 </Link>
             </div>
@@ -19,3 +31,7 @@ export default function Guest({ children }: PropsWithChildren) {
         </div>
     );
 }
+
+
+
+
