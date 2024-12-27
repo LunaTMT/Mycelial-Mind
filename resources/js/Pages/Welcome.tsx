@@ -6,6 +6,10 @@ import ApplicationLogo from '@/Components/Login/ApplicationLogo';
 import MouseColorChanger from '@/Components/Background/MouseColorChanger';
 import CompanyInfo from '@/Pages/Home/CompanyInfo';
 import WelcomeCard from "@/Components/Cards/WelcomeCard";
+import Navbar from '@/Components/Nav/Menu';
+
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import GuestLayout from '@/Layouts/GuestLayout';
 
 import { CiLogin } from 'react-icons/ci';
 import { IoHomeOutline } from 'react-icons/io5';
@@ -56,67 +60,46 @@ const Welcome: React.FC<WelcomeProps> = ({
         <>
             <Head title="Welcome" />
             
-            <MouseColorChanger />
+                <motion.main
+                    className="w-full h-full grid grid-cols-3 grid-rows-3 p-10 gap-5 overflow-hidden"
+                    initial={{ opacity: 0, y: 100 }}
+                    animate={{
+                        opacity: 1,
+                        y: 0,
+                    }}
+                    transition={{ duration: 2 }}
+                >
+                    {/* Display the current card based on leftIndex */}
+                    <WelcomeCard
+                        key={leftIndex}
+                        title={leftCardData[leftIndex].title}
+                        icon={leftCardData[leftIndex].icon}
+                        className={leftCardData[leftIndex].className}
+                    />
 
-            <div className=" h-auto
-                        bg-gradient-to-r from-sky-500 via-slate-900 to-sky-500 
-                        text-black/50 dark:bg-black dark:text-white/50 
-                        " id="container">
-
-                <CompanyInfo />
-                
-
-                <div className="relative w-full h-screen  z-10 bg-gradient-to-r from-sky-500 via-slate-900 to-sky-500 ">
-                    <header className="h-[15%] top-0 grid grid-cols-3 items-center">
-
-                        <div className="col-start-2">
-                            <ApplicationLogo className="w-[20%] h-full m-auto bg-gradient-to-r from-sky-500 to-slate-950 rounded-full opacity-[100%] fill-current bg-black" />
-                        </div>
-
-                        <nav className="flex justify-end pr-5 col-start-3">
-                            {auth.user ? (
-                                <Link href={route('dashboard')}>
-                                    <IoHomeOutline className="w-10 h-10 text-white" />
-                                </Link>
-                            ) : (
-                                <Link href={route('dashboard')}>
-                                    <CiLogin className="w-10 h-10 text-white" />
-                                </Link>
-                            )}
-                        </nav>
-                    </header>
-
-                    <motion.main
-                        className="h-[85%] w-full grid grid-cols-3 grid-rows-3 p-10 gap-5 overflow-hidden"
-                        initial={{ opacity: 0, y: 100 }}
-                        animate={{
-                            opacity: 1,
-                            y: 0,
-                        }}
-                        transition={{ duration: 2 }}
-                    >
-                        {/* Display the current card based on leftIndex */}
+                    {/* Right side static cards */}
+                    {rightCardData.map((card, index) => (
                         <WelcomeCard
-                            key={leftIndex}
-                            title={leftCardData[leftIndex].title}
-                            icon={leftCardData[leftIndex].icon}
-                            className={leftCardData[leftIndex].className}
+                            key={index}
+                            title={card.title}
+                            icon={card.icon}
+                            className={card.className}
                         />
-
-                        {/* Right side static cards */}
-                        {rightCardData.map((card, index) => (
-                            <WelcomeCard
-                                key={index}
-                                title={card.title}
-                                icon={card.icon}
-                                className={card.className}
-                            />
-                        ))}
-                    </motion.main>
-                </div>
-            </div>
+                    ))}
+                </motion.main>
+           
         </>
     );
-}
+};
 
-export default Welcome;
+const WelcomePage: React.FC<WelcomeProps> = (props) => {
+    const Layout = props.auth.user ? AuthenticatedLayout : GuestLayout;
+
+    return (
+        <Layout>
+            <Welcome {...props} />
+        </Layout>
+    );
+};
+
+export default WelcomePage;

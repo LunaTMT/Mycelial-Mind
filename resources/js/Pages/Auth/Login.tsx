@@ -40,7 +40,7 @@ export default function Login({
                 </div>
             )}
 
-            <form onSubmit={submit}>
+            <form onSubmit={submit} className=''>
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 
@@ -97,7 +97,7 @@ export default function Login({
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
-                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
                         >
                             Forgot your password?
                         </Link>
@@ -109,7 +109,7 @@ export default function Login({
                 <Link
                 href={route('register')}
                 className="relative  w-full h-auto mt-10 flex items-center justify-center  z-50  text-right
-                rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400  focus:ring-offset-2"
                 >
                     Create Account
                 </Link>

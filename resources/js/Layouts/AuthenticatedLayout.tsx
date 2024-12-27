@@ -168,7 +168,7 @@ export default function Authenticated({
                 </div>
             </nav>
             
-            <div className='w-full h-2 bg-gray-100 bg-gradient-to-r from-gray-100 to-slate-950'></div>
+            
             
             
             {header && (

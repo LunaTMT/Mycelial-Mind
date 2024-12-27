@@ -7,8 +7,7 @@ use Inertia\Inertia;
 
 Route::get('/shop', function () {
     return Inertia::render('Shop');
-});
-
+})->name('shop'); // Add the name if you want to ref it in href
 
 Route::get('/index', function () {
     return Inertia::render('Index');

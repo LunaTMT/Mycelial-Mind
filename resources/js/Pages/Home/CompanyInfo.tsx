@@ -1,12 +1,16 @@
 import React from 'react';
-import { motion } from 'framer-motion'; // Correct the import for framer-motion
+import { motion } from 'framer-motion'; 
 import { MdArrowDropDown } from "react-icons/md";
+
+
+//This can be loading screen like with csgo empire 
 
 const CompanyInfo: React.FC = () => {
     return (
         <>
-            {/* Main Content */}
-            <div className="relative flex flex-col items-center justify-center w-screen h-screen mx-auto gap-10">
+            
+            <div className="relative flex flex-col items-center justify-center w-screen h-screen gap-10 bg-transparent
+            bg-gradient-to-r from-sky-500 via-slate-900 to-sky-500">
                 {/* Logo Image */}
                 <motion.img
                     src="/assets/images/logo2.png"

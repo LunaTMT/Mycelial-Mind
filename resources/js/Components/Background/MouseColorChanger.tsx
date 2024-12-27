@@ -1,12 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const MouseColorChanger = () => {
+interface Props {
+  className?: string;
+}
+
+const MouseColorChanger: React.FC<Props> = ({ className }) => {
   return (
     <div className="overflow-hidden">
       {/* Left background image */}
       <motion.div
-        className="fixed top-0 left-0"
+        className={`fixed top-0 left-0 ${className}`}
         animate={{
           scale: [1, 1.2, 1], // Grow and shrink effect
           y: [0, -20, 0], // Float up and down
@@ -28,7 +32,7 @@ const MouseColorChanger = () => {
 
       {/* Right background image */}
       <motion.div
-        className="fixed top-0 right-0"
+        className={`fixed top-0 right-0 ${className}`}
         animate={{
           scale: [1, 1.2, 1], // Grow and shrink effect
           y: [0, 20, 0], // Float in the opposite direction
