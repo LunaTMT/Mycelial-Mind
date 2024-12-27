@@ -8,6 +8,7 @@ import CompanyInfo from '@/Pages/Home/CompanyInfo';
 import WelcomeCard from "@/Components/Cards/WelcomeCard";
 import Navbar from '@/Components/Nav/Menu';
 
+
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import GuestLayout from '@/Layouts/GuestLayout';
 
@@ -40,9 +41,9 @@ const Welcome: React.FC<WelcomeProps> = ({
 
     // Right card data
     const rightCardData = [
-        { title: "Store", icon: <BsShop className={IconClass} />, className: 'row-start-1 col-start-3' },
-        { title: "Resources", icon: <GrResources className={IconClass} />, className: 'row-start-2 col-start-3' },
-        { title: "About", icon: <FaInfoCircle className={IconClass} />, className: 'row-start-3 col-start-3' },
+        { title: "Store", icon: <BsShop className={IconClass} />, className: 'row-start-1 col-start-2' },
+        { title: "Resources", icon: <GrResources className={IconClass} />, className: 'row-start-2 col-start-2' },
+        { title: "About", icon: <FaInfoCircle className={IconClass} />, className: 'row-start-3 col-start-2' },
     ];
 
     // State to keep track of the leftIndex
@@ -56,50 +57,48 @@ const Welcome: React.FC<WelcomeProps> = ({
         return () => clearInterval(interval); // Clean up interval on component unmount
     }, []);
 
+    const Layout = auth?.user ? AuthenticatedLayout : GuestLayout;
+
     return (
         <>
-            <Head title="Welcome" />
+            <Layout header={
+                <h2 className="text-xl font-semibold leading-tight ">
+                    Welcome
+                </h2>
+            }>
+                <Head title="Welcome" />
             
-                <motion.main
-                    className="w-full h-full grid grid-cols-3 grid-rows-3 p-10 gap-5 overflow-hidden"
-                    initial={{ opacity: 0, y: 100 }}
-                    animate={{
-                        opacity: 1,
-                        y: 0,
-                    }}
-                    transition={{ duration: 2 }}
+
+                <main
+                    className="py-12 w-full h-auto grid grid-cols-2 grid-rows-3  gap-5 overflow-hidden mx-auto max-w-7xl  lg:px-8"
                 >
-                    {/* Display the current card based on leftIndex */}
+                    
                     <WelcomeCard
                         key={leftIndex}
                         title={leftCardData[leftIndex].title}
                         icon={leftCardData[leftIndex].icon}
                         className={leftCardData[leftIndex].className}
                     />
+                   
 
-                    {/* Right side static cards */}
-                    {rightCardData.map((card, index) => (
-                        <WelcomeCard
-                            key={index}
-                            title={card.title}
-                            icon={card.icon}
-                            className={card.className}
-                        />
-                    ))}
-                </motion.main>
+                    {/* Right Cards */}
+                    
+                        {rightCardData.map((card, index) => (
+                            <WelcomeCard
+                                key={index}
+                                title={card.title}
+                                icon={card.icon}
+                                className={card.className}
+                            />
+                        ))}
+              
+                </main>
+
            
+            </Layout>
         </>
     );
 };
 
-const WelcomePage: React.FC<WelcomeProps> = (props) => {
-    const Layout = props.auth.user ? AuthenticatedLayout : GuestLayout;
 
-    return (
-        <Layout>
-            <Welcome {...props} />
-        </Layout>
-    );
-};
-
-export default WelcomePage;
+export default Welcome;

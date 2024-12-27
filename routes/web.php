@@ -9,6 +9,16 @@ Route::get('/shop', function () {
     return Inertia::render('Shop');
 })->name('shop'); // Add the name if you want to ref it in href
 
+Route::get('/resources', function () {
+    return Inertia::render('Resources');
+})->name('resources'); // Add the name if you want to ref it in href
+
+
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('about'); // Add the name if you want to ref it in href
+
+
 Route::get('/index', function () {
     return Inertia::render('Index');
 });

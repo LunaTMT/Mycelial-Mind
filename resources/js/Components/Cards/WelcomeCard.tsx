@@ -11,7 +11,7 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({ title, icon, className }) => 
         <a
             className={`relative flex flex-col justify-start items-start p-10 gap-5 
                 rounded-lg z-30 overflow-hidden bg-white/30 group hover:bg-white/50
-                ${className} w-full h-full min-h-full`} // Ensure it takes full height
+                ${className} `} // Ensure it takes full height
         >
             {/* Title */}
             <h2 className="text-7xl font-Aileron_UltraLight text-white text-transparent 

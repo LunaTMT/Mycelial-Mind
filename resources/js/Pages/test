@@ -1,0 +1,22 @@
+{/* Content */}
+                <div className="w-full h-full flex flex-col justify-center items-center gap-[2%]">
+                    
+                    
+                    {/* Top Search Bar */}
+                    <div className="w-full flex justify-center">
+                        <SearchBar placeholder="Search..." onSearch={handleSearch} />
+                    </div>
+
+                    {/* Shop Filter */}
+                    <div className="w-[95%] h-[70%] bg-white flex flex-col">
+                        {/* Left Sidebar Filter */}
+                        <div className="hidden h-auto md:flex md:w-[15vw] md:h-[75vh] bg-white shadow-md border">
+                            <ShopFilter categories={categories} />
+                        </div>
+
+                        {/* Right Items */}
+                        <div className="w-full md:w-[85vw] md:h-[75vh] bg-white border shadow-md">
+                            Insert items
+                        </div>
+                    </div>
+                </div>

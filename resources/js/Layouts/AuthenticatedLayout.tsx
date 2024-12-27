@@ -3,7 +3,25 @@ import Dropdown from '@/Components/Login/Dropdown';
 import NavLink from '@/Components/Nav/NavLink';
 import ResponsiveNavLink from '@/Components/Login/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
-import { PropsWithChildren, ReactNode, useState } from 'react';
+import { PropsWithChildren, ReactNode, useState, useEffect } from 'react';
+
+import Socials from '@/Components/Menu/Socials';
+
+import { IoHomeOutline } from "react-icons/io5";
+import { MdDashboard } from "react-icons/md";
+import { MdAccountBox } from "react-icons/md";
+import { CiShop } from "react-icons/ci";
+import { IoBookOutline } from "react-icons/io5";
+import { BsInfoSquare } from "react-icons/bs";
+
+import { RiShoppingCartLine } from "react-icons/ri";
+import { CiShoppingCart } from "react-icons/ci";
+
+
+
+
+// Inside your component:
+
 
 export default function Authenticated({
     header,
@@ -14,55 +32,109 @@ export default function Authenticated({
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
+    const [isNavVisible, setIsNavVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+          if (window.scrollY > lastScrollY) {
+            // If scrolling down, hide the nav
+            setIsNavVisible(false);
+          } else {
+            // If scrolling up, show the nav
+            setIsNavVisible(true);
+          }
+          setLastScrollY(window.scrollY);
+        };
+      
+        // Add the scroll event listener
+        window.addEventListener('scroll', handleScroll);
+      
+        // Clean up the event listener on component unmount
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, [lastScrollY]); // Dependency array to track last scroll position
+
+
     return (
-        <div className="min-h-screen bg-gray-100 bg-gradient-to-r from-sky-500 to-slate-950">
-            <nav className="p-[2px]">
-                
-
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border border-red-400 ">
-                    <div className="flex h-16 justify-between ">
+        <div className=" w-full m-auto min-h-screen bg-gray-100 bg-gradient-to-r from-sky-500 to-slate-950">
+            
+            <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8  p-10   ">
+               
+                <div className="flex h justify-between items-center ">
                         
-                        <div className="flex ">
-                            <div className="flex shrink-0 items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current" />
-                                </Link>
-                            </div>
-
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex  ">
+                        
+                        <div className="flex w-auto items-center justify-start  border-white/20 ">
+                            <div className="hidden space-x-5  sm:flex  ">
                                 <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
-                                >
-                                    Dashboard
-                                </NavLink>
+                                    href="/"
+                                    active={true}
+                                    icon={<IoHomeOutline className="w-10 h-10 text-white/70 hover:text-white " />} 
+                                    name="Home"
+                                />
+
+                                <NavLink
+                                    href="/shop"
+                                    active={false}
+                                    icon={<CiShop className="w-10 h-10 text-white/70 hover:text-white " />} 
+                                    name="Shop"
+                                />
+
+                                <NavLink
+                                    href="/resources"
+                                    active={false}
+                                    icon={<IoBookOutline    className="w-10 h-10 text-white/70 hover:text-white " />} 
+                                    name="Resources"
+                                />
+
+                                <NavLink
+                                    href="/about"
+                                    active={false}
+                                    icon={<BsInfoSquare    className="w-10 h-10 text-white/70 hover:text-white " />} 
+                                    name="About"
+                                />
                             </div>
                         </div>
 
+                        <Link href="/"> 
+                            <div className="absolute  left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                <ApplicationLogo
+                                    className="
+                                        w-20 h-auto 
+                                        rounded-full opacity-[100%] 
+                                        fill-current text-gray-500
+                                        bg-gradient-to-r from-sky-500 to-slate-700
+                                        hover:opacity-100 hover:scale-105 hover:shadow-[0_0_20px_rgba(56,189,248,0.75)] 
+                                        transition-all duration-300"
+                                />
+                            </div>
+                        </Link>
+
+
+        
+                        
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
+                            <Link href={route('shop')}>
+                                <CiShoppingCart   className="w-10 h-10 text-white/70 hover:text-white ms-3" />
+                            </Link>
+                            
                             <div className="relative ms-3">
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
+                                       
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-                                            >
-                                                {user.name}
+                                                className="inline-flex items-center rounded-md  text-sm 
 
-                                                <svg
-                                                    className="-me-0.5 ms-2 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
+                                                font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
+                                            >
+                                                <MdAccountBox className="w-14 h-14 text-white/70 hover:text-white" /> {/* Add the icon here */}
+
+                                        
                                             </button>
+
                                         </span>
                                     </Dropdown.Trigger>
 
@@ -82,8 +154,11 @@ export default function Authenticated({
                                     </Dropdown.Content>
                                 </Dropdown>
                             </div>
+
+                            
                         </div>
 
+                        {/* this is mobile  */}
                         <div className="-me-2 flex items-center sm:hidden">
                             <button
                                 onClick={() =>
@@ -122,11 +197,12 @@ export default function Authenticated({
                                         d="M6 18L18 6M6 6l12 12"
                                     />
                                 </svg>
-                            </button>
+                            </button>   
                         </div>
-                    </div>
+                  
                 </div>
-
+                
+                {/* this is mobile  */}
                 <div
                     className={
                         (showingNavigationDropdown ? 'block' : 'hidden') +
@@ -168,18 +244,26 @@ export default function Authenticated({
                 </div>
             </nav>
             
-            
-            
-            
+        
             {header && (
-                <header className="bg-white  bg-gradient-to-r from-sky-500 to-slate-950  shadow">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                <header className=" text-white/75  shadow border-t-2 border-white/25">
+                    <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
                         {header}
                     </div>
                 </header>
             )}
 
-            <main>{children}</main>
+            <main className="h-auto ">{children}</main>
+
+            <footer className='p-3'>
+                <div className="flex items-center justify-center space-x-5">
+                    <div className="hidden sm:flex">
+                        <Socials />
+                    </div>
+                </div>
+            </footer>
+
+            
         </div>
     );
 }
