@@ -17,14 +17,11 @@ export default function ForgotPassword({ status }: { status?: string }) {
     };
 
     return (
-        <GuestLayout>
+        <GuestLayout header={
+            <h2 className="text-xl font-semibold leading-tight "> Forgot Password </h2>}>
             <Head title="Forgot Password" />
 
-            <div className="mb-4 text-sm text-gray-600">
-                Forgot your password? No problem. Just let us know your email
-                address and we will email you a password reset link that will
-                allow you to choose a new one.
-            </div>
+            
 
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">
@@ -32,25 +29,36 @@ export default function ForgotPassword({ status }: { status?: string }) {
                 </div>
             )}
 
-            <form onSubmit={submit}>
-                <TextInput
-                    id="email"
-                    type="email"
-                    name="email"
-                    value={data.email}
-                    className="mt-1 block w-full"
-                    isFocused={true}
-                    onChange={(e) => setData('email', e.target.value)}
-                />
+                
+                        
+            <form
+                onSubmit={submit}
+                className=" w-full h-full max-w-md p-6 m-auto rounded-md bg-white/80 shadow-lg"
+                >
+                    <h1 className="mb-4 text-lg text-gray-600">
+                        Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
+                        <br /> <br /> 
+                    </h1>
 
-                <InputError message={errors.email} className="mt-2" />
+                        <TextInput
+                            id="email"
+                            type="email"
+                            name="email"
+                            value={data.email}
+                            className="mt-1 block w-full"
+                            isFocused={true}
+                            onChange={(e) => setData('email', e.target.value)}
+                        />
 
-                <div className="mt-4 flex items-center justify-end">
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Email Password Reset Link
-                    </PrimaryButton>
-                </div>
-            </form>
+                        <InputError message={errors.email} className="mt-2" />
+
+                        <div className="mt-4 flex items-center justify-end">
+                            <PrimaryButton className="ms-4" disabled={processing}>
+                                Email Password Reset Link
+                            </PrimaryButton>
+                        </div>
+                    </form>
+             
         </GuestLayout>
     );
 }

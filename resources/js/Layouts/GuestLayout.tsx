@@ -60,10 +60,10 @@ export default function Guest({
     }, [lastScrollY]); // Dependency array to track last scroll position
 
     return (
-        <div className="realtive w-full min-h-screen bg-gray-100 bg-gradient-to-r from-sky-500 to-slate-950">
+        <div className="realtive w-full min-h-screen  bg-gradient-to-r from-sky-500 to-slate-950">
             
-            
-            <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 p-6">
+   
+            <nav className="mx-auto h-[12vh]  max-w-7xl px-4 sm:px-6 lg:px-8 p-6 ">
                 <div className="flex justify-between items-center">
                     {/* Left side (Socials) */}
                    
@@ -101,8 +101,7 @@ export default function Guest({
                     </div>
 
                    
-                    
-
+                
                     {/* Centered Logo */}
                     <Link href="/"> 
                         <div className="absolute  left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -134,20 +133,19 @@ export default function Guest({
             </nav>
 
             {header && (
-                <header className="text-white/75 shadow border-t-2 border-white/25">
+                <header className="h-[6vh] text-white/75 shadow border-t-2 border-white/25  bg-gradient-to-r from-sky-500 to-slate-950">
                     <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
                         {header}
                     </div>
                 </header>
             )}
 
-            <main className="min-h-screen">{children}</main>
+            <main className=" min-h-[82vh] flex justify-center items-center ">{children}</main>
 
-            <footer className='bg-red-500'>
-                <div className="flex items-center space-x-5">
-                    <div className="hidden sm:flex">
-                        <Socials />
-                    </div>
+            <footer className='relative bottom-0 w-full  p-5 flex items-center justify-center gap-4'>
+                
+                <div className="flex items-center justify-center space-x-5">
+                    <Socials />
                 </div>
             </footer>
         </div>

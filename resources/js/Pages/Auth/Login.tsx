@@ -31,7 +31,8 @@ export default function Login({
     };
 
     return (
-        <GuestLayout>
+        <GuestLayout header={
+            <h2 className="text-xl font-semibold leading-tight "> Login </h2>}>
             <Head title="Log in" />
 
             {status && (
@@ -41,10 +42,10 @@ export default function Login({
             )}
 
             {/* Centered form container */}
-            <div className="w-full h-auto bg-red-500 flex justify-center items-center">
-                <form
-                    onSubmit={submit}
-                    className="w-full max-w-md p-6 rounded-md bg-white/80 shadow-lg"
+  
+            <form
+                onSubmit={submit}
+                className=" w-full h-full max-w-md p-6 m-auto rounded-md bg-white/80 shadow-lg"
                 >
                     <div>
                         <InputLabel htmlFor="email" value="Email" />
@@ -116,7 +117,8 @@ export default function Login({
                         Create Account
                     </Link>
                 </form>
-            </div>
+ 
+            
         </GuestLayout>
     );
 }

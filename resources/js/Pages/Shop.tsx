@@ -67,7 +67,7 @@ const Shop: React.FC<ShopProps> = ({ auth }) => {
         >
             <Head title="Welcome" />
             
-            <div className="mx-auto p-14 w-full h-auto bg-white-50 flex items-start justify-center relative">
+            <div className="mx-auto p-14 w-full h-auto bg-white-50 flex items-start justify-center relative ">
                 {/* Filter Icon */}
                 <div className="absolute top-0 right-20 z-10 flex items-center gap-5 text-white">
                     <div className="flex items-center gap-5">

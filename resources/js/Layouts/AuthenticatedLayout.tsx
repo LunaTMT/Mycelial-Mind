@@ -58,9 +58,9 @@ export default function Authenticated({
 
 
     return (
-        <div className=" w-full m-auto min-h-screen bg-gray-100 bg-gradient-to-r from-sky-500 to-slate-950">
+        <div className="realtive w-full min-h-screen bg-gray-100 bg-gradient-to-r from-sky-500 to-slate-950">
             
-            <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8  p-10   ">
+            <nav className="mx-auto h-[12vh]  max-w-7xl px-4 sm:px-6 lg:px-8 p-6">
                
                 <div className="flex h justify-between items-center ">
                         
@@ -246,24 +246,24 @@ export default function Authenticated({
             
         
             {header && (
-                <header className=" text-white/75  shadow border-t-2 border-white/25">
+                <header className="h-[6vh] text-white/75 shadow border-t-2 border-white/25">
                     <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
                         {header}
                     </div>
                 </header>
             )}
 
-            <main className="h-auto ">{children}</main>
+            <main className=" min-h-[82vh] ">{children}</main>
 
-            <footer className='p-3'>
+            <footer className='relative bottom-0 w-full  p-5 flex items-center justify-center gap-4'>
+                
                 <div className="flex items-center justify-center space-x-5">
-                    <div className="hidden sm:flex">
-                        <Socials />
-                    </div>
+                    <Socials />
                 </div>
             </footer>
+        </div>
 
             
-        </div>
+        
     );
 }
