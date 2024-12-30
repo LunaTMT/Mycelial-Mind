@@ -13,6 +13,7 @@ import { MdAccountBox } from "react-icons/md";
 import { CiShop } from "react-icons/ci";
 import { IoBookOutline } from "react-icons/io5";
 import { BsInfoSquare } from "react-icons/bs";
+import { RxDashboard } from "react-icons/rx";
 
 import { RiShoppingCartLine } from "react-icons/ri";
 import { CiShoppingCart } from "react-icons/ci";
@@ -58,7 +59,7 @@ export default function Authenticated({
 
 
     return (
-        <div className="realtive w-full min-h-screen bg-gray-100 bg-gradient-to-r from-sky-500 to-slate-950">
+        <div className="realtive w-full min-h-screen bg-gradient-to-r from-sky-500 to-slate-950">
             
             <nav className="mx-auto h-[12vh]  max-w-7xl px-4 sm:px-6 lg:px-8 p-6">
                
@@ -81,6 +82,8 @@ export default function Authenticated({
                                     name="Shop"
                                 />
 
+                                {/* remove for now 
+                                
                                 <NavLink
                                     href="/resources"
                                     active={false}
@@ -88,20 +91,31 @@ export default function Authenticated({
                                     name="Resources"
                                 />
 
+                                */}
+
                                 <NavLink
                                     href="/about"
                                     active={false}
                                     icon={<BsInfoSquare    className="w-10 h-10 text-white/70 hover:text-white " />} 
                                     name="About"
                                 />
+
+                                <NavLink
+                                href="/dashboard"
+                                active={false}
+                                icon={<RxDashboard     className="w-10 h-10 text-white/70 hover:text-white " />} 
+                                name="Dashboard"
+                            />
+                                
                             </div>
                         </div>
 
+                        {/* 
                         <Link href="/"> 
                             <div className="absolute  left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                 <ApplicationLogo
                                     className="
-                                        w-20 h-auto 
+                                        w-20 h-auto     
                                         rounded-full opacity-[100%] 
                                         fill-current text-gray-500
                                         bg-gradient-to-r from-sky-500 to-slate-700
@@ -110,7 +124,7 @@ export default function Authenticated({
                                 />
                             </div>
                         </Link>
-
+                        */}
 
         
                         
@@ -154,7 +168,7 @@ export default function Authenticated({
                                     </Dropdown.Content>
                                 </Dropdown>
                             </div>
-
+                            
                             
                         </div>
 
@@ -246,17 +260,20 @@ export default function Authenticated({
             
         
             {header && (
-                <header className="h-[6vh] text-white/75 shadow border-t-2 border-white/25">
-                    <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+                <header className="h-auto text-white/75 shadow border-t-2 border-white/25 ">
+                    <div className="mx-auto max-w-7xl py-4 sm:px-6 lg:px-8">
                         {header}
                     </div>
                 </header>
             )}
 
-            <main className=" min-h-[82vh] ">{children}</main>
+       
+            <main className="relative p-5 w-full flex items-center justify-center mx-auto h-full max-w-7xl py-4 sm:px-6 lg:px-8">
+                {children}
+            </main>
 
-            <footer className='relative bottom-0 w-full  p-5 flex items-center justify-center gap-4'>
-                
+
+            <footer className='relative bottom-0 w-full h-auto p-5 flex items-center justify-center gap-4'>
                 <div className="flex items-center justify-center space-x-5">
                     <Socials />
                 </div>

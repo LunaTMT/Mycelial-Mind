@@ -1,7 +1,9 @@
-import { PageProps as InertiaPageProps } from '@inertiajs/core';
+// global.d.ts (or index.d.ts)
+
+import { Page } from '@inertiajs/react';
 import { AxiosInstance } from 'axios';
 import { route as ziggyRoute } from 'ziggy-js';
-import { PageProps as AppPageProps } from './';
+import { PageProps as AppPageProps } from './'; // Ensure this is correct path
 
 declare global {
     interface Window {
@@ -12,6 +14,12 @@ declare global {
     var route: typeof ziggyRoute;
 }
 
-declare module '@inertiajs/core' {
-    interface PageProps extends InertiaPageProps, AppPageProps {}
+declare module '@inertiajs/react' {
+    interface Page {
+        props: {
+            flash: {
+                loggedIn?: boolean;
+            };
+        } & AppPageProps;
+    }
 }

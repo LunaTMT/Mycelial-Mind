@@ -11,6 +11,7 @@ import Navbar from '@/Components/Nav/Menu';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import GuestLayout from '@/Layouts/GuestLayout';
+import VideoPlayer from "@/Components/Video/VideoPlayer";
 
 import { CiLogin } from 'react-icons/ci';
 import { IoHomeOutline } from 'react-icons/io5';
@@ -67,21 +68,31 @@ const Welcome: React.FC<WelcomeProps> = ({
                 </h2>
             }>
                 <Head title="Welcome" />
-            
+                
+                
+        
+                <div
+                        className="relative w-full h-full 
+                                    flex justify-center items-center 
 
-                <main
-                    className="py-12 w-full h-auto grid grid-cols-2 grid-rows-3  gap-5 overflow-hidden mx-auto max-w-7xl  lg:px-8"
-                >
-                    
-                    <WelcomeCard
-                        key={leftIndex}
-                        title={leftCardData[leftIndex].title}
-                        icon={leftCardData[leftIndex].icon}
-                        className={leftCardData[leftIndex].className}
-                    />
-                   
+                                    "
+                    >               
+                        <VideoPlayer src="/assets/videos/time_lapse.mp4" />
+                        
+                        {/* Make sure CompanyInfo is positioned correctly */}
+                        <CompanyInfo />
+                                        
 
-                    {/* Right Cards */}
+                    {/* add this to dashboard 
+                        main className="relative py-12 w-full h-auto grid grid-cols-2 grid-rows-3 gap-5 overflow-hidden mx-auto max-w-7xl lg:px-8"
+
+                        <WelcomeCard
+                            key={leftIndex}
+                            title={leftCardData[leftIndex].title}
+                            icon={leftCardData[leftIndex].icon}
+                            className={leftCardData[leftIndex].className}
+                        />
+
                     
                         {rightCardData.map((card, index) => (
                             <WelcomeCard
@@ -91,8 +102,9 @@ const Welcome: React.FC<WelcomeProps> = ({
                                 className={card.className}
                             />
                         ))}
-              
-                </main>
+                    */}
+                </div>
+
 
            
             </Layout>

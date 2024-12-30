@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
+
+
 
 Route::get('/shop', function () {
     return Inertia::render('Shop');
@@ -34,10 +38,22 @@ Route::get('/', function () {
 });
 
 
-//The dashboard is what the user can access when logged in 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+Route::get('/dashboard', function (Request $request) {
+    $loggedIn = $request->query('loggedIn', false); 
+    
+    return Inertia::render('Dashboard', [
+        'loggedIn' => $loggedIn,
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+
+
+Route::post('login', [AuthenticatedSessionController::class, 'store'])->name('login');
+Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

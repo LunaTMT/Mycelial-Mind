@@ -102,7 +102,7 @@ export default function Guest({
 
                    
                 
-                    {/* Centered Logo */}
+                    {/* Centered Logo 
                     <Link href="/"> 
                         <div className="absolute  left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                             <ApplicationLogo
@@ -116,7 +116,7 @@ export default function Guest({
                             />
                         </div>
                     </Link>
-
+                    */}
                     
                     {/* Right side (Cart) */}
                     <div className="hidden sm:flex items-center">
