@@ -51,7 +51,7 @@ export default function Login({
                     {status}
                 </div>
             )}
-
+            
             <form
                 onSubmit={submit}
                 className="w-full h-full max-w-md p-6 m-auto rounded-md bg-white/80 shadow-lg"
@@ -100,28 +100,33 @@ export default function Login({
                     </label>
                 </div>
 
-                <div className="mt-4 flex flex-col items-center justify-center">
-                    <PrimaryButton className="text-center w-full" disabled={processing}>
+                <div className="mt-4 flex flex-col items-center justify-center gap-5">
+                    <PrimaryButton className="text-center w-1/2" disabled={processing}>
                         Log in
                     </PrimaryButton>
+                    
+                    <div>
+                        {canResetPassword && (
+                            <Link
+                                href={route('password.request')}
+                                className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
+                            >
+                                Forgot your password?
+                            </Link>
+                        )}
 
-                    {canResetPassword && (
                         <Link
-                            href={route('password.request')}
-                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
+                            href={route('register')}
+                            className="relative w-full h-auto  flex items-center justify-center text-right rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
                         >
-                            Forgot your password?
+                            Create Account
                         </Link>
-                    )}
+                    </div>
                 </div>
 
-                <Link
-                    href={route('register')}
-                    className="relative w-full h-auto mt-10 flex items-center justify-center text-right rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
-                >
-                    Create Account
-                </Link>
+                
             </form>
+         
         </GuestLayout>
     );
 }

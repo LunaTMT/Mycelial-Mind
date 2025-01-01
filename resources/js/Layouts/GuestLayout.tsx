@@ -17,10 +17,14 @@ import Socials from '@/Components/Menu/Socials';
 import { IoHomeOutline } from "react-icons/io5";
 import { MdDashboard } from "react-icons/md";
 import { MdAccountBox } from "react-icons/md";
-import { CiShop } from "react-icons/ci";
+
 import { IoBookOutline } from "react-icons/io5";
 import { BsInfoSquare } from "react-icons/bs";
-
+import { ImBooks } from "react-icons/im";
+import { MdOutlineLibraryBooks } from "react-icons/md";
+import { LiaBookSolid } from "react-icons/lia";
+import { BsShop } from "react-icons/bs";
+import { BsInfoSquareFill } from "react-icons/bs";
 import { RiShoppingCartLine } from "react-icons/ri";
 
 
@@ -30,7 +34,7 @@ export default function Guest({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-    const user = usePage().props.auth.user;
+  
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
@@ -63,40 +67,35 @@ export default function Guest({
         <div className="realtive w-full min-h-screen  bg-gradient-to-r from-sky-500 to-slate-950">
             
    
-            <nav className="mx-auto h-[12vh]  max-w-7xl px-4 sm:px-6 lg:px-8 p-6 ">
+            <nav className="mx-auto h-[12vh] max-w-7xl px-4 sm:px-6 lg:px-8 p-6">
                 <div className="flex justify-between items-center">
                     {/* Left side (Socials) */}
                    
-                   
+                    
                     <div className="flex w-auto items-center justify-start  border-white/20 ">
                         <div className="hidden space-x-5  sm:flex  ">
-                            <NavLink
-                                href="/"
-                                active={true}
-                                icon={<IoHomeOutline className="w-10 h-10 text-white/70 hover:text-white " />} 
-                                name="Home"
-                            />
+                        <NavLink
+                            href="/"
+                            active={true}
+                            icon={<IoHomeOutline className="w-full h-auto text-white/70 hover:text-white" />} 
+                            name="Home"
+                        />
 
-                            <NavLink
-                                href="/shop"
-                                active={false}
-                                icon={<CiShop className="w-10 h-10 text-white/70 hover:text-white " />} 
-                                name="Shop"
-                            />
+                        <NavLink
+                            href="/shop"
+                            active={false}
+                            icon={<BsShop className="w-full h-auto text-white/70 hover:text-white" />} 
+                            name="Shop"
+                        />
 
-                            <NavLink
-                                href="/resources"
-                                active={false}
-                                icon={<IoBookOutline    className="w-10 h-10 text-white/70 hover:text-white " />} 
-                                name="Resources"
-                            />
+                    
+                        <NavLink
+                            href="/about"
+                            active={false}
+                            icon={<BsInfoSquare className="w-full h-auto text-white/70 hover:text-white" />} 
+                            name="About"
+                        />
 
-                            <NavLink
-                                href="/about"
-                                active={false}
-                                icon={<BsInfoSquare    className="w-10 h-10 text-white/70 hover:text-white " />} 
-                                name="About"
-                            />
                         </div>
                     </div>
 
@@ -120,7 +119,7 @@ export default function Guest({
                     
                     {/* Right side (Cart) */}
                     <div className="hidden sm:flex items-center">
-                        <Link href={route('shop')}>
+                        <Link href={route('cart')}>
                             <CiShoppingCart className="w-10 h-10 text-white/70 hover:text-white ms-3" />
                         </Link>
 
@@ -129,21 +128,30 @@ export default function Guest({
                         </Link>
 
                     </div>
+
                 </div>
             </nav>
 
             {header && (
-                <header className="h-[6vh] text-white/75 shadow border-t-2 border-white/25  bg-gradient-to-r from-sky-500 to-slate-950">
-                    <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+                <header className="text-white h-[6vh] shadow border-t-2 border-white/25">
+                <div className="flex justify-between items-center 
+                                mx-auto 
+                                w-full h-full max-w-7xl 
+                                sm:px-6 lg:px-8">
                         {header}
                     </div>
                 </header>
             )}
 
-            <main className=" min-h-[82vh] flex justify-center items-center ">{children}</main>
+    
+            <main className="relative p-5 w-full h-full min-h-[82vh]  flex items-center justify-center 
+                             mx-auto max-w-7xl py-4 sm:px-6 lg:px-8">
+                    {children}
+            </main>
 
-            <footer className='relative bottom-0 w-full  p-5 flex items-center justify-center gap-4'>
-                
+
+
+            <footer className='relative bottom-0 w-full h-auto p-5 flex items-center justify-center gap-4'>
                 <div className="flex items-center justify-center space-x-5">
                     <Socials />
                 </div>
@@ -151,3 +159,21 @@ export default function Guest({
         </div>
     );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

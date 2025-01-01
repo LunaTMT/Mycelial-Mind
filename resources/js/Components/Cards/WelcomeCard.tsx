@@ -9,7 +9,7 @@ interface WelcomeCardProps {
 const WelcomeCard: React.FC<WelcomeCardProps> = ({ title, icon, className }) => {
     return (
         <a
-            className={`relative flex flex-col justify-start items-start p-10 gap-5 
+            className={`relative flex flex-col  p-10 gap-5 
                 rounded-lg z-30 overflow-hidden bg-white/30 group hover:bg-white/50
                 ${className} `} // Ensure it takes full height
         >

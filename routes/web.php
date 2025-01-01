@@ -11,7 +11,15 @@ use Inertia\Inertia;
 
 Route::get('/shop', function () {
     return Inertia::render('Shop');
-})->name('shop'); // Add the name if you want to ref it in href
+})->name('shop'); 
+
+Route::get('/item', function() {
+    return Inertia::render('Shop/Item');        
+})->name('item');
+
+Route::get('/cart', function () {
+    return Inertia::render('Cart');
+})->name('cart');
 
 Route::get('/resources', function () {
     return Inertia::render('Resources');
@@ -45,6 +53,8 @@ Route::get('/dashboard', function (Request $request) {
         'loggedIn' => $loggedIn,
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 
 

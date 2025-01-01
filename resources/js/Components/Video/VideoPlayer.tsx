@@ -1,12 +1,13 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
+import CompanyInfo from "@/Pages/Home/CompanyInfo";
 
 interface VideoPlayerProps {
   src: string;
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
-  const videoRef = useRef<HTMLVideoElement | null>(null); 
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const handleEnded = () => {
     if (videoRef.current) {
@@ -17,14 +18,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
 
   return (
     <motion.div
-      className="w-full h-full"
-      initial={{ opacity: 0 }} // Start with opacity 0
-      animate={{ opacity: 1 }} // Fade in to full opacity
-      transition={{ duration: 2 }} // Duration of the fade-in effect
+      className="relative w-full h-full"  // Ensure relative positioning for the parent container
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 2 }}
     >
       <video
         ref={videoRef}
-        className="w-full h-full object-fill rounded-lg" // Add rounded-md here
+        className="w-full h-full object-cover rounded-lg"
         autoPlay
         muted
         loop
@@ -33,6 +34,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+
+      <CompanyInfo />  {/* This will be over the video and centered */}
     </motion.div>
   );
 };

@@ -5,7 +5,7 @@ interface Props {
   className?: string;
 }
 
-const MouseColorChanger: React.FC<Props> = ({ className }) => {
+const LightCircles: React.FC<Props> = ({ className }) => {
   return (
     <div className="overflow-hidden">
       {/* Left background image */}
@@ -55,4 +55,4 @@ const MouseColorChanger: React.FC<Props> = ({ className }) => {
   );
 };
 
-export default MouseColorChanger;
+export default LightCircles;

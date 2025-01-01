@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Head, Link } from '@inertiajs/react';
 
 import ApplicationLogo from '@/Components/Login/ApplicationLogo';
-import MouseColorChanger from '@/Components/Background/MouseColorChanger';
+import MouseColorChanger from '@/Components/Background/LightCircles';
 import CompanyInfo from '@/Pages/Home/CompanyInfo';
 import WelcomeCard from "@/Components/Cards/WelcomeCard";
 import Navbar from '@/Components/Nav/Menu';
@@ -63,47 +63,52 @@ const Welcome: React.FC<WelcomeProps> = ({
     return (
         <>
             <Layout header={
-                <h2 className="text-xl font-semibold leading-tight ">
-                    Welcome
+                <h2 className="text-xl font-semibold leading-tight text-white font-Aileron_UltraLight">
+                    Home
                 </h2>
             }>
                 <Head title="Welcome" />
                 
                 
-        
-                <div
-                        className="relative w-full h-full 
-                                    flex justify-center items-center 
-
-                                    "
-                    >               
-                        <VideoPlayer src="/assets/videos/time_lapse.mp4" />
+                
+                <div className="flex flex-col items-start justify-center gap-24">
                         
-                        {/* Make sure CompanyInfo is positioned correctly */}
-                        <CompanyInfo />
-                                        
+                    <VideoPlayer src="/assets/videos/time_lapse.mp4" />
+                    <VideoPlayer src="/assets/videos/time_lapse.mp4" />
+                    <VideoPlayer src="/assets/videos/time_lapse.mp4" />
 
-                    {/* add this to dashboard 
-                        main className="relative py-12 w-full h-auto grid grid-cols-2 grid-rows-3 gap-5 overflow-hidden mx-auto max-w-7xl lg:px-8"
+                    <div className="h-[83vh] w-full rounded-lg bg-white/10">
+                        <p>dd</p>
+                    </div>
 
-                        <WelcomeCard
-                            key={leftIndex}
-                            title={leftCardData[leftIndex].title}
-                            icon={leftCardData[leftIndex].icon}
-                            className={leftCardData[leftIndex].className}
-                        />
-
-                    
-                        {rightCardData.map((card, index) => (
-                            <WelcomeCard
-                                key={index}
-                                title={card.title}
-                                icon={card.icon}
-                                className={card.className}
-                            />
-                        ))}
-                    */}
                 </div>
+
+
+
+                {/* add this to dashboard 
+                    main className="relative py-12 w-full h-auto grid grid-cols-2 grid-rows-3 gap-5 overflow-hidden mx-auto max-w-7xl lg:px-8"
+
+                    <WelcomeCard
+                        key={leftIndex}
+                        title={leftCardData[leftIndex].title}
+                        icon={leftCardData[leftIndex].icon}
+                        className={leftCardData[leftIndex].className}
+                    />
+
+                
+                    {rightCardData.map((card, index) => (
+                        <WelcomeCard
+                            key={index}
+                            title={card.title}
+                            icon={card.icon}
+                            className={card.className}
+                        />
+                    ))}
+
+
+                      <CompanyInfo />
+                */}
+            
 
 
            

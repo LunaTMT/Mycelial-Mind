@@ -10,6 +10,10 @@ import { IoHomeOutline } from 'react-icons/io5';
 import { BsShop } from "react-icons/bs";
 import { GrResources } from "react-icons/gr";
 import { FaInfoCircle } from "react-icons/fa";
+import { MdAccountBox } from "react-icons/md";
+import { BiSolidPackage } from "react-icons/bi";
+import { FaShippingFast } from "react-icons/fa";
+
 
 export default function Dashboard() {
     const { props } = usePage();
@@ -27,56 +31,41 @@ export default function Dashboard() {
     }, [loggedIn]);
 
     const IconClass = "w-full p-5 h-auto ";
-    const leftCardData = [
-        { title: "New", icon: <BsShop className={IconClass} />, className: 'row-start-1 col-start-1 row-span-3' },
-        { title: "Popular", icon: <BsShop className={IconClass} />, className: 'row-start-1 col-start-1 row-span-3' },
-        { title: "Deals", icon: <BsShop className={IconClass} />, className: 'row-start-1 col-start-1 row-span-3' },
-    ];
+
 
     // Right card data
     const rightCardData = [
-        { title: "Store", icon: <BsShop className={IconClass} />, className: 'row-start-1 col-start-2' },
-        { title: "Resources", icon: <GrResources className={IconClass} />, className: 'row-start-2 col-start-2' },
-        { title: "About", icon: <FaInfoCircle className={IconClass} />, className: 'row-start-3 col-start-2' },
+        { title: "Profile", icon: <MdAccountBox className={IconClass} />, className: 'row-start-1' },
+        { title: "Orders", icon: <BiSolidPackage className={IconClass} />, className: 'row-start-2' },
+        { title: "Shipping", icon: <FaShippingFast className={IconClass} />, className: 'row-start-3' },
+       
+    
     ];
 
-    // State to keep track of the leftIndex
-    const [leftIndex, setLeftIndex] = useState(0);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setLeftIndex((prevIndex) => (prevIndex + 1) % leftCardData.length); // Increment index and loop
-        }, 3000); // Update every 3 seconds
 
-        return () => clearInterval(interval); // Clean up interval on component unmount
-    }, []);
 
 
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-semibold leading-tight text-white font-Aileron_UltraLight space-x-10">
+            
+                <h2 className="text-xl font-semibold leading-tight text-white font-Aileron_UltraLight">
                     Dashboard
                 </h2>
+                
             }
         >
             <Head title="Dashboard" />
             
-            <div className="relative  w-full  grid grid-cols-2 grid-rows-3 gap-5 overflow-hidden mx-auto ">
-
+            <div className='w-full h-full 
+                                        rounded-lg
+                                        overflow-hidden mx-auto 
+                                        max-w-7xl py-5 sm:px-6 lg:px-8
+                                        bg-white/10
+                            grid grid-cols-1 grid-rows-3 gap-3 '>
                 {/* Left Card */}
-                <motion.div
-                    key={leftIndex}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                >
-                    <WelcomeCard
-                        title={leftCardData[leftIndex].title}
-                        icon={leftCardData[leftIndex].icon}
-                        className={leftCardData[leftIndex].className}
-                    />
-                </motion.div>
+
 
                 {/* Right Cards */}
                 {rightCardData.map((card, index) => (
@@ -94,6 +83,7 @@ export default function Dashboard() {
                     </motion.div>
                 ))}
             </div>
+           
 
             
         </AuthenticatedLayout>
