@@ -179,15 +179,11 @@ export default function Authenticated({
                 </div>
             </nav>
             
-            <header className="text-white h-[6vh] shadow border-t-2 border-white/25">
-                <div className="flex justify-between items-center 
-                                mx-auto 
-                                w-full h-full max-w-7xl 
-                                sm:px-6 lg:px-8">
+            <header className="sticky top-0 z-40 bg-sky shadow-md h-[6vh] transition-all duration-300 ease-in-out ">
+                <div className="flex justify-between items-center mx-auto w-full h-full max-w-7xl sm:px-6 lg:px-8">
                     {header}
                 </div>
             </header>
-
 
 
             <main className="relative w-full min-h-[82vh] 

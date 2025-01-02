@@ -1,0 +1,23 @@
+interface ArrowIconProps {
+    w: string; // Width
+    h: string; // Height
+    isOpen: boolean; // Determines the rotation state
+}
+
+const ArrowIcon: React.FC<ArrowIconProps> = ({ w, h, isOpen }) => {
+    return (
+        <svg
+            className={`text-gray-800 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            width={w} // Use passed width
+            height={h} // Use passed height
+        >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    );
+};
+
+export default ArrowIcon;

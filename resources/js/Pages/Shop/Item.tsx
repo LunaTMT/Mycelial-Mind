@@ -10,12 +10,15 @@ import Dropdown from '@/Components/Login/Dropdown';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import GuestLayout from '@/Layouts/GuestLayout';
 
+import { useCart } from "@/Contexts/CartContext"; // Import the cart context
+
 interface ItemProps {
     auth: { user: any } | null; // Assuming 'auth' prop contains user info if logged in
 }
 
 const Item: React.FC<ItemProps> = ({ auth }) => {
     const Layout = auth?.user ? AuthenticatedLayout : GuestLayout;
+    const { addToCart } = useCart(); // Get the addToCart function from context
 
     // Mock data for the images
     const images = [
@@ -26,16 +29,23 @@ const Item: React.FC<ItemProps> = ({ auth }) => {
 
     const [selectedImage, setSelectedImage] = useState(images[0]);
 
-    return (
-        <Layout
-            header={
-                <h2 className="text-xl font-semibold leading-tight">Item</h2>
-            }
-        >
-            <Head title="Welcome" />
+    const handleAddToCart = () => {
+        const newItem = {
+            id: 1, // Ensure this ID is unique for each product
+            name: "Product Name",
+            quantity: 1,
+            image: selectedImage,
+            price: 49.99,
+            total: 49.99, // Calculate the total price (price * quantity)
+        };
+        addToCart(newItem); // Add item to the cart context
+    };
 
+    return (
+        <Layout header={<h2 className="text-xl font-semibold leading-tight">Item</h2>}>
+            <Head title="Item" />
             {/* Main Content */}
-            <div className="relative w-full h-[78vh] p-5 flex justify-center items-start bg-white/10 rounded-lg space-x-2">
+            <div className="relative w-full h-[78vh] p-5 flex justify-center items-start bg-white/10 rounded-lg space-x-2 shadow-sm">
                 {/* Left Photo Carousel (10% width) */}
                 <div className="w-auto h-full flex flex-col space-y-1">
                     {images.map((image, index) => (
@@ -67,11 +77,13 @@ const Item: React.FC<ItemProps> = ({ auth }) => {
                         Discover the features and benefits of this amazing product. A detailed description goes here to entice customers.
                     </p>
                     <p className="text-3xl font-semibold text-black">$49.99</p>
-                    <button className="w-full py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-transform transform hover:scale-105">
+                    <button
+                        onClick={handleAddToCart} // Trigger the add to cart action
+                        className="w-full py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-transform transform hover:scale-105"
+                    >
                         Add to Cart
                     </button>
                 </div>
-
             </div>
         </Layout>
     );

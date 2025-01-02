@@ -31,7 +31,7 @@ export default function NavLink({
                 {/* Render the icon */}
                 <div
                     className={`w-10 h-10 transition duration-150 ${
-                        active ? 'text-white' : 'text-white/70 group-hover:text-white'
+                        active ? 'text-black': 'text-black group-hover:text-black'
                     }`}
                 >
                     {icon}
@@ -39,7 +39,7 @@ export default function NavLink({
 
                 {/* Name below the icon, shown only on hover */}
                 <span
-                    className="text-sm text-white/70 group-hover:text-white "
+                    className="text-sm text-black/70 group-hover:text-black "
                 >
                     {name}
                 </span>

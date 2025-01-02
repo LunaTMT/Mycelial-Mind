@@ -63,7 +63,7 @@ const Welcome: React.FC<WelcomeProps> = ({
     return (
         <>
             <Layout header={
-                <h2 className="text-xl font-semibold leading-tight text-white font-Aileron_UltraLight">
+                <h2 className="text-xl font-semibold leading-tight text-black font-Aileron_UltraLight">
                     Home
                 </h2>
             }>
@@ -74,10 +74,8 @@ const Welcome: React.FC<WelcomeProps> = ({
                 <div className="flex flex-col items-start justify-center gap-24">
                         
                     <VideoPlayer src="/assets/videos/time_lapse.mp4" />
-                    <VideoPlayer src="/assets/videos/time_lapse.mp4" />
-                    <VideoPlayer src="/assets/videos/time_lapse.mp4" />
 
-                    <div className="h-[83vh] w-full rounded-lg bg-white/10">
+                    <div className="h-[83vh] w-full rounded-lg bg-black/10">
                         <p>dd</p>
                     </div>
 

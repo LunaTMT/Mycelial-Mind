@@ -7,9 +7,9 @@ import { CiFacebook } from "react-icons/ci";
 export default function Socials() {
     return (
         <>   
-            <FaFacebookSquare className="w-12 h-12  rounded-md text-white/70 hover:text-white" />
-            <FaSquareInstagram className="w-12 h-12 rounded-md text-white/70 hover:text-white" />
-            <FaSquareXTwitter className="w-12 h-12 rounded-md text-white/70 hover:text-white" />
+            <FaFacebookSquare className="w-12 h-12  rounded-md text-black/70 hover:text-black" />
+            <FaSquareInstagram className="w-12 h-12 rounded-md text-black/70 hover:text-black" />
+            <FaSquareXTwitter className="w-12 h-12 rounded-md text-black/70 hover:text-black" />
         </>
     );
 }

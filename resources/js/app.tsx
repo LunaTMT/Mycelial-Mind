@@ -5,6 +5,9 @@ import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 
+import { CartProvider } from '../js/Contexts/CartContext'
+
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
@@ -15,9 +18,12 @@ createInertiaApp({
             import.meta.glob('./Pages/**/*.tsx'),
         ),
     setup({ el, App, props }) {
-        console.log(props); 
         const root = createRoot(el);
-        root.render(<App {...props} />);
+        root.render(
+            <CartProvider>  {/* Wrap your app with the CartProvider */}
+                <App {...props} />
+            </CartProvider>
+        );
     },
     progress: {
         color: '#4B5563',
