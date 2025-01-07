@@ -25,7 +25,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
     >
       <video
         ref={videoRef}
-        className="w-full h-full object-cover rounded-lg"
+        className="w-full min-h-[85vh] object-cover rounded-lg"
         autoPlay
         muted
         loop

@@ -2,14 +2,12 @@ import { InertiaLinkProps, Link } from '@inertiajs/react';
 
 interface NavLinkProps extends InertiaLinkProps {
     active: boolean;
-    icon: JSX.Element; // The icon to display
-    name: string; // The name to display on hover
+    name?: string;
 }
 
 export default function NavLink({
     active = false,
     className = '',
-    icon,
     name,
     ...props
 }: NavLinkProps) {
@@ -17,33 +15,31 @@ export default function NavLink({
         <Link
             {...props}
             className={`
-                relative inline-flex w-[30%] items-center flex-col gap-2 px-1 pt-1 text-sm font-medium leading-5
-                transition duration-150 ease-in-out focus:outline-none 
-                
+                relative inline-flex items-center text-lg font-medium leading-5
+                transition-all duration-300 ease-in-out focus:outline-none text-left
                 ${className}
             `}
-            
         >
-            {/* Wrap both icon and name in a group */}
-            <div
-                className={`group inline-flex flex-col items-center gap-1 `}
-            >
-                {/* Render the icon */}
-                <div
-                    className={`w-10 h-10 transition duration-150 ${
-                        active ? 'text-black': 'text-black group-hover:text-black'
-                    }`}
-                >
-                    {icon}
-                </div>
-
-                {/* Name below the icon, shown only on hover */}
+            {name && (
                 <span
-                    className="text-sm text-black/70 group-hover:text-black "
+                    className={`
+                        relative text-slate-700 text-left dark:text-slate-300 transition-all duration-300 ease-in-out
+                        ${active 
+                            ? 'underline-offset-2- dark:text-blue-400 font-semibold'
+                            : 'group-hover:text-white dark:group-hover:text-gray-200'
+                        }
+                    `}
                 >
+                    {/* Adding background color change on hover */}
+                    <span
+                        className={`
+                            absolute inset-0 w-full h-full  opacity-0 transition-all duration-300 ease-in-out 
+                            group-hover:opacity-10
+                        `}
+                    />
                     {name}
                 </span>
-            </div>
+            )}
         </Link>
     );
 }

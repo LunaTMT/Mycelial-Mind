@@ -52,11 +52,11 @@ export default function DeleteUserForm({
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">
+                <h2 className="text-lg font-medium text-gray-900 dark:text-slate-100">
                     Delete Account
                 </h2>
 
-                <p className="mt-1 text-sm text-gray-600">
+                <p className="mt-1 text-sm text-gray-600 dark:text-slate-400">
                     Once your account is deleted, all of its resources and data
                     will be permanently deleted. Before deleting your account,
                     please download any data or information that you wish to
@@ -68,13 +68,17 @@ export default function DeleteUserForm({
                 Delete Account
             </DangerButton>
 
-            <Modal show={confirmingUserDeletion} onClose={closeModal}>
+            <Modal
+                show={confirmingUserDeletion}
+                onClose={closeModal}
+                className="dark:bg-slate-700 dark:text-slate-100"
+            >
                 <form onSubmit={deleteUser} className="p-6">
-                    <h2 className="text-lg font-medium text-gray-900">
+                    <h2 className="text-lg font-medium text-gray-900 dark:text-slate-100">
                         Are you sure you want to delete your account?
                     </h2>
 
-                    <p className="mt-1 text-sm text-gray-600">
+                    <p className="mt-1 text-sm text-gray-600 dark:text-slate-400">
                         Once your account is deleted, all of its resources and
                         data will be permanently deleted. Please enter your
                         password to confirm you would like to permanently delete
@@ -85,7 +89,7 @@ export default function DeleteUserForm({
                         <InputLabel
                             htmlFor="password"
                             value="Password"
-                            className="sr-only"
+                            className="sr-only dark:text-slate-100"
                         />
 
                         <TextInput
@@ -97,14 +101,14 @@ export default function DeleteUserForm({
                             onChange={(e) =>
                                 setData('password', e.target.value)
                             }
-                            className="mt-1 block w-3/4"
+                            className="mt-1 block w-3/4 dark:bg-slate-800 dark:text-slate-100 dark:border-slate-600 focus:dark:border-indigo-500 focus:ring-indigo-500"
                             isFocused
                             placeholder="Password"
                         />
 
                         <InputError
                             message={errors.password}
-                            className="mt-2"
+                            className="mt-2 dark:text-red-400"
                         />
                     </div>
 

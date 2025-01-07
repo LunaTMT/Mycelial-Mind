@@ -63,24 +63,18 @@ const Welcome: React.FC<WelcomeProps> = ({
     return (
         <>
             <Layout header={
-                <h2 className="text-xl font-semibold leading-tight text-black font-Aileron_UltraLight">
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
                     Home
                 </h2>
             }>
                 <Head title="Welcome" />
-                
-                
-                
-                <div className="flex flex-col items-start justify-center gap-24">
+ 
                         
-                    <VideoPlayer src="/assets/videos/time_lapse.mp4" />
+                <VideoPlayer src="/assets/videos/time_lapse.mp4" />
 
-                    <div className="h-[83vh] w-full rounded-lg bg-black/10">
-                        <p>dd</p>
-                    </div>
+                    
 
-                </div>
-
+               
 
 
                 {/* add this to dashboard 
@@ -102,7 +96,10 @@ const Welcome: React.FC<WelcomeProps> = ({
                             className={card.className}
                         />
                     ))}
-
+                    
+                    <div className="h-[83vh] w-full rounded-lg bg-black/10">
+                        
+                    </div>
 
                       <CompanyInfo />
                 */}

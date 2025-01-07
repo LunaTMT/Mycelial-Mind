@@ -1,26 +1,15 @@
-import { usePage } from '@inertiajs/react';
-import { PropsWithChildren, ReactNode, useState, useEffect } from 'react';
+import { PropsWithChildren, ReactNode, useState } from 'react';
 import NavLink from '@/Components/Nav/NavLink';
-import ResponsiveNavLink from '@/Components/Login/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
-import ApplicationLogo from '@/Components/Login/ApplicationLogo';
-import Dropdown from '@/Components/Login/Dropdown';
-import LightCircles from '@/Components/Background/LightCircles';
-import { IoHomeOutline } from "react-icons/io5";
 import { MdAccountBox } from "react-icons/md";
-import { CiShop } from "react-icons/ci";
-import { BsInfoSquare } from "react-icons/bs";
-import { RxDashboard } from "react-icons/rx";
 import { CiShoppingCart } from "react-icons/ci";
-import { RiShoppingCartLine } from "react-icons/ri";
+import Dropdown from '@/Components/Login/Dropdown';
 import Socials from '@/Components/Menu/Socials';
-import { BsShop } from "react-icons/bs";
+import { useNav } from '@/Contexts/NavContext';
+import { usePage, router } from '@inertiajs/react';
 
-// Define the types for the user and page props
 interface User {
     name: string;
     email: string;
-    // Add other properties if necessary
 }
 
 interface PageProps {
@@ -33,176 +22,112 @@ export default function Authenticated({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-    // Type the usePage hook properly
     const { user } = usePage<PageProps>().props.auth;
+    const { url } = usePage();
+    const { showNav, scrollDirection } = useNav();
+    const [darkMode, setDarkMode] = useState(false);
 
-    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-    const [isNavVisible, setIsNavVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > lastScrollY) {
-                // If scrolling down, hide the nav
-                setIsNavVisible(false);
+    const toggleDarkMode = () => {
+        setDarkMode((prevMode) => {
+            const newMode = !prevMode;
+            localStorage.setItem("theme", newMode ? "dark" : "light");
+            if (newMode) {
+                document.documentElement.classList.add("dark");
             } else {
-                // If scrolling up, show the nav
-                setIsNavVisible(true);
+                document.documentElement.classList.remove("dark");
             }
-            setLastScrollY(window.scrollY);
-        };
-
-        // Add the scroll event listener
-        window.addEventListener('scroll', handleScroll);
-
-        // Clean up the event listener on component unmount
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [lastScrollY]);
+            return newMode;
+        });
+    };
 
     return (
-        <div className="relative w-full min-h-screen bg-gradient-to-r from-sky-500 to-slate-950">
+        <div className="relative w-full min-h-screen dark:bg-none dark:bg-slate-800">
 
-     
-
-            <nav className="mx-auto h-[12vh] max-w-7xl px-4 sm:px-6 lg:px-8 p-6">
-                <div className="flex h justify-between items-center">
-                    <div className="flex w-auto items-center justify-start border-white/20 ">
-                        <div className="hidden space-x-5 sm:flex">
-                            <NavLink
-                                href="/"
-                                active={true}
-                                icon={<IoHomeOutline className="w-full h-auto text-white/70 hover:text-white " />}
-                                name="Home"
-                            />
-                            <NavLink
-                                href="/shop"
-                                active={false}
-                                icon={<BsShop className="w-full h-auto text-white/70 hover:text-white" />} 
-                                name="Shop"
-                            />
-                            <NavLink
-                                href="/about"
-                                active={false}
-                                icon={<BsInfoSquare className="w-full h-auto text-white/70 hover:text-white " />}
-                                name="About"
-                            />
-                            <NavLink
-                                href="/dashboard"
-                                active={false}
-                                icon={<RxDashboard className="w-full h-auto text-white/70 hover:text-white " />}
-                                name="Dashboard"
-                            />
-                        </div>
+            {/* Navigation */}
+            <header className={`flex flex-col items-center justify-center h-[12vh] sticky top-0 z-10 shadow-md transition-all duration-500 ease-in-out overflow-visible bg-white dark:bg-slate-700/50 dark:text-white
+                        ${scrollDirection === "down" ? '-translate-y-1/2' : ''}`}>
+                <nav className={`w-full h-[6vh] flex items-center justify-center z-50 max-w-7xl sm:px-6 lg:px-8 
+                    ${scrollDirection === "down" ? '-translate-y-full' : 'translate-y-0'} transition-transform duration-500 ease-in-out`}>
+                   <div className="flex gap-8 justify-center items-center">
+                        {/* Centered NavLinks */}
+                        <NavLink
+                            href="/"
+                            name="Home"
+                            active={url === '/'} // Pass active as a boolean
+                            className={url === '/' ? 'active' : ''}
+                        />
+                        <NavLink
+                            href="/shop"
+                            name="Shop"
+                            active={url === '/shop'} // Pass active as a boolean
+                            className={url === '/shop' ? 'active' : ''}
+                        />
+                        <NavLink
+                            href="/about"
+                            name="About"
+                            active={url === '/about'} // Pass active as a boolean
+                            className={url === '/about' ? 'active' : ''}
+                        />
+                        <NavLink
+                            href="/dashboard"
+                            name="Dashboard"
+                            active={url === '/dashboard'} // Pass active as a boolean
+                            className={url === '/dashboard' ? 'active' : ''}
+                        />
                     </div>
 
-                    <div className="hidden sm:ms-6 sm:flex sm:items-center">
-                        <Link href={route('cart')}>
-                            <CiShoppingCart className="w-10 h-10 text-white/70 hover:text-white ms-3" />
-                        </Link>
 
-                        <div className="relative ms-3">
-                            <Dropdown>
-                                <Dropdown.Trigger>
-                                    <span className="inline-flex rounded-md">
-                                        <button
-                                            type="button"
-                                            className="inline-flex items-center rounded-md text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-                                        >
-                                            <MdAccountBox className="w-14 h-14 text-white/70 hover:text-white" />
-                                        </button>
-                                    </span>
-                                </Dropdown.Trigger>
+                    {/* Right-aligned Icons */}
+                    <div className="flex items-center ml-auto justify-center">
+                        <CiShoppingCart className="w-14 h-10 text-slate-700 hover:text-black dark:text-slate-300 dark:hover:text-white" />
 
-                                <Dropdown.Content>
-                                    <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                    <Dropdown.Link href={route('logout')} method="post" as="button">
+                        <Dropdown>
+                            <Dropdown.Trigger>
+                                <MdAccountBox className="w-14 h-12 text-slate-700 hover:text-black dark:text-slate-300 dark:hover:text-white" />
+                            </Dropdown.Trigger>
+
+                            <Dropdown.Content>
+                                <ul className="absolute right-0 top-full mt-2 border border-gray-200 dark:border-gray-600 w-full bg-white dark:bg-gray-800 shadow-lg rounded-md z-50">
+                                    {/* Navigate to Profile */}
+                                    <li className="cursor-pointer px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300"
+                                        onClick={() => router.get('/profile')}>
+                                        Profile
+                                    </li>
+
+                                    {/* Log Out */}
+                                    <li className="cursor-pointer px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300"
+                                        onClick={() => router.post('/logout', {}, { preserveScroll: true })}>
                                         Log Out
-                                    </Dropdown.Link>
-                                </Dropdown.Content>
-                            </Dropdown>
-                        </div>
+                                    </li>
+                                </ul>
+                            </Dropdown.Content>
+                        </Dropdown>
                     </div>
+                </nav>
 
-                    {/* Mobile version */}
-                    <div className="-me-2 flex items-center sm:hidden">
-                        <button
-                            onClick={() =>
-                                setShowingNavigationDropdown((previousState) => !previousState)
-                            }
-                            className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
-                        >
-                            <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                <path
-                                    className={!showingNavigationDropdown ? 'inline-flex' : 'hidden'}
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h16M4 18h16"
-                                />
-                                <path
-                                    className={showingNavigationDropdown ? 'inline-flex' : 'hidden'}
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                {/* Mobile Navigation */}
-                <div
-                    className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}
-                >
-                    <div className="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <div className="border-t border-gray-200 pb-1 pt-4">
-                        <div className="px-4">
-                            <div className="text-base font-medium text-gray-800">{user.name}</div>
-                            <div className="text-sm font-medium text-gray-500">{user.email}</div>
-                        </div>
-
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-                            <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            
-            <header className="sticky top-0 z-40 bg-sky shadow-md h-[6vh] transition-all duration-300 ease-in-out ">
-                <div className="flex justify-between items-center mx-auto w-full h-full max-w-7xl sm:px-6 lg:px-8">
+                <div className="flex h-[6vh] justify-between items-center mx-auto w-full max-w-7xl sm:px-6 lg:px-8">
                     {header}
                 </div>
             </header>
 
+            {/* Dark Mode Toggle Button */}
+            <div className="absolute top-0 right-0 z-50 w-14 h-12">
+                <button onClick={toggleDarkMode} className="w-full h-full text-black dark:text-white hover:rotate-[-30deg] transition-transform duration-500 focus:outline-none">
+                    {darkMode ? <span className="text-3xl">🌙</span> : <span className="text-3xl">☀️</span>}
+                </button>
+            </div>
 
-            <main className="relative w-full min-h-[82vh] 
-                h-auto
-                mx-auto py-4 sm:px-6 max-w-7xl lg:px-8">
+            {/* Main Content */}
+            <main className="relative w-full min-h-[88vh] flex flex-col gap-10 justify-center items-center mx-auto py-4 sm:px-6 max-w-7xl lg:px-8">
                 {children}
-                
             </main>
 
-            <footer className="relative bottom-0 w-full h-auto p-5 flex items-center justify-center gap-4">
-                <div className="flex items-center justify-center space-x-5">
+            {/* Footer */}
+            <footer className="dark:bg-slate-700/50 z-50 relative bottom-0 w-full h-[auto] p-5 flex items-center justify-center gap-4">
+                <div className="flex items-center justify-center space-x-5 dark:text-white">
                     <Socials />
                 </div>
             </footer>
         </div>
     );
 }
-
-
-
-
-    

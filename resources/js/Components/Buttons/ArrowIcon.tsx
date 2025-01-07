@@ -7,7 +7,7 @@ interface ArrowIconProps {
 const ArrowIcon: React.FC<ArrowIconProps> = ({ w, h, isOpen }) => {
     return (
         <svg
-            className={`text-gray-800 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+            className={`text-gray-800 dark:text-white transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"

@@ -42,14 +42,14 @@ export default function Dashboard() {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-semibold leading-tight text-white font-Aileron_UltraLight">
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
                     Dashboard
                 </h2>
             }
         >
             <Head title="Dashboard" />
 
-            <div className="w-full h-full rounded-lg overflow-hidden mx-auto max-w-7xl py-5 sm:px-6 lg:px-8 bg-white/10 grid grid-cols-1 grid-rows-3 gap-3">
+            <div className="w-full h-full rounded-lg overflow-hidden mx-auto max-w-7xl py-5 sm:px-6 lg:px-8 bg-white/10 dark:bg-slate-800 grid grid-cols-1 grid-rows-3 gap-3">
                 
                 {rightCardData.map((card, index) => (
                     <motion.div

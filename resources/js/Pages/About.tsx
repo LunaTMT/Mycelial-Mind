@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import GuestLayout from '@/Layouts/GuestLayout';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 
 interface AboutProps {
     auth: { user: any } | null;
@@ -13,16 +13,15 @@ const About: React.FC<AboutProps> = ({ auth }) => {
     return (
         <Layout
             header={
-                <div className="w-full grid grid-rows-1 grid-cols-4 items-center">
-                    <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-                        About
-                    </h2>
-                </div>
+
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+                About
+            </h2>
             }
         >
             <Head title="About" />
 
-            <div className="relative w-full min-h-[78vh] flex justify-center items-center bg-white/50 rounded-lg p-10 shadow-lg">
+            <div className="min-h-[85vh] p-5 flex justify-center items-start dark:bg-slate-700/50 rounded-lg  shadow-lg dark:shadow-xl">
                 <div className="prose lg:prose-xl text-gray-700 dark:text-gray-300 max-w-6xl">
                     
                     <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">Mycenic</h1>
@@ -43,6 +42,10 @@ const About: React.FC<AboutProps> = ({ auth }) => {
                     </p>
                 </div>
             </div>
+
+
+
+            
         </Layout>
     );
 };

@@ -27,16 +27,6 @@ const Cart: React.FC<CartProps> = ({ auth }) => {
     const [showPromoCodeDropdown, setShowPromoCodeDropdown] = useState(false);
     const [promoCode, setPromoCode] = useState("");
 
-    useEffect(() => {
-        if (auth?.user) {
-            Swal.fire({
-                title: 'Success!',
-                text: 'You have successfully logged in.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        }
-    }, [auth]);
 
     const handleRemove = (id: number) => {
         removeFromCart(id); // Use removeFromCart from context
@@ -63,24 +53,24 @@ const Cart: React.FC<CartProps> = ({ auth }) => {
             </div>
             <div className="grid grid-cols-2 w-full h-full p-1">
                 <div>
-                    <h2 className="font-semibold text-gray-800">{product.name}</h2>
-                    <p>info</p>
+                    <h2 className="font-semibold text-gray-800 dark:text-gray-200">{product.name}</h2>
+                    <p className="text-gray-700 dark:text-gray-400">info</p>
                 </div>
                 <div className="text-right">
-                    <p className="font-semibold text-lg">${product.total.toFixed(2)}</p>
+                    <p className="font-semibold text-lg text-gray-800 dark:text-gray-200">${product.total}</p>
                 </div>
             </div>
         </div>
     );
 
     const renderCartSummary = () => (
-        <div className="w-auto h-full max-w-7xl p-5 rounded-lg shadow-lg">
+        <div className="w-auto h-full max-w-7xl p-5 rounded-lg shadow-lg bg-white dark:bg-gray-800">
             <h1 className="text-2xl font-extrabold text-black dark:text-white mb-6">Summary</h1>
             {["Subtotal", "Estimated Delivery & Handling"].map((label, index) => (
                 <div key={index} className="flex justify-between items-center mb-4">
                     <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{label}</span>
                     <span className="text-sm font-bold text-black dark:text-white">
-                        {index === 0 ? `$${calculateSubtotal().toFixed(2)}` : `$${estimatedDeliveryHandling.toFixed(2)}`}
+                        {index === 0 ? `$${calculateSubtotal()}` : `$${estimatedDeliveryHandling}`}
                     </span>
                 </div>
             ))}
@@ -97,7 +87,7 @@ const Cart: React.FC<CartProps> = ({ auth }) => {
 
                 {/* Promo Code Input Dropdown */}
                 <div
-                    className={`relative top-0 left-0 flex gap-3 w-full bg-white shadow-md p-4 rounded-md mt-2 overflow-hidden transition-all duration-500 ease-in-out
+                    className={`relative top-0 left-0 flex gap-3  bg-white/10 shadow-md p-4 rounded-md mt-2 overflow-hidden transition-all duration-500 ease-in-out
                     ${showPromoCodeDropdown ? "max-h-[300px] opacity-100 mb-10" : "max-h-0 opacity-0 mb-0"}`}
                 >
                     <input
@@ -105,7 +95,7 @@ const Cart: React.FC<CartProps> = ({ auth }) => {
                         value={promoCode}
                         onChange={(e) => setPromoCode(e.target.value)}
                         placeholder="Enter promo code"
-                        className="w-[70%] px-3 py-2 border border-gray-300 rounded-md h-[40px]"
+                        className="w-[70%] px-3 py-2 border border-gray-300 rounded-md h-[40px] dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white"
                     />
                     <button
                         onClick={() => {
@@ -124,7 +114,7 @@ const Cart: React.FC<CartProps> = ({ auth }) => {
 
             <div className="flex justify-between items-center mb-6">
                 <span className="text-lg font-extrabold text-gray-800 dark:text-gray-200">Total</span>
-                <span className="text-lg font-extrabold text-black dark:text-white">${calculateTotal().toFixed(2)}</span>
+                <span className="text-lg font-extrabold text-black dark:text-white">${calculateTotal()}</span>
             </div>
 
             <PrimaryButton className="w-full">Checkout</PrimaryButton>
@@ -132,14 +122,14 @@ const Cart: React.FC<CartProps> = ({ auth }) => {
     );
 
     return (
-        <Layout header={<h2 className="text-xl font-semibold leading-tight flex items-center h-auto w-full">Cart</h2>}>
+        <Layout header={<h2 className="text-xl font-semibold leading-tight flex items-center h-auto w-full text-gray-800 dark:text-white">Cart</h2>}>
             <Head title="Cart" />
             <div className="relative w-full min-h-[78vh] rounded-lg flex justify-center items-start bg-white/10 gap-5">
                 <div className="w-[80%] h-auto p-7 shadow-md ">
                     {cart.length ? (
                         cart.map(renderCartItem)
                     ) : (
-                        <div className="text-center text-gray-500 mt-10 shadow-md p-2 w-1/3 mx-auto">
+                        <div className="text-center text-gray-500 dark:text-gray-400 mt-10 shadow-md p-2 w-1/3 mx-auto">
                             Your cart is empty.
                         </div>
                     )}
