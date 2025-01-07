@@ -24,7 +24,7 @@ const Item: React.FC<ItemProps> = ({ auth, item }) => {
     const [selectedImage, setSelectedImage] = useState<number>(0);
 
     if (!item) {
-        return <div>Loading...</div>; // Or return an error state
+        return <div>Loading... ddd</div>; // Or return an error state
     }
 
     console.log(item);

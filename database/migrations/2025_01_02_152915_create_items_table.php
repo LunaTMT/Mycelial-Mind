@@ -17,8 +17,8 @@ return new class extends Migration
             $table->text('description')->nullable(); // Nullable description
             $table->decimal('price', 8, 2); // Item price
             $table->integer('stock')->default(0); // Default stock value
-            $table->integer('number_of_images')->default(0); // Default image count
-            $table->string('category');
+            $table->json('images')->nullable(); // Store images as a JSON type, allowing null values
+            $table->string('category'); // Category of the item
             $table->timestamps(); // Created_at and Updated_at
         });
     }

@@ -10,14 +10,12 @@ import { IoFilterOutline } from "react-icons/io5";
 
 import { Select, Option } from "@material-tailwind/react";
 import { IoIosAddCircleOutline } from "react-icons/io";
-
 import { BsArrowDownSquare } from "react-icons/bs";
 import Hamburger from 'hamburger-react';
 
 import Dropdown from '@/Components/Login/Dropdown';
 import ArrowIcon from "@/Components/Buttons/ArrowIcon";
-
-import { useNav } from '@/Contexts/NavContext'
+import { useNav } from '@/Contexts/NavContext';
 
 const categories = [
     "All",
@@ -42,7 +40,7 @@ const Shop: React.FC<ShopProps> = ({ auth }) => {
     const [selectedCategory, setSelectedCategory] = useState<string>("All");
     const [showFilter, setShowFilter] = useState<boolean>(false);
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
-    const { showNav, scrollDirection } = useNav(); 
+    const { showNav, scrollDirection } = useNav();
 
     const handleSearch = (query: string) => {
         console.log("Search query:", query);
@@ -69,53 +67,47 @@ const Shop: React.FC<ShopProps> = ({ auth }) => {
             header={
                 <div className="h-full w-full overflow-visible flex justify-between items-center gap-4">
                     <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-                            Shop
+                        Shop
                     </h2>
 
+                    <div className="absolute top-[120%] w-full z-50 h-[100vh] bg-white dark:bg-slate-800 -translate-x-full"></div>
 
-                    <div className="absolute top-[120%] w-full  z-50 h-[100vh] bg-white  dark:bg-slate-800 -translate-x-full"></div>    
-                    
                     <div
                         className={`absolute h-full top-[120%] dark:shadow-none 
                             ${showFilter ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
-
-                            <div className="sticky  w-auto dark:bg-slate-800">
-                                <ul className="space-y-2 w-full font-bold text-gray-700 dark:text-gray-300">
-                                    {categories.map((category) => (
-                                        <li
-                                            key={category}
-                                            className={`cursor-pointer hover:translate-x-2 transform transition-transform duration-300 ${
-                                                category === selectedCategory ? 'text-black dark:text-white underline underline-offset-4' : ''
-                                            }`}
-                                            onClick={() => handleCategorySelect(category)}
-                                        >
-                                            {category}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                        <div className="sticky w-auto dark:bg-slate-800">
+                            <ul className="space-y-2 w-full font-bold text-gray-700 dark:text-gray-300">
+                                {categories.map((category) => (
+                                    <li
+                                        key={category}
+                                        className={`cursor-pointer hover:translate-x-2 transform transition-transform duration-300 ${
+                                            category === selectedCategory ? 'text-black dark:text-white underline underline-offset-4' : ''
+                                        }`}
+                                        onClick={() => handleCategorySelect(category)}
+                                    >
+                                        {category}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
+                    </div>
 
-
-
-                    <div className="flex items-center gap-4 ">
+                    <div className="flex items-center gap-4">
                         {/* Show Filter */}
                         <div
                             className="cursor-pointer flex items-center justify-center gap-2 rounded-md"
                             onClick={() => setShowFilter(!showFilter)}
                         >
-                            <p className="text-slate-700 hover:text-black
-                                          dark:text-slate-300  dark:text-white/70 dark:hover:text-white">Filter</p>
+                            <p className="text-slate-700 hover:text-black dark:text-slate-300 dark:text-white/70 dark:hover:text-white">Filter</p>
                             <Hamburger size={20} toggled={showFilter} toggle={setShowFilter} />
                         </div>
 
                         {/* Sort by Dropdown */}
                         <div
                             className="cursor-pointer flex items-center justify-center gap-2 rounded-md relative group"
-                            onClick={() => setShowDropdown(!showDropdown)} 
+                            onClick={() => setShowDropdown(!showDropdown)}
                         >
-                            <p className="text-slate-700 hover:text-black
-                                          dark:text-slate-300  dark:text-white/70 dark:hover:text-white">Sort</p>
+                            <p className="text-slate-700 hover:text-black dark:text-slate-300 dark:text-white/70 dark:hover:text-white">Sort</p>
                             <ArrowIcon w="30" h="30" isOpen={showDropdown} />
                             <ul
                                 className={`absolute right-0 top-14 w-[250%] bg-white dark:bg-gray-800 shadow-lg rounded-md border border-gray-200 dark:border-gray-600 z-50 
@@ -138,30 +130,21 @@ const Shop: React.FC<ShopProps> = ({ auth }) => {
 
                         {/* Plus Button (Visible only for admin) */}
                         {auth?.user?.role === 'admin' && (
-                            <Link href={route('cart')}>
+                            <Link href={route('item.add')}>
                                 <div className="cursor-pointer flex items-center justify-center gap-2 rounded-md relative group">
-                                    <p className="text-slate-700 hover:text-black
-                                          dark:text-slate-300  dark:text-white/70 dark:hover:text-white">Add</p>
-                                    <IoIosAddCircleOutline
-                                        className="cursor-pointer w-8 h-8 rounded-md text-black dark:text-white"
-                                        onClick={() => {route('login')}}
-                                    />
+                                    <p className="text-slate-700 hover:text-black dark:text-slate-300 dark:text-white/70 dark:hover:text-white">Add</p>
+                                    <IoIosAddCircleOutline className="cursor-pointer w-8 h-8 rounded-md text-black dark:text-white"/>
                                 </div>
                             </Link>
                         )}
-
                     </div>
                 </div>
             }
         >
             <Head title="Shop" />
-           
-
-
-            
 
             {/* Main Content */}
-            <div className={`grid grid-cols-3 gap-6 bg-red-400rounded-lg w-auto transition-all duration-300  bg-white dark:bg-gray-900/10 ${showFilter ? 'ml-40' : ''}`}>
+            <div className={`grid grid-cols-3 gap-6 bg-red-400rounded-lg w-auto transition-all duration-300 bg-white dark:bg-gray-900/10 ${showFilter ? 'ml-40' : ''}`}>
                 {products.map((product) => (
                     <Link href={route('item', { id: product.id })} key={product.id}>
                         <div className="flex flex-col items-start justify-start bg-white dark:bg-gray-800 rounded-md">
