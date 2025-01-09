@@ -7,11 +7,11 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link } from '@inertiajs/react';
 import { IoFilterOutline } from "react-icons/io5";
-
-import { Select, Option } from "@material-tailwind/react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { BsArrowDownSquare } from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/ai";
 import Hamburger from 'hamburger-react';
+import { Inertia } from '@inertiajs/inertia';
 
 import Dropdown from '@/Components/Login/Dropdown';
 import ArrowIcon from "@/Components/Buttons/ArrowIcon";
@@ -34,64 +34,65 @@ const categories = [
 
 interface ShopProps {
     auth: { user: any } | null;
+    items: any[]; // Inertia passes this prop with the fetched items
 }
 
-const Shop: React.FC<ShopProps> = ({ auth }) => {
+const Shop: React.FC<ShopProps> = ({ auth, items }) => {
     const [selectedCategory, setSelectedCategory] = useState<string>("All");
     const [showFilter, setShowFilter] = useState<boolean>(false);
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const { showNav, scrollDirection } = useNav();
+    
 
-    const handleSearch = (query: string) => {
-        console.log("Search query:", query);
-    };
+    const fallbackImage = "assets/images/missing_image.png";
 
     const handleCategorySelect = (category: string) => {
         setSelectedCategory(category);
-        console.log("Selected Category:", category);
     };
 
-    const Layout = auth?.user ? AuthenticatedLayout : GuestLayout;
+    const handleRemoveItem = (itemId: number) => {
+        Inertia.delete(`/items/${itemId}`, {
+            onSuccess: () => {
+                Inertia.visit('/shop');  // Navigate to /shop without forcing a full page reload
+            },
+            onError: (error) => {
+                console.error("Error removing item:", error);
+            },
+        });
+    };
+    
 
-    const products = [
-        { id: 1, category: "Footwear", name: "Air Force 1", price: "$10", image: "/assets/images/products/air_force_1.png", rating: 4.5 },
-        { id: 2, category: "Apparel", name: "Vapor MAx 2023", price: "$15", image: "/assets/images/products/AIR_VAPORMAX_2023_FK.png", rating: 4.0 },
-        { id: 3, category: "Accessories", name: "Product Name", price: "$20", image: "/assets/images/products/air_max_dn.png", rating: 4.8 },
-        { id: 4, category: "Footwear", name: "Product Name", price: "$25", image: "/assets/images/products/NIKE_AIR_MAX_PLUS.png", rating: 3.9 },
-        { id: 5, category: "Apparel", name: "Product Name", price: "$30", image: "/assets/images/products/nike_zoom.png", rating: 4.3 },
-        { id: 6, category: "Accessories", name: "Product Name", price: "$35", image: "/assets/images/products/air_max_dn.png", rating: 5.0 },
-    ];
+    
+
+    const Layout = auth?.user ? AuthenticatedLayout : GuestLayout;
 
     return (
         <Layout
             header={
                 <div className="h-full w-full overflow-visible flex justify-between items-center gap-4">
-                    <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-                        Shop
-                    </h2>
-
-                    <div className="absolute top-[120%] w-full z-50 h-[100vh] bg-white dark:bg-slate-800 -translate-x-full"></div>
+                    <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Shop</h2>
 
                     <div
-                        className={`absolute h-full top-[120%] dark:shadow-none 
-                            ${showFilter ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
-                        <div className="sticky w-auto dark:bg-slate-800">
-                            <ul className="space-y-2 w-full font-bold text-gray-700 dark:text-gray-300">
-                                {categories.map((category) => (
-                                    <li
-                                        key={category}
-                                        className={`cursor-pointer hover:translate-x-2 transform transition-transform duration-300 ${
-                                            category === selectedCategory ? 'text-black dark:text-white underline underline-offset-4' : ''
-                                        }`}
-                                        onClick={() => handleCategorySelect(category)}
-                                    >
-                                        {category}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                        className={`absolute w-auto h-auto top-[100%]   rounded-md  dark:border-gray-600 z-30
+                            ${showFilter ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} transition-all duration-300 ease-in-out`}
+                    >
+                       <ul className="space-y-2 w-full font-medium text-gray-700 dark:text-gray-300">
+                            {categories.map((category) => (
+                                <li
+                                    key={category}
+                                    className="cursor-pointer px-4 py-2 relative transition-all duration-200 ease-in-out"
+                                    onClick={() => handleCategorySelect(category)}
+                                >
+                                    {category}
+    
+                                </li>
+                            ))}
+                        </ul>
+
                     </div>
 
+
+                    {/* Head buttons right side */}
                     <div className="flex items-center gap-4">
                         {/* Show Filter */}
                         <div
@@ -105,18 +106,22 @@ const Shop: React.FC<ShopProps> = ({ auth }) => {
                         {/* Sort by Dropdown */}
                         <div
                             className="cursor-pointer flex items-center justify-center gap-2 rounded-md relative group"
-                            onClick={() => setShowDropdown(!showDropdown)}
+                            onClick={() => setShowDropdown(!showDropdown)} 
                         >
-                            <p className="text-slate-700 hover:text-black dark:text-slate-300 dark:text-white/70 dark:hover:text-white">Sort</p>
+                            <p className="text-slate-700 hover:text-black dark:text-slate-300 dark:text-white/70 dark:hover:text-white">
+                                Sort
+                            </p>
                             <ArrowIcon w="30" h="30" isOpen={showDropdown} />
                             <ul
                                 className={`absolute right-0 top-14 w-[250%] bg-white dark:bg-gray-800 shadow-lg rounded-md border border-gray-200 dark:border-gray-600 z-50 
                                     transform transition-all duration-300 ease-in-out ${showDropdown ? "translate-y-0 opacity-100" : "-translate-y-6 opacity-0"}`}
                             >
-                                {["Newest", "Price: Low to High", "Price: High to Low"].map((option, index) => (
+                                {["Newest", "Price: Low to High", "Price: High to Low"].map((option, index, array) => (
                                     <li
                                         key={index}
-                                        className="cursor-pointer px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300"
+                                        className={`cursor-pointer px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 
+                                            ${index === 0 ? "rounded-t-md" : ""} 
+                                            ${index === array.length - 1 ? "rounded-b-md" : ""}`}
                                         onClick={() => {
                                             console.log("Sort by option:", option);
                                             setShowDropdown(false);
@@ -128,39 +133,59 @@ const Shop: React.FC<ShopProps> = ({ auth }) => {
                             </ul>
                         </div>
 
-                        {/* Plus Button (Visible only for admin) */}
+                        {/* Add Item Button */}
                         {auth?.user?.role === 'admin' && (
                             <Link href={route('item.add')}>
                                 <div className="cursor-pointer flex items-center justify-center gap-2 rounded-md relative group">
-                                    <p className="text-slate-700 hover:text-black dark:text-slate-300 dark:text-white/70 dark:hover:text-white">Add</p>
-                                    <IoIosAddCircleOutline className="cursor-pointer w-8 h-8 rounded-md text-black dark:text-white"/>
+                                    <p className="text-slate-700 hover:text-black
+                                          dark:text-slate-300  dark:text-white/70 dark:hover:text-white">Add</p>
+                                    <IoIosAddCircleOutline
+                                        className="cursor-pointer w-8 h-8 rounded-md text-black dark:text-white"
+                                    />
                                 </div>
                             </Link>
                         )}
                     </div>
+
                 </div>
             }
         >
             <Head title="Shop" />
-
             {/* Main Content */}
-            <div className={`grid grid-cols-3 gap-6 bg-red-400rounded-lg w-auto transition-all duration-300 bg-white dark:bg-gray-900/10 ${showFilter ? 'ml-40' : ''}`}>
-                {products.map((product) => (
-                    <Link href={route('item', { id: product.id })} key={product.id}>
-                        <div className="flex flex-col items-start justify-start bg-white dark:bg-gray-800 rounded-md">
+            <div className={`grid grid-cols-3 gap-6 rounded-lg w-auto transition-all duration-300  ${showFilter ? 'ml-48' : ''}`}>
+            {items.map((item) => {
+                const images = JSON.parse(item.images);
+                
+                return (
+                    <div key={item.id} className="relative flex flex-col items-start justify-start dark:bg-gray-800 rounded-md">
+                        {/* Red Cross */}
+                        {auth?.user?.role === 'admin' && (
+                            <button
+                                className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                                onClick={() => handleRemoveItem(item.id)}
+                            >
+                                <AiOutlineClose size={20} />
+                            </button>
+                        )}
+
+                        {/* Product Image */}
+                        <Link href={route('item', { id: item.id })}>
                             <img
-                                src={product.image}
+                                src={images[0] ? `/${images[0]}` : fallbackImage}
                                 alt="Product Image"
-                                className="w-full object-cover rounded-t-md"
+                                className="w-full h-64 object-cover rounded-t-md"
                             />
+
                             <div className="w-full h-auto flex flex-col items-start p-2 bg-white dark:bg-slate-700/75 rounded-b-md">
-                                <p className="text-center text-gray-700 dark:text-gray-300 italic">{product.category}</p>
-                                <p className="text-center text-gray-800 dark:text-white">{product.name}</p>
-                                <p className="text-center text-lg text-gray-900 dark:text-gray-200 font-semibold">{product.price}</p>
+                                <p className="text-center text-gray-700 dark:text-gray-300 italic">{item.category}</p>
+                                <p className="text-center text-gray-800 dark:text-white">{item.name}</p>
+                                <p className="text-center text-lg text-gray-900 dark:text-gray-200 font-semibold">{item.price}</p>
                             </div>
-                        </div>
-                    </Link>
-                ))}
+                        </Link>
+                    </div>
+                );
+            })}
+
             </div>
         </Layout>
     );

@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
 
 class ItemController extends Controller
 {
@@ -69,10 +70,14 @@ class ItemController extends Controller
             
             // Redirect to the shop page after item is created
             Log::info('Redirecting to Shop.');
+            $items = Item::all();
+            
             return Inertia::render('Shop', [
-                'message' => 'Item added successfully.'
+                'message' => 'Item added successfully.',
+                'items' => $items 
             ]);
-    
+
+
         } catch (\Exception $e) {   
             Log::error('Error storing item: ' . $e->getMessage()); // Log the exception message
             return Inertia::render('Shop/AddItem', [
@@ -106,8 +111,30 @@ class ItemController extends Controller
 
     public function destroy($id)
     {
-        $item = Item::findOrFail($id);
-        $item->delete();
-        return response()->json(null, 204);  // Return 204 No Content after successful delete
+        try {
+            // Find the item
+            $item = Item::findOrFail($id);
+    
+            // Determine the folder path
+            $folderPath = public_path("assets/images/products/{$id}");
+    
+            // Delete the folder if it exists
+            if (File::exists($folderPath)) {
+                File::deleteDirectory($folderPath);
+            }
+    
+            // Delete the item from the database
+            $item->delete();
+    
+            // Return success response
+            return response()->json(null, 204);
+            
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            Log::error("Error deleting item with ID {$id}: " . $e->getMessage());
+    
+            // Return error response
+            return response()->json(['error' => 'Unable to delete item'], 500);
+        }
     }
 }

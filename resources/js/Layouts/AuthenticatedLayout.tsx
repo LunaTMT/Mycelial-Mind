@@ -7,6 +7,10 @@ import Socials from '@/Components/Menu/Socials';
 import { useNav } from '@/Contexts/NavContext';
 import { usePage, router } from '@inertiajs/react';
 import { useDarkMode } from '@/Contexts/DarkModeContext';
+import { useCart } from "@/Contexts/CartContext";
+
+import {Link} from '@inertiajs/react';
+import { motion } from 'framer-motion';
 
 interface User {
     name: string;
@@ -27,6 +31,7 @@ export default function Authenticated({
     const { url } = usePage();
     const { scrollDirection } = useNav();
     const { darkMode, toggleDarkMode } = useDarkMode();
+    const { scaled, cart, totalItems } = useCart();  // Access both `scaled` and `cart`
 
     const navItems = [
         { href: '/', name: 'Home' },
@@ -60,15 +65,38 @@ export default function Authenticated({
             {/* Navigation */}
             <header className={`flex flex-col items-center justify-center h-[12vh] sticky top-0 z-10 shadow-md transition-all duration-500 ease-in-out overflow-visible bg-white dark:bg-slate-700/50 dark:text-white
                     ${scrollDirection === "down" ? '-translate-y-1/2' : ''}`}>
-                <nav className={`w-full h-[6vh] flex items-center justify-center z-50 max-w-7xl sm:px-6 lg:px-8 
+                
+                <nav className={`w-full h-[6vh] flex items-center justify-center z-50 max-w-7xl sm:px-6 lg:px-8
                     ${scrollDirection === "down" ? '-translate-y-full' : 'translate-y-0'} transition-transform duration-500 ease-in-out`}>
                     <div className="flex gap-8 justify-center items-center">
                         {renderNavLinks()}
                     </div>
 
                     {/* Right-aligned Icons */}
-                    <div className="flex items-center ml-auto justify-center">
-                        <CiShoppingCart className="w-14 h-10 text-slate-700 hover:text-black dark:text-slate-300 dark:hover:text-white" />
+                    <div className="flex items-center ml-auto justify-center relative ">
+                        
+
+                    <Link href={route('cart')}>
+                        <div className="relative">
+                            <CiShoppingCart
+                                className={`w-14 h-10 text-slate-700 hover:text-black dark:text-slate-300 dark:hover:text-white transition-transform duration-300 ${scaled ? 'scale-110' : ''}`}
+                            />
+                            {cart.length > 0 && (
+                                <motion.div
+                                    className="absolute top-0 right-0 w-5 h-5 text-white bg-red-500 text-xs rounded-full flex items-center justify-center transform translate-x-1/2 -translate-y-1/2"
+                                    initial={{ opacity: 0, scale: 0.75 }} // Start with opacity 0 and scale smaller
+                                    animate={{ opacity: 1, scale: scaled ? 1.2 : 1 }} // Scale up when `scaled` is true
+                                    exit={{ opacity: 0, scale: 0.75 }} // Optionally fade out and scale down when removed
+                                    transition={{ duration: 0.5 }} // Duration of the fade-in and scaling
+                                >
+                                    {totalItems}
+                                </motion.div>
+                            )}
+                        </div>
+                    </Link>
+
+
+
 
                         {/* Account Dropdown */}
                         <Dropdown>
@@ -113,7 +141,7 @@ export default function Authenticated({
             </div>
 
             {/* Main Content */}
-            <main className="relative w-full min-h-[88vh] flex flex-col gap-10 justify-center items-center mx-auto py-4 sm:px-6 max-w-7xl lg:px-8">
+            <main className="relative w-full min-h-[88vh] flex flex-col gap-10 justify-start items-center mx-auto py-4 sm:px-6 max-w-7xl lg:px-8">
                 {children}
             </main>
 

@@ -22,7 +22,7 @@ const About: React.FC<AboutProps> = ({ auth }) => {
             <Head title="About" />
 
             <div className="min-h-[85vh] p-5 flex justify-center items-start dark:bg-slate-700/20 rounded-lg  shadow-lg dark:shadow-xl">
-                <div className="prose lg:prose-xl text-gray-700 dark:text-gray-300 max-w-6xl">
+                <div className="prose lg:prose-xl text-gray-700 dark:text-gray-300 max-w-7xl">
                     
                     <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">Mycenic</h1>
                     <p className="leading-relaxed">

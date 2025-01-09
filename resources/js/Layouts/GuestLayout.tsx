@@ -76,7 +76,7 @@ export default function Guest({
             </div>
            
            {/* Main Content */}
-           <main className="relative w-full min-h-[88vh] flex flex-col gap-10 justify-center items-center mx-auto py-4 sm:px-6 max-w-7xl lg:px-8">
+           <main className="relative w-full min-h-[88vh] flex flex-col gap-10 justify-start items-center mx-auto py-4 sm:px-6 max-w-7xl lg:px-8">
                 {children}
             </main>
 

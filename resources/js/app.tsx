@@ -9,7 +9,15 @@ import { CartProvider } from '../js/Contexts/CartContext';
 import { NavProvider } from '../js/Contexts/NavContext';  
 import { DarkModeProvider } from './Contexts/DarkModeContext';
 
+import Lenis from 'lenis'
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+
+// Initialize Lenis
+const lenis = new Lenis({
+    autoRaf: true,
+  });
+  
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

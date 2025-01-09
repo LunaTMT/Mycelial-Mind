@@ -93,7 +93,8 @@ export default function AddItem() {
     return (
         <Layout header={<h2 className="text-xl font-semibold leading-tight text-gray-900 dark:text-white">Add New Item</h2>}>
             <Head title="Add New Item" />
-            <section className="rounded-lg w-1/2 shadow-md p-5 bg-white dark:bg-slate-700 border border-gray-200 dark:border-none">
+           
+            <section className="rounded-lg w-full h-full max-w-xl  m-auto shadow-md p-5 bg-white dark:bg-slate-700 border border-gray-200 dark:border-none">
                 <form onSubmit={submit} className="mt-6 space-y-6">
                     <div>
                         <InputLabel htmlFor="name" value="Item Name" className="dark:text-slate-100" />

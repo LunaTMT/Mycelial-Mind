@@ -31,7 +31,7 @@ export default function UpdateProfileInformation({
 
     return (
         <section
-            className={`rounded-lg shadow-md p-5 bg-white dark:bg-slate-700 border border-gray-200 dark:border-none ${className}`}
+            className={`rounded-lg shadow-md p-5 bg-white dark:bg-slate-700  border border-gray-200 dark:border-slate-600  ${className}`}
         >
             <header>
                 <h2 className="text-lg font-medium text-gray-900 dark:text-slate-100">

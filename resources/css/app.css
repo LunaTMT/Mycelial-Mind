@@ -31,3 +31,16 @@
     /* Ensure children of the container have a height that matches the snap destination */
     height: 100vh;
   }
+
+
+  .video-dissolve {
+    position: relative;
+    z-index: 1;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    -webkit-mask-image: linear-gradient(to bottom, rgba(1, 1, 1, 1), rgba(0, 0, 0, 0));
+  }
+  
+  .bg-gradient-to-b {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+  }
+  

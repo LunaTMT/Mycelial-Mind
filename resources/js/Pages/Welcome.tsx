@@ -71,7 +71,9 @@ const Welcome: React.FC<WelcomeProps> = ({
  
                         
                 <VideoPlayer src="/assets/videos/time_lapse.mp4" />
-
+                <VideoPlayer src="/assets/videos/time_lapse.mp4" />
+                <VideoPlayer src="/assets/videos/time_lapse.mp4" />
+           
                     
 
                

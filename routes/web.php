@@ -1,11 +1,12 @@
     <?php
 
     use App\Http\Controllers\ProfileController;
+    use App\Http\Controllers\ItemController;
+    use App\Http\Controllers\CheckoutController;
+
     use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
-    use App\Http\Controllers\ItemController;
-
-    use App\Models\Item;  // <-- This is where you import the Item model
+    use App\Models\Item; 
 
     use Illuminate\Foundation\Application;
     use Illuminate\Support\Facades\Route;
@@ -13,30 +14,34 @@
     use Inertia\Inertia;
 
     Route::get('/shop', function () {
-        return Inertia::render('Shop');
-    })->name('shop'); 
+        $items = Item::all();
+        
+        return Inertia::render('Shop', [
+            'items' => $items 
+        ]);
+    })->name('shop');
+    Route::get('/shop/cart', function () {
+        return Inertia::render('Shop/Cart');
+    })->name('cart');
+
+    Route::get('/checkout', [CheckoutController::class, 'createCheckoutSession'])->name('checkout.session');
+    Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+    Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
 
     Route::resource('items', ItemController::class);
 
 
     Route::get('/item/add', function () {
-        return Inertia::render('Shop/AddItem');
+        return Inertia::render('Shop/AddItem'); 
     })->name('item.add')->middleware('auth');  // Adjust based on your needs
-
-
-    Route::get('/item/{id}', function($id) {
-        return Inertia::render('Shop/Item', [
-            'item' => Item::find($id)  // Using the Item model here
-        ]);
+    Route::get('/item/{id}', function($id) { 
+        return Inertia::render('Shop/Item', ['item' => Item::find($id) ]);
     })->name('item');
 
 
-
-
-    Route::get('/shop/cart', function () {
-        return Inertia::render('Shop/Cart');
-    })->name('cart');
+    
+ 
 
     Route::get('/about', function () {
         return Inertia::render('About');
@@ -62,6 +67,7 @@
             'loggedIn' => $loggedIn,
         ]);
     })->middleware(['auth', 'verified'])->name('dashboard');
+
 
     Route::post('login', [AuthenticatedSessionController::class, 'store'])->name('login');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

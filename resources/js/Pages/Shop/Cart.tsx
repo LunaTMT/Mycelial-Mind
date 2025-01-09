@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Head } from "@inertiajs/react";
 import Swal from 'sweetalert2';
 
-import { useCart } from "@/Contexts/CartContext";  // Import the context
+import { useCart, CartItem } from "@/Contexts/CartContext"; // Import the context
 import GuestLayout from "@/Layouts/GuestLayout";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
@@ -27,7 +27,6 @@ const Cart: React.FC<CartProps> = ({ auth }) => {
     const [showPromoCodeDropdown, setShowPromoCodeDropdown] = useState(false);
     const [promoCode, setPromoCode] = useState("");
 
-
     const handleRemove = (id: number) => {
         removeFromCart(id); // Use removeFromCart from context
     };
@@ -41,30 +40,35 @@ const Cart: React.FC<CartProps> = ({ auth }) => {
     const estimatedDeliveryHandling = 5.0;
     const calculateTotal = () => calculateSubtotal() + estimatedDeliveryHandling;
 
-    const renderCartItem = (product: any) => (
-        <div key={product.id} className="flex flex-row justify-start w-full h-full mb-4 p-2 ">
-            <div className="flex flex-col items-center justify-between">
-                <img src={product.image} alt={product.name} className="w-40 aspect-square object-cover rounded-md mb-2" />
-                <Counter
-                    quantity={product.quantity}
-                    onQuantityChange={(newQuantity) => handleQuantityChange(product.id, newQuantity)}
-                    onRemove={() => handleRemove(product.id)}
-                />
-            </div>
-            <div className="grid grid-cols-2 w-full h-full p-1">
-                <div>
-                    <h2 className="font-semibold text-gray-800 dark:text-gray-200">{product.name}</h2>
-                    <p className="text-gray-700 dark:text-gray-400">info</p>
+    const renderCartItem = (product: CartItem) => (
+        <div key={product.id} className="flex flex-row justify-start w-full h-full rounded-lg p-4 gap-3 dark:bg-slate-700/75  ">
+                <img src={`/${product.image}`}alt={product.name} className="w-40 aspect-square object-cover rounded-md" />
+                
+            <div className="flex w-full flex-col justify-between ">
+                <div className="grid grid-cols-2 w-full h-auto p-1 ">
+                    <div>
+                        <h2 className="font-semibold text-gray-800 dark:text-gray-200">{product.name}</h2>
+                        <p className="text-gray-700 dark:text-gray-400">info</p>
+                    </div>
+                
+                    <p className="font-semibold text-right text-lg text-gray-800 dark:text-gray-200">${product.total}</p>
+                
                 </div>
-                <div className="text-right">
-                    <p className="font-semibold text-lg text-gray-800 dark:text-gray-200">${product.total}</p>
+
+                <div className="w-36">
+                    <Counter
+                            quantity={product.quantity}
+                            onQuantityChange={(newQuantity) => handleQuantityChange(product.id, newQuantity)}
+                            onRemove={() => handleRemove(product.id)}
+                        />
                 </div>
             </div>
         </div>
     );
 
     const renderCartSummary = () => (
-        <div className="w-auto h-full max-w-7xl p-5 rounded-lg shadow-lg bg-white dark:bg-gray-800">
+        <div className="w-[35%] h-full  max-w-7xl p-5 rounded-lg shadow-lg bg-white dark:bg-slate-700/75 ">
+            
             <h1 className="text-2xl font-extrabold text-black dark:text-white mb-6">Summary</h1>
             {["Subtotal", "Estimated Delivery & Handling"].map((label, index) => (
                 <div key={index} className="flex justify-between items-center mb-4">
@@ -122,19 +126,25 @@ const Cart: React.FC<CartProps> = ({ auth }) => {
     );
 
     return (
-        <Layout header={<h2 className="text-xl font-semibold leading-tight flex items-center h-auto w-full text-gray-800 dark:text-white">Cart</h2>}>
+        <Layout header={
+            <h2 className="text-xl font-semibold leading-tight flex items-center h-auto w-full text-gray-800 dark:text-white">Cart</h2>
+        }> 
             <Head title="Cart" />
-            <div className="relative w-full min-h-[78vh] rounded-lg flex justify-center items-start bg-white/10 gap-5">
-                <div className="w-[80%] h-auto p-7 shadow-md ">
+
+            <div className="min-h-[85vh] w-full p-5 flex gap-5 justify-center items-start dark:bg-slate-700/20 rounded-lg  shadow-lg dark:shadow-xl">
+        
+                <div className="w-[65%] flex flex-col gap-5">
                     {cart.length ? (
                         cart.map(renderCartItem)
                     ) : (
-                        <div className="text-center text-gray-500 dark:text-gray-400 mt-10 shadow-md p-2 w-1/3 mx-auto">
-                            Your cart is empty.
-                        </div>
+                        <div className="flex flex-row justify-center  min-h-[80vh] rounded-lg p-4 gap-3 dark:bg-slate-700/75 text-lg font-extrabold text-gray-800 dark:text-gray-200 ">
+                                Your cart is empty.
+                        </div>  
                     )}
                 </div>
+
                 {renderCartSummary()}
+                
             </div>
         </Layout>
     );
