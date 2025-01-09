@@ -24,12 +24,26 @@
         return Inertia::render('Shop/Cart');
     })->name('cart');
 
-    Route::get('/checkout', [CheckoutController::class, 'createCheckoutSession'])->name('checkout.session');
-    Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
-    Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
+ 
+    Route::get('/checkout', function (Request $request) {
+        $stripePriceId = 'price_deluxe_album';
+     
+        $quantity = 1;
+     
+        return $request->user()->checkout([$stripePriceId => $quantity], [
+            'success_url' => route('checkout-success'),
+            'cancel_url' => route('checkout-cancel'),
+        ]);
+    })->name('checkout');
+     
+    Route::view('/checkout/success', 'checkout.success')->name('checkout-success');
+    Route::view('/checkout/cancel', 'checkout.cancel')->name('checkout-cancel');
 
 
     Route::resource('items', ItemController::class);
+
+
+    
 
 
     Route::get('/item/add', function () {

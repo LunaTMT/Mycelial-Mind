@@ -41,10 +41,8 @@ const Shop: React.FC<ShopProps> = ({ auth, items }) => {
     const [selectedCategory, setSelectedCategory] = useState<string>("All");
     const [showFilter, setShowFilter] = useState<boolean>(false);
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
-    const { showNav, scrollDirection } = useNav();
     
-
-    const fallbackImage = "assets/images/missing_image.png";
+    const { showNav, scrollDirection } = useNav();
 
     const handleCategorySelect = (category: string) => {
         setSelectedCategory(category);
@@ -73,14 +71,14 @@ const Shop: React.FC<ShopProps> = ({ auth, items }) => {
                     <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Shop</h2>
 
                     <div
-                        className={`absolute w-auto h-auto top-[100%]   rounded-md  dark:border-gray-600 z-30
+                        className={`absolute w-[10vw] h-auto top-[115%]  rounded-md   z-30
                             ${showFilter ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} transition-all duration-300 ease-in-out`}
                     >
-                       <ul className="space-y-2 w-full font-medium text-gray-700 dark:text-gray-300">
+                       <ul className="space-y-2 w-full font-medium text-gray-700 dark:text-gray-300 ">
                             {categories.map((category) => (
                                 <li
                                     key={category}
-                                    className="cursor-pointer px-4 py-2 relative transition-all duration-200 ease-in-out"
+                                    className="cursor-pointer px-2 py-1  hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 "
                                     onClick={() => handleCategorySelect(category)}
                                 >
                                     {category}
@@ -152,40 +150,38 @@ const Shop: React.FC<ShopProps> = ({ auth, items }) => {
         >
             <Head title="Shop" />
             {/* Main Content */}
-            <div className={`grid grid-cols-3 gap-6 rounded-lg w-auto transition-all duration-300  ${showFilter ? 'ml-48' : ''}`}>
-            {items.map((item) => {
-                const images = JSON.parse(item.images);
-                
-                return (
-                    <div key={item.id} className="relative flex flex-col items-start justify-start dark:bg-gray-800 rounded-md">
-                        {/* Red Cross */}
-                        {auth?.user?.role === 'admin' && (
-                            <button
-                                className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
-                                onClick={() => handleRemoveItem(item.id)}
-                            >
-                                <AiOutlineClose size={20} />
-                            </button>
-                        )}
+            <div className={`grid grid-cols-3 gap-6 rounded-lg  transition-all duration-300  ${showFilter ? 'ml-48' : ''}`}>
+                {items.map((product) => {
+                    const images = JSON.parse(product.images);
 
-                        {/* Product Image */}
-                        <Link href={route('item', { id: item.id })}>
-                            <img
-                                src={images[0] ? `/${images[0]}` : fallbackImage}
-                                alt="Product Image"
-                                className="w-full h-64 object-cover rounded-t-md"
-                            />
+                    return (
+                        <div key={product.id} className="relative flex flex-col items-start justify-start  dark:bg-gray-800  rounded-md">
+                            {/* Red Cross */}
+                            {auth?.user?.role === 'admin' && (
+                                <button
+                                    className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                                    onClick={() => handleRemoveItem(product.id)}
+                                >
+                                    <AiOutlineClose size={20} />
+                                </button>
+                            )}
 
-                            <div className="w-full h-auto flex flex-col items-start p-2 bg-white dark:bg-slate-700/75 rounded-b-md">
-                                <p className="text-center text-gray-700 dark:text-gray-300 italic">{item.category}</p>
-                                <p className="text-center text-gray-800 dark:text-white">{item.name}</p>
-                                <p className="text-center text-lg text-gray-900 dark:text-gray-200 font-semibold">{item.price}</p>
-                            </div>
-                        </Link>
-                    </div>
-                );
-            })}
-
+                            {/* Product Image */}
+                            <Link href={route('item', { id: product.id })}>
+                                <img
+                                     src={`/${images[0]}`}
+                                    alt="Product Image"
+                                    className="w-full object-cover rounded-t-md"
+                                />
+                                <div className="w-full h-auto flex flex-col items-start p-2 bg-white dark:bg-slate-700/75 rounded-b-md">
+                                    <p className="text-center text-gray-700 dark:text-gray-300 italic">{product.category}</p>
+                                    <p className="text-center text-gray-800 dark:text-white">{product.name}</p>
+                                    <p className="text-center text-lg text-gray-900 dark:text-gray-200 font-semibold">{product.price}</p>
+                                </div>
+                            </Link>
+                        </div>
+                    );
+                })}
             </div>
         </Layout>
     );

@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 
+use Stripe\Stripe;
+use Stripe\Product;
+use Stripe\Price;
+
 class ItemController extends Controller
 {
     public function index(Request $request)
@@ -22,69 +26,87 @@ class ItemController extends Controller
         }
     }
 
+
+
     public function store(Request $request)
     {
         try {
-            Log::info('Store method called.'); // Log entry point
-            
+            Log::info('Store method called.');
+
             // Validate input data including images
             $data = $request->validate([
                 'name' => 'required|string|max:255',
-                'category' => 'nullable|string', // Make category nullable, as it's optional
+                'category' => 'nullable|string',
                 'price' => 'required|numeric',
                 'stock' => 'nullable|integer',
-                'images' => 'nullable|array|max:5',  // Allow up to 5 images
-                'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120',  // Validate each image
+                'images' => 'nullable|array|max:5',
+                'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
             ]);
-            
-            Log::info('Validated data: ', $data); // Log validated data
-            
-            // Create the item
+
+            Log::info('Validated data: ', $data);
+
+            // Create the item in your database
             $item = Item::create([
                 'name' => $data['name'],
-                'category' => $data['category'] ?? 'Uncategorized', // Default category if none is selected
+                'category' => $data['category'] ?? 'Uncategorized',
                 'price' => $data['price'],
-                'stock' => $data['stock'] ?? 0, // Provide a default value for stock
+                'stock' => $data['stock'] ?? 0,
             ]);
-            
-            Log::info('Item created: ', $item->toArray()); // Log the created item details
-        
+
+            Log::info('Item created: ', $item->toArray());
+
             // Handle the images if any are uploaded
             if ($request->hasFile('images')) {
                 $imagePaths = [];
                 foreach ($request->file('images') as $index => $image) {
                     $imageName = $index . '.' . $image->getClientOriginalExtension();
-                    
-                    // Store the image directly in the public/assets/images/products/ directory
                     $path = $image->move(public_path('assets/images/products/' . $item->id), $imageName);
-                    
-                    // Store the image path in the array
                     $imagePaths[] = 'assets/images/products/' . $item->id . '/' . $imageName;
                 }
-                // Save the array of image paths as JSON in the database
                 $item->images = json_encode($imagePaths);
                 $item->save();
-        
-                Log::info('Images saved: ', $imagePaths); // Log saved image paths
+
+                Log::info('Images saved: ', $imagePaths);
             }
-            
-            // Redirect to the shop page after item is created
-            Log::info('Redirecting to Shop.');
-            $items = Item::all();
-            
-            return Inertia::render('Shop', [
-                'message' => 'Item added successfully.',
-                'items' => $items 
+
+            // Register the product and price in Stripe
+            Stripe::setApiKey(env('STRIPE_SECRET'));
+
+            $product = Product::create([
+                'name' => $data['name'],
+                'description' => "Category: " . ($data['category'] ?? 'Uncategorized'),
             ]);
 
+            Log::info('Stripe product created: ', $product->toArray());
 
-        } catch (\Exception $e) {   
-            Log::error('Error storing item: ' . $e->getMessage()); // Log the exception message
+            $price = Price::create([
+                'unit_amount' => intval($data['price'] * 100), // Convert to cents
+                'currency' => 'usd', // Adjust currency as needed
+                'product' => $product->id,
+            ]);
+
+            Log::info('Stripe price created: ', $price->toArray());
+
+            // Save Stripe product and price IDs in your database
+            $item->stripe_product_id = $product->id;
+            $item->stripe_price_id = $price->id;
+            $item->save();
+
+            Log::info('Redirecting to Shop.');
+            $items = Item::all();
+
+            return Inertia::render('Shop', [
+                'message' => 'Item added successfully and registered with Stripe.',
+                'items' => $items,
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Error storing item: ' . $e->getMessage());
             return Inertia::render('Shop/AddItem', [
-                'error' => 'Unable to store item'
+                'error' => 'Unable to store item',
             ]);
         }
     }
+
     
 
     

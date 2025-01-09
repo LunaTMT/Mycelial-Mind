@@ -10,6 +10,8 @@ import Counter from "@/Components/Buttons/Counter";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton";
 import ArrowIcon from "@/Components/Buttons/ArrowIcon";
 
+import {Link} from "@inertiajs/react";
+
 const categories = [
     "All", "Agar", "Apparel", "Books", "Equipment", "Foraging", "Gourmet",
     "Grow Kits", "Infused Products", "Microscopy", "Spawn", "Spores",
@@ -120,8 +122,10 @@ const Cart: React.FC<CartProps> = ({ auth }) => {
                 <span className="text-lg font-extrabold text-gray-800 dark:text-gray-200">Total</span>
                 <span className="text-lg font-extrabold text-black dark:text-white">${calculateTotal()}</span>
             </div>
-
-            <PrimaryButton className="w-full">Checkout</PrimaryButton>
+            
+            <Link href={route('checkout')}>
+                <PrimaryButton className="w-full">Checkout</PrimaryButton>
+            </Link>
         </div>
     );
 
