@@ -20,13 +20,34 @@ class ItemController extends Controller
     {
         try {
             $category = $request->query('category', 'All');
-            $items = $category === 'All' ? Item::all() : Item::where('category', $category)->get();
-            return response()->json($items);
+            $sort = $request->query('sort', 'Newest'); // Get sort option from query
+            
+            $query = Item::query();
+            
+            if ($category !== 'All') {
+                $query->where('category', $category);
+            }
+    
+            if ($sort === 'Price: Low to High') {
+                $query->orderBy('price', 'asc');
+            } elseif ($sort === 'Price: High to Low') {
+                $query->orderBy('price', 'desc');
+            } else {
+                $query->orderBy('created_at', 'desc'); // Default to sorting by newest
+            }
+            
+            $items = $query->get();
+    
+            return Inertia::render('Shop', [
+                'items' => $items,
+            ]);
         } catch (\Exception $e) {
             Log::error('Error fetching items: ' . $e->getMessage());
             return response()->json(['error' => 'Unable to fetch items'], 500);
         }
     }
+    
+    
 
     public function store(Request $request)
     {
@@ -169,8 +190,8 @@ class ItemController extends Controller
         try {
             // Find the item to delete
             $item = Item::findOrFail($id);
-
-            // Delete the images associated with the item
+    
+            // Delete associated images (if any)
             if ($item->images) {
                 $imagePaths = json_decode($item->images);
                 foreach ($imagePaths as $path) {
@@ -179,30 +200,32 @@ class ItemController extends Controller
                     }
                 }
             }
-
-            // Set the corresponding product and price to inactive in Stripe
+    
+            // Deactivate the Stripe product and price
             Stripe::setApiKey(env('STRIPE_SECRET'));
-
-            // Retrieve the Stripe product
             $product = Product::retrieve($item->stripe_product_id);
             $product->active = false;
             $product->save();
-
-            // Retrieve the Stripe price
+    
             $price = Price::retrieve($item->stripe_price_id);
             $price->active = false;
             $price->save();
-
-            // Delete the item from the database
+    
+            // Delete the item
             $item->delete();
-
+    
             Log::info('Item deleted: ' . $id);
+    
+            // Retrieve the updated list of items
+            $items = Item::all();
 
-            return response()->json(['message' => 'Item deleted successfully']);
+            return redirect()->route('shop')->with('message', 'Item successfully deleted from Stripe and database.');
+
         } catch (\Exception $e) {
             Log::error('Error deleting item: ' . $e->getMessage());
             return response()->json(['error' => 'Unable to delete item'], 500);
         }
     }
     
+
 }    

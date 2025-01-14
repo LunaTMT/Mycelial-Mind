@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { IoIosAddCircleOutline } from "react-icons/io";
 
-interface AddItemButtonProps {
-    userRole: string | undefined;
-}
-
-const AddItemButton: React.FC<AddItemButtonProps> = ({ userRole }) => {
+const AddItemButton: React.FC = () => {
+    const { auth } = usePage().props as any;
+    const userRole = auth?.user?.role;
+    
     return (
         userRole === 'admin' && (
             <Link href={route('item.add')}>

@@ -1,5 +1,4 @@
-// DarkModeContext.js
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 interface DarkModeContextType {
   darkMode: boolean;
@@ -10,6 +9,18 @@ const DarkModeContext = createContext<DarkModeContextType | undefined>(undefined
 
 export const DarkModeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [darkMode, setDarkMode] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Check localStorage on initial render to set darkMode
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setDarkMode(false);
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
 
   const toggleDarkMode = () => {
     setDarkMode((prevMode) => {

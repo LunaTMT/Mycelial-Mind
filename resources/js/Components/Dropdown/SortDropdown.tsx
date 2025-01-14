@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from "react";
 import ArrowIcon from "@/Components/Buttons/ArrowIcon";
 
 interface SortDropdownProps {
-    showDropdown: boolean;
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>;
+    setSortOption: (sortOption: string) => void; 
 }
 
-const SortDropdown: React.FC<SortDropdownProps> = ({ showDropdown, setShowDropdown }) => {
+const SortDropdown: React.FC<SortDropdownProps> = ({ setSortOption }) => {
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    const handleSortChange = (sortOption: string) => {
+        setSortOption(sortOption);
+        setShowDropdown(false);
+    };
+
+    
+
     return (
         <div className="cursor-pointer flex items-center justify-center gap-2 rounded-md relative group" onClick={() => setShowDropdown(!showDropdown)}>
             <p className="text-slate-700 hover:text-black dark:text-slate-300 dark:text-white/70 dark:hover:text-white">Sort</p>
@@ -21,7 +29,7 @@ const SortDropdown: React.FC<SortDropdownProps> = ({ showDropdown, setShowDropdo
                         className={`cursor-pointer px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 
                             ${index === 0 ? "rounded-t-md" : ""} 
                             ${index === array.length - 1 ? "rounded-b-md" : ""}`}
-                        onClick={() => setShowDropdown(false)}
+                        onClick={() => handleSortChange(option)}
                     >
                         {option}
                     </li>
