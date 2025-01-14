@@ -17,9 +17,11 @@
         $items = Item::all();
         
         return Inertia::render('Shop', [
+            'message' => "",
             'items' => $items 
         ]);
     })->name('shop');
+
     Route::get('/shop/cart', function () {
         return Inertia::render('Shop/Cart');
     })->name('cart');
@@ -41,10 +43,6 @@
 
 
     Route::resource('items', ItemController::class);
-
-
-    
-
 
     Route::get('/item/add', function () {
         return Inertia::render('Shop/AddItem'); 

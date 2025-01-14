@@ -79,14 +79,7 @@ export default function AddItem() {
         e.preventDefault();
         console.log(data); // Log the form data before submission
         post(route('items.store'), {
-            data,
-            onSuccess: () => {
-                console.log('Item added successfully.');
-                router.visit('/shop'); // Redirect to the Shop page
-            },
-            onError: (errors) => {
-                console.error('Error:', errors);
-            },
+            data
         });
     };
 
