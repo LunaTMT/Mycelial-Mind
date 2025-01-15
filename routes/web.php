@@ -10,8 +10,13 @@ use App\Models\Item;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+
+
+
+
 
 // Shop route that uses the ItemController
 Route::get('/shop', [ItemController::class, 'index'])->name('shop');
@@ -21,20 +26,25 @@ Route::get('/shop/cart', function () {
     return Inertia::render('Shop/Cart');
 })->name('cart');
 
-// Checkout route
-Route::get('/checkout', function (Request $request) {
-    $stripePriceId = 'price_deluxe_album';
-    $quantity = 1;
+Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
 
-    return $request->user()->checkout([$stripePriceId => $quantity], [
-        'success_url' => route('checkout-success'),
-        'cancel_url' => route('checkout-cancel'),
+Route::get('/checkout/success', function () {
+    $items = Item::all();
+    return Inertia::render('Shop', [
+        'message' => 'Item successfully bought.',
+        'items' => $items
     ]);
-})->name('checkout');
+})->name('checkout-success');
 
-// Checkout success and cancel routes
-Route::view('/checkout/success', 'checkout.success')->name('checkout-success');
-Route::view('/checkout/cancel', 'checkout.cancel')->name('checkout-cancel');
+// Cancel route
+Route::get('/checkout/cancel', function () {
+    $items = Item::all();
+    return Inertia::render('Shop', [
+        'message' => 'Your payment was cancelled.',
+        'items' => $items
+    ]);
+})->name('checkout-cancel');
+
 
 // Item resource routes (CRUD for items)
 Route::resource('items', ItemController::class);
