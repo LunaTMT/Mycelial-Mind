@@ -2,7 +2,7 @@ import { Link } from '@inertiajs/react';
 
 const NavLinks = ({ items, currentUrl }: { items: { href: string; name: string }[]; currentUrl: string }) => {
     return (
-        <div className="flex gap-8 justify-center items-center">
+        <div className="flex gap-8 justify-center items-center font-Aileron_Thin text-2xl">
             {items.map((item) => (
                 <Link
                     key={item.href}

@@ -1,15 +1,15 @@
-import { PropsWithChildren, ReactNode } from 'react';
-import { usePage, router } from '@inertiajs/react';
+import { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
+import { usePage } from '@inertiajs/react';
 import { useNav } from '@/Contexts/NavContext';
 import { useDarkMode } from '@/Contexts/DarkModeContext';
 import { useCart } from "@/Contexts/CartContext";
+import { motion } from 'framer-motion';
 
 import Socials from '@/Components/Menu/Socials';
 import NavLinks from '@/Components/Nav/NavLinks';
 import DarkModeToggle from '@/Components/Buttons/DarkModeButton';
 import CartButton from '@/Components/Buttons/CartButton';
 import AccountDropdown from '@/Components/Dropdown/AccountDropdown';
-
 
 export default function Authenticated({ header, children }: PropsWithChildren<{ header?: ReactNode }>) {
     const { user } = usePage<PageProps>().props.auth;
@@ -18,41 +18,50 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
     const { darkMode, toggleDarkMode } = useDarkMode();
     const { scaled, cart, totalItems } = useCart();
 
+    const [mounted, setMounted] = useState(false);
+
     const navItems = [
         { href: '/', name: 'Home' },
         { href: '/shop', name: 'Shop' },
         { href: '/about', name: 'About' },
-        { href: '/dashboard', name: 'Dashboard' },
     ];
 
-    const handleProfileClick = () => router.get('/profile');
-    const handleLogout = () => router.post('/logout', {}, { preserveScroll: true });
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     return (
         <div className="relative w-full min-h-screen dark:bg-slate-800">
-            <header className={`flex flex-col items-center justify-center h-[12vh] sticky top-0 z-10 shadow-md transition-all duration-500 ease-in-out overflow-visible bg-white dark:bg-slate-700/50 dark:text-white ${scrollDirection === "down" ? '-translate-y-1/2' : ''}`}>
-                
+            <motion.header
+                className="flex flex-col items-center justify-center h-[12vh] sticky top-0 z-10 shadow-md overflow-visible bg-white dark:bg-slate-700/50 dark:text-white"
+                initial={{ y: -100 }}  // Starts above the screen
+                animate={{ y: 0 }}     // Ends at its normal position
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                whileInView={{
+                    y: scrollDirection === "down" ? "-50%" : "0",
+                }}
+                viewport={{ once: true }} // Animation occurs once when the header is in view
+            >
                 {/* top nav */}
-                <nav className={`w-full h-[6vh] flex items-center justify-center z-50 max-w-7xl sm:px-6 lg:px-8 ${scrollDirection === "down" ? '-translate-y-full' : 'translate-y-0'} transition-transform duration-500 ease-in-out`}>
-                    
+                <nav className={`w-full h-[6vh] flex items-center justify-center z-50 max-w-7xl sm:px-6 lg:px-8`}>
                     {/* left */}
                     <NavLinks items={navItems} currentUrl={url} />
-                    
+
                     {/* right */}
                     <div className="flex items-center ml-auto justify-center relative">
                         <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
                         <CartButton cart={cart} totalItems={totalItems} scaled={scaled} />
-                        <AccountDropdown handleProfileClick={handleProfileClick} handleLogout={handleLogout} />
+                        <AccountDropdown />
                     </div>
                 </nav>
 
-                 {/* bottom nav */}
+                {/* bottom nav */}
                 <div className="flex h-[6vh] justify-between items-center mx-auto w-full max-w-7xl sm:px-6 lg:px-8">
                     {header}
                 </div>
-            </header>
+            </motion.header>
 
-            <main className="relative w-full min-h-[88vh] flex flex-col gap-10 justify-start items-center mx-auto py-4 sm:px-6 max-w-7xl lg:px-8">
+            <main className="relative w-full min-h-[88vh] flex flex-col gap-2 justify-start items-center mx-auto py-4 sm:px-6 max-w-7xl lg:px-8 ">
                 {children}
             </main>
 
@@ -64,5 +73,3 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
         </div>
     );
 }
-
-

@@ -1,12 +1,15 @@
 import { MdAccountBox } from "react-icons/md";
 import Dropdown from '@/Components/Login/Dropdown';
+import { usePage, router } from '@inertiajs/react';
 
-interface AccountDropdownProps {
-    handleProfileClick: () => void;
-    handleLogout: () => void;
-}
+const AccountDropdown = () => {
+    const menuItems = [
+        { label: "Profile", onClick: () => router.get('/profile') },
+        { label: "Orders", onClick: () => console.log("Orders clicked") },
+        { label: "Shipping", onClick: () => console.log("Shipping clicked") },
+        { label: "Log Out", onClick: () => router.post('/logout', {}, { preserveScroll: true }) },
+    ];
 
-const AccountDropdown = ({ handleProfileClick, handleLogout }: AccountDropdownProps) => {
     return (
         <Dropdown>
             <Dropdown.Trigger>
@@ -14,20 +17,19 @@ const AccountDropdown = ({ handleProfileClick, handleLogout }: AccountDropdownPr
             </Dropdown.Trigger>
 
             <Dropdown.Content>
-                <ul className="absolute right-0 top-full mt-2 border border-gray-200 dark:border-gray-600 w-full bg-white dark:bg-gray-800 shadow-lg rounded-md z-50">
+            <ul className="relative right-0 top-full mt-2 border border-gray-200 dark:border-gray-600 w-full bg-white dark:bg-gray-800 shadow-lg rounded-md z-50">
+                {menuItems.map((item, index) => (
                     <li
+                        key={index}
                         className="cursor-pointer px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300"
-                        onClick={handleProfileClick}
+                        onClick={item.onClick}
                     >
-                        Profile
+                        {item.label}
                     </li>
-                    <li
-                        className="cursor-pointer px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300"
-                        onClick={handleLogout}
-                    >
-                        Log Out
-                    </li>
-                </ul>
+                ))}
+            </ul>
+
+
             </Dropdown.Content>
         </Dropdown>
     );

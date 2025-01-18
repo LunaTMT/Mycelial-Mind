@@ -18,6 +18,12 @@ import { IoHomeOutline } from 'react-icons/io5';
 import { BsShop } from "react-icons/bs";
 import { GrResources } from "react-icons/gr";
 import { FaInfoCircle } from "react-icons/fa";
+import CustomerReviews from "./Home/CustomerReviews";
+
+import FadeInOut from "@/Components/Animations/FadeInOut";
+import FreeDelivery from "./Home/FreeDelivery";
+import MoneyBackGuarantee from "./Home/MoneyBackGuarantee";
+import ImageGrid from "@/Components/Grid/ImageGrid";
 
 // Define the types for the page props
 interface WelcomeProps {
@@ -63,23 +69,43 @@ const Welcome: React.FC<WelcomeProps> = ({
     return (
         <>
             <Layout header={
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+                <h2 className="text-xl font-Aileron_Thin text-gray-800 dark:text-white">
                     Home
                 </h2>
             }>
                 <Head title="Welcome" />
  
                         
-                <VideoPlayer src="/assets/videos/time_lapse.mp4" />
-                <VideoPlayer src="/assets/videos/time_lapse.mp4" />
-                <VideoPlayer src="/assets/videos/time_lapse.mp4" />
-           
+                <FadeInOut>
+                    <VideoPlayer src="/assets/videos/time_lapse.mp4" />
+                </FadeInOut>
+
+                <FadeInOut>
+                    <ImageGrid />
+                </FadeInOut>
+
+
+                <FadeInOut>
+                    <CustomerReviews />
+                </FadeInOut>
                     
+                
 
                
 
 
                 {/* add this to dashboard 
+
+
+                    <FadeInOut>
+                        <FreeDelivery />
+                    </FadeInOut>
+
+                    <FadeInOut>
+                        <MoneyBackGuarantee />
+                    </FadeInOut>
+
+
                     main className="relative py-12 w-full h-auto grid grid-cols-2 grid-rows-3 gap-5 overflow-hidden mx-auto max-w-7xl lg:px-8"
 
                     <WelcomeCard

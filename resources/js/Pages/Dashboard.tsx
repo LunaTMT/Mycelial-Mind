@@ -34,9 +34,9 @@ export default function Dashboard() {
 
     // Right card data
     const rightCardData = [
-        { title: "Profile", icon: <MdAccountBox className={IconClass} />, className: 'row-start-1' },
-        { title: "Orders", icon: <BiSolidPackage className={IconClass} />, className: 'row-start-2' },
-        { title: "Shipping", icon: <FaShippingFast className={IconClass} />, className: 'row-start-3' },
+        { title: "Profile",     description: "Update your email, change your password, or delete your account.", icon: <MdAccountBox className={IconClass} />, className: 'row-start-1' },
+        { title: "Orders",      description: "View your orders and track them", icon: <BiSolidPackage className={IconClass} />, className: 'row-start-2' },
+        { title: "Shipping",    description: "Change your shipping address", icon: <FaShippingFast className={IconClass} />, className: 'row-start-3' },
     ];
 
     return (
@@ -60,6 +60,7 @@ export default function Dashboard() {
                     >
                         <WelcomeCard
                             title={card.title}
+                            description={card.description}
                             icon={card.icon}
                             className={card.className}
                         />

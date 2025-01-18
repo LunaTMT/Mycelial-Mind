@@ -15,7 +15,7 @@ class ItemSeeder extends Seeder
             'description' => 'Item 1 description',
             'price' => 10,
             'stock' => 100,
-            'images' => json_encode(['assets/images/products/1/0.png', 'assets/images/products/1/1.png', 'assets/images/products/1/2.png', 'assets/images/products/1/3.png', 'assets/images/products/1/4.png', 'assets/images/products/1/5.png']), // Add image paths as a JSON array
+            'images' => json_encode(['assets/images/products/1/0.png', 'assets/images/products/1/1.png', 'assets/images/products/1/2.png', 'assets/images/products/1/3.png', 'assets/images/products/1/4.png']), 
             'category' => 'Agar'
         ]);
         

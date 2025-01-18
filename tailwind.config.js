@@ -16,6 +16,7 @@ export default {
                 Aileron_Thin: ['Aileron_Thin', ...defaultTheme.fontFamily.sans],
                 Aileron_UltraLight: ['Aileron_UltraLight', ...defaultTheme.fontFamily.sans],
                 Audrey_Normal: ['Audrey_Normal', ...defaultTheme.fontFamily.sans],
+                Poppins: ['Poppins', ...defaultTheme.fontFamily.sans], // Add custom Poppins font
             },
         },
     },
@@ -23,4 +24,20 @@ export default {
     darkMode: 'class', // This enables dark mode based on the presence of the 'dark' class
 
     plugins: [forms],
+
+    corePlugins: {
+        preflight: true,
+    },
+
+    extend: {
+        addComponents: {
+            '.scrollbar-hidden::-webkit-scrollbar': {
+                display: 'none',
+            },
+            '.scrollbar-hidden': {
+                '-ms-overflow-style': 'none',   // For Internet Explorer
+                'scrollbar-width': 'none',       // For Firefox
+            },
+        },
+    },
 };

@@ -2,11 +2,12 @@ import React from "react";
 
 interface WelcomeCardProps {
     title: string;
+    description: string;
     icon: React.ReactElement; // Expecting a React element for the icon
     className: string;
 }
 
-const WelcomeCard: React.FC<WelcomeCardProps> = ({ title, icon, className }) => {
+const WelcomeCard: React.FC<WelcomeCardProps> = ({ title, description, icon, className }) => {
     return (
         <a
             className={`relative flex flex-col p-10 gap-5 w-full h-full
@@ -15,7 +16,7 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({ title, icon, className }) => 
                 ${className}`}
         >
             {/* Title */}
-            <h2 className="text-8xl font-Aileron_UltraLight text-black 
+            <h2 className="text-7xl font-Aileron_UltraLight text-black 
                 group-hover:text-black dark:text-white dark:group-hover:text-white
                 transition-all duration-300 transform group-hover:translate-x-[20px]">
                 {title}
@@ -23,8 +24,7 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({ title, icon, className }) => 
 
             {/* Paragraph */}
             <p className="text-lg text-slate-700 dark:text-slate-300 group-hover:text-black dark:group-hover:text-white">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-
+                {description}
             </p>
 
             {/* Icon */}

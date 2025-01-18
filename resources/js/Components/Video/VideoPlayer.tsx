@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import CompanyInfo from "@/Pages/Home/CompanyInfo";
 
 interface VideoPlayerProps {
@@ -10,16 +10,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const videoContainerRef = useRef<HTMLDivElement | null>(null); // Create a ref for the video container
 
-  // Track the scroll progress of the video container
-  const { scrollYProgress } = useScroll({
-    target: videoContainerRef, // Reference the video container
-    offset: ["start end", "end start"], // Adjust the offset when the video enters and leaves the view
-  });
-
-  // Map scrollYProgress to opacity for the video container
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.5, 1], [0, 1, 1, 0]);
-  console.log(scrollYProgress);
-
   const handleEnded = () => {
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
@@ -29,19 +19,15 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
 
   return (
     <motion.div
-      ref={videoContainerRef} // Apply the ref to the video container
-      className="relative w-full h-full rounded-xl bg-gradient-to-b from-gray-900 via-black to-gray-900"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 2 }}
-      style={{
-        opacity: opacity, // Apply the opacity transformation based on scroll progress
-      }}
+      ref={videoContainerRef}
+      className="relative w-full min-h-[85vh] rounded-lg flex items-center justify-center  "
+      initial={{ opacity: 0, y: "20%" }}
+      animate={{ opacity: 1, y: "0%" }}
+      transition={{ opacity: { duration: 2 }, y: { duration: 1, ease: "easeOut" } }}
     >
-      {/* Video with dissolve effect */}
       <video
         ref={videoRef}
-        className="w-full min-h-[85vh] object-cover rounded-xl"
+        className="w-[100vw] min-h-[85vh] object-cover rounded-lg p-[2px]"
         autoPlay
         muted
         loop
@@ -51,9 +37,19 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
         Your browser does not support the video tag.
       </video>
 
-      {/* Overlayed content */}
-      <CompanyInfo />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center gap-5">
+        <img
+          src="/assets/images/logo2.png"
+          alt="Mycenic Logo"
+          className="w-[60%] rounded-full bg-gradient-to-t from-black "
+        />
+        <h1 className="font-Audrey_Normal text-white text-9xl leading-tight bg-clip-text bg-gradient-to-tr  ">
+          MYCENIC
+        </h1>
+      </div>
+      
     </motion.div>
+
   );
 };
 

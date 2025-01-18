@@ -38,19 +38,7 @@ const Item: React.FC<ItemProps> = ({ auth, item }) => {
         addToCart(newItem);  // Add the item to the cart and trigger scaling
     };
 
-    const renderImageElements = () => {
-        return images.map((src: string, index: number) => (
-            <img
-                key={index}
-                src={`/${src}`}
-                alt={item.name}
-                className={`cursor-pointer rounded-lg w-full aspect-square object-cover transition duration-300 ease-in-out ${
-                    selectedImage === src ? 'bg-black/15 brightness-75 border border-black' : 'hover:bg-black/20 dark:hover:bg-white/30'
-                }`}
-                onMouseEnter={() => setSelectedImage(src)} // Set the image when hovered
-            />
-        ));
-    };
+
 
     return (
         <Layout header={
@@ -58,14 +46,26 @@ const Item: React.FC<ItemProps> = ({ auth, item }) => {
         }>
             <Head title={`${item.category}/${item.name}`} />
             <div className="relative w-full h-[78vh] p-5 flex justify-center items-center bg-white/10 dark:bg-gray-800  rounded-lg space-x-2 shadow-sm ">
-                <div className="w-[10%] h-full flex flex-col space-y-1 rounded-md dark:bg-gray-700">
-                    {renderImageElements()}
+               
+                <div className="w-[10%] h-full flex flex-col space-y-1 rounded-md dark:bg-gray-700 overflow-hidden">
+                    {images.map((src: string, index: number) => (
+                        <img
+                            key={index}
+                            src={`/${src}`}
+                            alt={item.name}
+                            className={`cursor-pointer rounded-lg h-1/6 object-cover transition duration-300 ease-in-out ${
+                                selectedImage === src ? 'bg-black/15 brightness-75 border border-black' : 'hover:bg-black/20 dark:hover:bg-white/30'
+                            }`}
+                            onMouseEnter={() => setSelectedImage(src)} // Set the image when hovered
+                        />
+                    ))}
                 </div>
+
 
                 <div className="w-[60%] h-full">
                     {selectedImage && (
                         <img
-                            src={`/${selectedImage}`} // Ensure the path is relative to the root directory
+                            src={`/${selectedImage}`} 
                             alt="Selected"
                             className="rounded-lg shadow-lg w-full h-full object-cover"
                         />

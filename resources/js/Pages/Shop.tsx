@@ -57,7 +57,7 @@ const Shop: React.FC<ShopProps> = ({ auth, items, message }) => {
         <Layout
             header={
                 <div className="h-full w-full overflow-visible flex justify-between items-center gap-4">
-                    <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Shop</h2>
+                    <h2 className="text-xl font-Aileron_Thin text-gray-800 dark:text-white">Shop</h2>
                     
                     <FilterDropdown showFilter={showFilter} />
 
