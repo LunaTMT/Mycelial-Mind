@@ -40,7 +40,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     };
 
     return (
-        <div className="relative flex flex-col items-start justify-start dark:bg-gray-800 rounded-md">
+        <div className="relative flex flex-col w-full h-full items-start justify-start dark:bg-gray-800 rounded-md">
             {role === 'admin' && (
                 <div className="absolute top-2 right-2 flex gap-2">
                     {/* Close/Delete Button */}

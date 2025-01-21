@@ -19,7 +19,7 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         try {
-            $category = $request->query('category', 'All');
+            $category = $request->query('category', 'All');  // Get category from query
             $sort = $request->query('sort', 'Newest'); // Get sort option from query
             
             $query = Item::query();
@@ -40,12 +40,14 @@ class ItemController extends Controller
     
             return Inertia::render('Shop', [
                 'items' => $items,
+                'category' => $category,  // Pass category as a prop
             ]);
         } catch (\Exception $e) {
             Log::error('Error fetching items: ' . $e->getMessage());
             return response()->json(['error' => 'Unable to fetch items'], 500);
         }
     }
+    
     
     
 

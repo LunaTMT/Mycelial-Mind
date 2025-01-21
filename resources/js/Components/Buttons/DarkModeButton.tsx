@@ -1,3 +1,5 @@
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
+
 interface DarkModeToggleProps {
     darkMode: boolean;
     toggleDarkMode: () => void;

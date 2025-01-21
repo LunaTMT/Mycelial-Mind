@@ -13,8 +13,9 @@ const AccountDropdown = () => {
     return (
         <Dropdown>
             <Dropdown.Trigger>
-                <MdAccountBox className="w-14 h-12 text-slate-700 hover:text-black dark:text-slate-300 dark:hover:text-white" />
+                <MdAccountBox className="w-14 h-12 text-black/75 hover:text-black hover:scale-110 dark:text-slate-300 dark:hover:text-white transition-transform duration-500" />
             </Dropdown.Trigger>
+
 
             <Dropdown.Content>
             <ul className="relative right-0 top-full mt-2 border border-gray-200 dark:border-gray-600 w-full bg-white dark:bg-gray-800 shadow-lg rounded-md z-50">

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Head } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';  // Import Inertia for navigation
 import { useCart, CartItem } from "@/Contexts/CartContext"; // Import the cart context
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import GuestLayout from '@/Layouts/GuestLayout';
+import Breadcrumb from "@/Components/Nav/Breadcrumb";
 
 interface ItemProps {
     auth: { user: any } | null;
@@ -38,15 +39,21 @@ const Item: React.FC<ItemProps> = ({ auth, item }) => {
         addToCart(newItem);  // Add the item to the cart and trigger scaling
     };
 
-
-
     return (
         <Layout header={
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{`${item.category} - ${item.name}`}</h2>
+            <div className="h-[6vh] w-full overflow-visible flex justify-between items-center gap-4 ">
+                <Breadcrumb 
+                    items={[
+                        { label: "Shop", link: "/shop" },  // Link to shop
+                        { label: item.category, link: `/shop?category=${item.category}` },  
+                        { label: item.name }  
+                    ]}
+                />
+            </div> 
         }>
             <Head title={`${item.category}/${item.name}`} />
-            <div className="relative w-full h-[78vh] p-5 flex justify-center items-center bg-white/10 dark:bg-gray-800  rounded-lg space-x-2 shadow-sm ">
-               
+
+            <div className="relative w-full h-[78vh] p-5 flex justify-center items-center bg-white/10 dark:bg-gray-800 rounded-lg space-x-2 shadow-sm mx-auto max-w-7xl sm:px-6 lg:px-8 ">
                 <div className="w-[10%] h-full flex flex-col space-y-1 rounded-md dark:bg-gray-700 overflow-hidden">
                     {images.map((src: string, index: number) => (
                         <img
@@ -60,7 +67,6 @@ const Item: React.FC<ItemProps> = ({ auth, item }) => {
                         />
                     ))}
                 </div>
-
 
                 <div className="w-[60%] h-full">
                     {selectedImage && (
@@ -77,8 +83,6 @@ const Item: React.FC<ItemProps> = ({ auth, item }) => {
                         <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{item.name}</h2>
                         <p className="text-3xl font-semibold text-black dark:text-gray-200">${item.price}</p>
                         <p className="text-xl font-medium text-black dark:text-gray-300">In Stock: {item.stock}</p>
-
-
 
                         <button
                             onClick={handleAddToCart}

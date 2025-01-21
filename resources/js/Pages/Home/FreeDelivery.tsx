@@ -1,5 +1,6 @@
 import { motion, useTransform, useScroll } from "framer-motion";
 import React, { useRef, useEffect } from "react";
+import { TbTruckDelivery } from "react-icons/tb";
 
 const FreeDelivery: React.FC = () => {
   // Create a ref for the parent div
@@ -11,14 +12,8 @@ const FreeDelivery: React.FC = () => {
     offset: ["start end", "end start"], // Adjust offset based on when you want to trigger the scroll effect
   });
 
-  // Log the scrollYProgress value
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange((latestProgress) => {
-      console.log("scrollYProgress:", latestProgress);
-    });
 
-    return () => unsubscribe(); // Cleanup the subscription when the component unmounts
-  }, [scrollYProgress]);
+
 
   // Scale transformation for the entire section based on scroll progress
   const scale = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
@@ -26,24 +21,10 @@ const FreeDelivery: React.FC = () => {
   return (
     <motion.div
       ref={containerRef} // Set the ref to track scroll progress of this div
-      className="w-full min-h-[85vh]  flex flex-col items-center justify-center text-white rounded-t-lg relative"
+      className="w-full min-h-[85vh]  flex flex-col items-center justify-center text-black rounded-t-lg relative"
       style={{ scale }} // Apply the scale transformation based on scroll progress
     >
-      {/* Video Background */}
-      <motion.div className="relative p-10 rounded-full flex items-center justify-center overflow-hidden">
-        <div className="w-64 h-64 rounded-full overflow-hidden">
-          <video
-            className="w-full h-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-          >
-            <source src="/assets/animations/truck.mov" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </motion.div>
+      <TbTruckDelivery />
 
       <h1 className="font-Audrey_Normal absolute inset-0 translate-y-[25%] flex items-center justify-center text-black dark:text-white text-6xl">
         FREE DELIVERIES

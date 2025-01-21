@@ -13,7 +13,7 @@ const CartButton = ({ cart, totalItems, scaled }: CartButtonProps) => {
         <Link href={route('cart')}>
             <div className="relative">
                 <CiShoppingCart
-                    className={`w-14 h-10 text-slate-700 hover:text-black dark:text-slate-300 dark:hover:text-white transition-transform duration-300 ${scaled ? 'scale-110' : ''}`}
+                    className={`w-14 h-10 text-slate-700 hover:text-black dark:text-slate-300 dark:hover:text-white transform hover:scale-110 transition-transform duration-500 ${scaled ? 'scale-110' : ''}`}
                 />
                 {cart.length > 0 && (
                     <motion.div

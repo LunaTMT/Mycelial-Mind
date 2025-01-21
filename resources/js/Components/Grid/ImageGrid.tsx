@@ -10,11 +10,11 @@ export default function ImageGrid() {
         { id: 6, text: "Medicinal",         image: "/assets/images/grid/medicinal.png" },
         { id: 7, text: "Foraging",          image: "/assets/images/grid/foraging.png" },
         { id: 8, text: "Microscopy",        image: "/assets/images/grid/microscopy.png" },
-        { id: 9, text: "Paraphernalia",     image: "/assets/images/grid/paraphernalia.png" },
+        { id: 9, text: "Paraphernalia",     image: "/assets/images/grid/agar.png" },
     ];
 
     return (
-        <div className="grid grid-cols-3 gap-2 w-full min-h-[85vh]">
+        <div className="grid grid-cols-3 gap-2 w-full min-h-[94vh] m-auto p-10 px-6 max-w-7xl lg:px-8">
             {items.map((item, index) => (
                 <motion.div
                     key={item.id}
@@ -24,7 +24,7 @@ export default function ImageGrid() {
                     viewport={{ once: true, amount: 0.5 }} // Trigger when 80% of the element is in view
                     transition={{ duration: 0.5, delay: index * 0.2 }} // Delay staggered animation for each item
                 >
-                    {/* Image with scale on hover */}
+                    {/* Image */}
                     <motion.img
                         src={item.image}
                         alt={item.text}
@@ -34,6 +34,8 @@ export default function ImageGrid() {
                     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         <span className="text-white text-4xl font-Aileron_Thin">{item.text}</span>
                     </div>
+                    {/* Hover shadow */}
+                    <div className="absolute inset-0 group-hover:shadow-2xl transition-shadow duration-500"></div>
                 </motion.div>
             ))}
         </div>

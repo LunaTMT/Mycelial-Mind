@@ -27,7 +27,6 @@ Route::get('/shop/cart', function () {
 })->name('cart');
 
 Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
-
 Route::get('/checkout/success', function () {
     $items = Item::all();
     return Inertia::render('Shop', [
@@ -35,8 +34,6 @@ Route::get('/checkout/success', function () {
         'items' => $items
     ]);
 })->name('checkout-success');
-
-// Cancel route
 Route::get('/checkout/cancel', function () {
     $items = Item::all();
     return Inertia::render('Shop', [

@@ -54,7 +54,7 @@ const CustomerReviews: React.FC = () => {
     };
 
     return (
-        <section className="min-h-[85vh] w-full  rounded-lg ">
+        <section className="min-h-[94vh] w-full rounded-lg ">
             
             <div className="max-w-6xl p-5 mx-auto">
                 {/* Header */}

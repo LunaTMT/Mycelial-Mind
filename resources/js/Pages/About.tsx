@@ -6,6 +6,8 @@ import { Head } from '@inertiajs/react';
 import Section from '@/Pages/About/Section'
 import FadeInOut from "@/Components/Animations/FadeInOut";
 
+import Section2 from "./Home/Section";
+
 interface AboutProps {
     auth: { user: any } | null;
 }
@@ -15,7 +17,7 @@ const About: React.FC<AboutProps> = ({ auth }) => {
 
     const sections = [
         {
-            title: "Mycenic",
+            title: "MYCENIC",
             subtitle: "A newly established company committed to delivering the highest level of professionalism in the field of mycology.",
             content: ""
         },
@@ -39,25 +41,24 @@ const About: React.FC<AboutProps> = ({ auth }) => {
     return (
         <Layout
             header={
-                <h2 className="text-xl font-Aileron_Thin text-gray-800 dark:text-white">
-                    About
-                </h2>
+                <div className="h-[6vh] w-full overflow-visible flex justify-between items-center gap-4 ">
+                    <h2 className="text-xl font-Aileron_Thin text-gray-800 dark:text-white">About</h2>
+                    
+                </div>
             }
         >
             <Head title="About" />
 
-            <div className="h-auto p-5 flex flex-col justify-center items-start rounded-lg">
-                
+            <div className="min-h-screen relative w-full flex flex-col justify-center items-center ">
 
                     {sections.map((section, index) => (
-                        <FadeInOut>
-                            <Section
-                                key={index}
-                                title={section.title}
-                                subtitle={section.subtitle}
-                                content={section.content}
-                            />
-                        </FadeInOut>
+                        <Section
+                            key={index}
+                            index={index} // Pass index to determine animation behavior
+                            title={section.title}
+                            subtitle={section.subtitle}
+                            content={section.content}
+                        />
                     ))}
                 </div>
          
