@@ -13,7 +13,7 @@ type PropType = {
   options?: EmblaOptionsType;
 };
 
-const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
+const Statistics: React.FC<PropType> = ({ slides, options }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     AutoScroll({ playOnInit: true, speed: 2 }),
   ]);
@@ -46,4 +46,4 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
   );
 };
 
-export default EmblaCarousel;
+export default Statistics;

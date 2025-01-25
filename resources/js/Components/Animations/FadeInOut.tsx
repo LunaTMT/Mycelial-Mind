@@ -22,7 +22,7 @@ const FadeInOut: React.FC<FadeInOutProps> = ({ children }) => {
   return (
     <motion.div
       ref={containerRef}
-      className="relative w-full h-[94vh]"
+      className="relative w-full h-auto"
       style={{
         opacity, // Apply the opacity transformation based on scroll progress
       }}

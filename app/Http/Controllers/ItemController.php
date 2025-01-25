@@ -19,34 +19,37 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         try {
-            $category = $request->query('category', 'All');  // Get category from query
+            $category = $request->query('category', 'ALL');  // Get category from query
             $sort = $request->query('sort', 'Newest'); // Get sort option from query
-            
+            $showFilter = $request->query('showFilter');
+
             $query = Item::query();
             
-            if ($category !== 'All') {
+            if ($category !== 'ALL') {
                 $query->where('category', $category);
             }
-    
-            if ($sort === 'Price: Low to High') {
+
+            if ($sort === 'LOW - HIGH') {
                 $query->orderBy('price', 'asc');
-            } elseif ($sort === 'Price: High to Low') {
+            } elseif ($sort === 'HIGH - LOW') {
                 $query->orderBy('price', 'desc');
             } else {
                 $query->orderBy('created_at', 'desc'); // Default to sorting by newest
             }
-            
+
             $items = $query->get();
-    
+
             return Inertia::render('Shop', [
                 'items' => $items,
-                'category' => $category,  // Pass category as a prop
+                'category' => $category,
+                'showFilter' => $showFilter,  
             ]);
         } catch (\Exception $e) {
             Log::error('Error fetching items: ' . $e->getMessage());
             return response()->json(['error' => 'Unable to fetch items'], 500);
         }
     }
+
     
     
     

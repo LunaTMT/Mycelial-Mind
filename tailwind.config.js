@@ -15,9 +15,10 @@ export default {
             fontFamily: {
                 Aileron_Thin: ['Aileron_Thin', ...defaultTheme.fontFamily.sans],
                 Aileron_UltraLight: ['Aileron_UltraLight', ...defaultTheme.fontFamily.sans],
-                Audrey_Normal: ['Audrey_Normal', ...defaultTheme.fontFamily.sans],
-                Poppins: ['Poppins', ...defaultTheme.fontFamily.sans], // Add custom Poppins font
+                Audrey: ['Audrey', ...defaultTheme.fontFamily.sans],
+                Poppins: ['Poppins', ...defaultTheme.fontFamily.sans],
             },
+ 
         },
     },
 
@@ -29,6 +30,7 @@ export default {
         preflight: true,
     },
 
+    // You only need one `extend` block, combine your existing `extend` with the new additions.
     extend: {
         addComponents: {
             '.scrollbar-hidden::-webkit-scrollbar': {

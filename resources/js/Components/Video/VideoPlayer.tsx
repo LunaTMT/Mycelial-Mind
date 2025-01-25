@@ -38,7 +38,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
       </video>
 
       {/* Bottom Gradient */}
-      <div className="absolute bottom-0 left-0 w-full h-52 bg-gradient-to-t from-white dark:from-slate-800 to-transparent pointer-events-none z-10"></div>
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent  pointer-events-none z-10"></div>
 
       {/* Content */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center gap-5">
@@ -57,7 +57,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
 
         {/* Animated Heading */}
         <motion.h1
-          className="font-Audrey_Normal text-white text-[200px] leading-tight bg-clip-text bg-gradient-to-tr"
+          className="font-Audrey  text-white text-[200px] leading-tight"
           initial={{ y: "100vh" }}
           animate={{ y: 0 }}
           transition={{
@@ -68,6 +68,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
         >
           MYCENIC
         </motion.h1>
+
+
       </div>
     </motion.div>
   );

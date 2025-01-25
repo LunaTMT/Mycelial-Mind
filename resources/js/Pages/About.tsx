@@ -3,10 +3,9 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
-import Section from '@/Pages/About/Section'
-import FadeInOut from "@/Components/Animations/FadeInOut";
-
-import Section2 from "./Home/Section";
+import Section from '@/Pages/About/Section';
+import { motion } from "framer-motion";
+import ArrowIcon from "@/Components/Buttons/ArrowIcon";
 
 interface AboutProps {
     auth: { user: any } | null;
@@ -39,29 +38,27 @@ const About: React.FC<AboutProps> = ({ auth }) => {
     ];
 
     return (
-        <Layout
-            header={
-                <div className="h-[6vh] w-full overflow-visible flex justify-between items-center gap-4 ">
-                    <h2 className="text-xl font-Aileron_Thin text-gray-800 dark:text-white">About</h2>
-                    
-                </div>
-            }
-        >
+        <Layout>
             <Head title="About" />
 
             <div className="min-h-screen relative w-full flex flex-col justify-center items-center ">
+                
+                
 
-                    {sections.map((section, index) => (
-                        <Section
-                            key={index}
-                            index={index} // Pass index to determine animation behavior
-                            title={section.title}
-                            subtitle={section.subtitle}
-                            content={section.content}
-                        />
-                    ))}
-                </div>
-         
+
+
+
+                {/* Sections */}
+                {sections.map((section, index) => (
+                    <Section
+                        key={index}
+                        index={index} // Pass index to determine animation behavior
+                        title={section.title}
+                        subtitle={section.subtitle}
+                        content={section.content}
+                    />
+                ))}
+            </div>
         </Layout>
     );
 };
