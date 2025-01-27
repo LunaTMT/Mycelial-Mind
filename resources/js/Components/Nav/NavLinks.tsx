@@ -9,7 +9,7 @@ const NavLinks = ({ items, currentUrl }: { items: { href: string; name: string }
                     href={item.href}
                     className={`relative group ${currentUrl === item.href ? 'active' : ''}`}
                 >
-                    <span className="">{item.name}</span>
+                    <span className="text-shadow-beige-glow">{item.name}</span>
                     <span
                         className={`absolute left-0 bottom-0 h-[1px] bg-gradient-to-r rounded-full 
                         from-yellow-400/50 via-yellow-400 to-yellow-400/50

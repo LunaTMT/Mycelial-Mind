@@ -16,9 +16,7 @@ export default function StarsGrid() {
         { id: 3, title: "⭐⭐⭐", number: 5 },
         { id: 4, title: "⭐⭐⭐⭐", number: 70 },
         { id: 5, title: "⭐⭐⭐⭐⭐", number: 256 },
-      ];
-
-    
+    ];
 
   return (
     <div className="relative h-[20vh] w-full">
@@ -32,18 +30,21 @@ export default function StarsGrid() {
         }}
         loop={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper w-[60%]  h-full"
+        className="mySwiper w-[60%] h-full"
       >
         {items.map((item) => (
           <SwiperSlide key={item.id}>
-            <div className="rounded-lg  w-full h-full  text-black dark:text-white gap-5  flex flex-col justify-center items-center">
-              <div className="text-center text-5xl ">
+            <div className="rounded-lg w-full h-full text-black dark:text-white gap-5 flex flex-col justify-center items-center">
+              <div className="text-center text-5xl text-yellow-400">
                 {item.number}
               </div>
-              <div className="text-center text-2xl font-Audrey">
+              <div
+                className="text-center text-2xl text-yellow-500 dark:text-yellow-400 text-shadow-golden-glow"
+                
+              >
                 {item.title}
               </div>
-             
+
             </div>
           </SwiperSlide>
         ))}

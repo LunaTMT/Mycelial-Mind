@@ -61,10 +61,12 @@
         "react-lorem-ipsum": "^1.4.10",
         "react-rating-stars-component": "^2.2.0",
         "react-slick": "^0.30.3",
+        "react-slot-counter": "^3.1.0",
         "react-toggle-dark-mode": "^1.1.1",
         "scroll-snap": "^4.0.5",
         "slick-carousel": "^1.8.1",
         "sweetalert2": "^11.15.3",
-        "swiper": "^11.2.1"
+        "swiper": "^11.2.1",
+        "tailwindcss-textshadow": "^2.1.3"
     }
 }

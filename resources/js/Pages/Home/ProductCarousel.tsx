@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion"; // Import motion for animations
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import FadeInOut from "@/Components/Animations/FadeInOut";
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -16,7 +18,7 @@ export default function ProductCarousel() {
     { id: 2, text: "SPORES", image: "/assets/images/grid/spore_syringe.png" },
     { id: 3, text: "SPAWN", image: "/assets/images/grid/spawn.png" },
     { id: 4, text: "GOURMET", image: "/assets/images/grid/gourmet.png" },
-    { id: 5, text: "INFUSED PRODUCTS", image: "/assets/images/grid/infused.png" },
+    { id: 5, text: "INFUSED", image: "/assets/images/grid/infused.png" },
     { id: 6, text: "MEDICINAL", image: "/assets/images/grid/medicinal.png" },
     { id: 7, text: "FORAGING", image: "/assets/images/grid/foraging2.png" },
     { id: 8, text: "MICROSCOPY", image: "/assets/images/grid/microscopy.png" },
@@ -24,46 +26,46 @@ export default function ProductCarousel() {
   ];
   return (
     <div className="relative h-[44vh] w-full 
-    bg-gradient-to-b from-sky-300 to-slate-600
-    
+    bg-transparent  shadow-lg
     dark:bg-gradient-to-b dark:from-slate-800 dark:to-slate-600">
-      <Swiper
-        effect="fade"
-        slidesPerView={4}
-        spaceBetween={30}
-        centeredSlides={false} // Avoid centering for even alignment
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-  
-        pagination={{ clickable: true }}
-        loop={true}
-        modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper w-[90%] h-full"
-      >
-        {items.map((item) => (
-          <SwiperSlide key={item.id}>
-            <div className="relative overflow-hidden rounded-lg w-full h-full group dark:shadow-none">
-              {/* Image */}
-              <img
-                src={item.image}
-                alt={item.text}
-                className="w-full h-full object-cover"
-              />
-              {/* Hover text */}
-              <div className="absolute inset-0 flex items-center justify-center dark:bg-gradient-to-b bg-black dark:from-slate-800/20 dark:to-slate-600/70 bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <span className="text-white text-5xl font-Audrey">
-                  {item.text}
-                </span>
+      
+      <FadeInOut>
+        <Swiper
+          effect="fade"
+          slidesPerView={3}
+          spaceBetween={30}
+          centeredSlides={false} // Avoid centering for even alignment
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+    
+          pagination={{ clickable: true }}
+          loop={true}
+          modules={[Autoplay, Pagination, Navigation]}
+          className="mySwiper w-[90%] h-full "
+        >
+          {items.map((item) => (
+            <SwiperSlide key={item.id}>
+              <div className="relative overflow-hidden rounded-lg w-full h-full group dark:shadow-none">
+                
+                {/* Image */}
+                <img
+                  src={item.image}
+                  alt={item.text}
+                  className="w-full h-full object-cover"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-black/75 via-transparent to-transparent bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <span className="text-white text-5xl text-shadow-beige-glow font-Audrey mb-4">
+                    {item.text}
+                  </span>
+                </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      {/* Custom styles for pagination and arrows */}
-
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </FadeInOut>
     </div>
   );
 }

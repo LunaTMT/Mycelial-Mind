@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import React, { ReactNode, useRef, useEffect } from "react";
+import React, { ReactNode, useRef } from "react";
 
 interface FadeInOutProps {
   children: ReactNode;
@@ -14,20 +14,18 @@ const FadeInOut: React.FC<FadeInOutProps> = ({ children }) => {
     offset: ["start end", "end start"],
   });
 
-
-
   // Map scrollYProgress to opacity for the container
-  const opacity = useTransform(scrollYProgress, [0.1, 0.4, 0.6, 1], [0, 1, 1, 0]);
+  const opacity = useTransform(scrollYProgress, [0.2, 0.5, 0.7, 1], [0, 1, 1, 0]);
 
   return (
     <motion.div
       ref={containerRef}
-      className="relative w-full h-auto"
+      className="relative w-full h-full"
       style={{
         opacity, // Apply the opacity transformation based on scroll progress
       }}
     >
-      {React.cloneElement(children as React.ReactElement<any>, { scrollYProgress })}
+      {children}
     </motion.div>
   );
 };

@@ -55,19 +55,18 @@ const Welcome: React.FC<WelcomeProps> = ({
       
 
  
-        <FadeInOut>
+        
           <ProductCarousel  />
-        </FadeInOut>
+        
 
-
-        <FadeInOut>
+ 
           <StatisticsGrid />
-        </FadeInOut>
+     
       
 
-        <FadeInOut>
+      
           <CustomerReviews />
-        </FadeInOut>
+       
 
   
       </Layout>

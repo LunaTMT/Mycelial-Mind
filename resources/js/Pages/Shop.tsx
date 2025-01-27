@@ -92,7 +92,7 @@ const Shop: React.FC<ShopProps> = ({ auth, items, category, message, showFilter=
             <Head title="Shop" />
             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8  ">
                 {filteredItems.length === 0 ? (
-                    <div className="w-full h-full shadow-2xl">
+                    <div className="w-full h-full">
                         <img
                         src={'assets/images/background/coming_soon.png'}
                         alt="Product Image"
