@@ -24,31 +24,24 @@ export default function ProductCarousel() {
     { id: 8, text: "MICROSCOPY", image: "/assets/images/grid/microscopy.png" },
     { id: 9, text: "AGAR", image: "/assets/images/grid/agar.png" },
   ];
+
   return (
-    <div className="relative h-[44vh] w-full 
-    bg-transparent  shadow-lg
-    dark:bg-gradient-to-b dark:from-slate-800 dark:to-slate-600">
-      
-      <FadeInOut>
+      <div className="relative h-[44vh] w-full bg-transparent shadow-lg dark:bg-gradient-to-b dark:from-slate-800 dark:to-slate-600 dark:shadow-2xl">
+
         <Swiper
-          effect="fade"
-          slidesPerView={3}
-          spaceBetween={30}
-          centeredSlides={false} // Avoid centering for even alignment
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-    
+          slidesPerView={4}
+          spaceBetween={0}
+          autoplay={{ delay: 2500, disableOnInteraction: false }}
           pagination={{ clickable: true }}
+          navigation={true} 
           loop={true}
           modules={[Autoplay, Pagination, Navigation]}
-          className="mySwiper w-[90%] h-full "
+          className="mySwiper w-[90%] h-full"
         >
+          
           {items.map((item) => (
             <SwiperSlide key={item.id}>
-              <div className="relative overflow-hidden rounded-lg w-full h-full group dark:shadow-none">
-                
+              <div className="relative overflow-hidden rounded-lg w-full h-full group ">
                 {/* Image */}
                 <img
                   src={item.image}
@@ -65,7 +58,9 @@ export default function ProductCarousel() {
             </SwiperSlide>
           ))}
         </Swiper>
-      </FadeInOut>
+
+ 
+    
     </div>
   );
 }

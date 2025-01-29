@@ -35,11 +35,11 @@ export default function StarsGrid() {
         {items.map((item) => (
           <SwiperSlide key={item.id}>
             <div className="rounded-lg w-full h-full text-black dark:text-white gap-5 flex flex-col justify-center items-center">
-              <div className="text-center text-5xl text-yellow-400">
+              <div className="text-center text-5xl font-extralight font-Poppins">
                 {item.number}
               </div>
               <div
-                className="text-center text-2xl text-yellow-500 dark:text-yellow-400 text-shadow-golden-glow"
+                className="text-center text-2xl text-yellow-500 dark:text-yellow-400 dark:text-shadow-golden-glow"
                 
               >
                 {item.title}

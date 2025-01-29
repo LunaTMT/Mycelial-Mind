@@ -33,7 +33,7 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({ showFilter, handleCateg
             className={`absolute w-[10vw] h-auto top-[115%]  z-30 
                 ${showFilter ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} transition-all duration-500 ease-in-out`}
         >
-            <ul className="space-y-2 w-full font-Poppins text-lg text-black dark:text-gray-300">
+            <ul className="space-y-2 w-full font-Poppins text-lg text-black dark:text-white">
                 {categories.map((category) => (
                     <li
                         key={category}

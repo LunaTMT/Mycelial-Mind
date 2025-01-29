@@ -37,7 +37,7 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
 
             
             <motion.header      
-                className="sticky w-full flex flex-col items-center justify-center min-h-6vh h-auto  top-0 z-10 shadow-xl overflow-visible  bg-[#f5f5dc] dark:bg-slate-700 dark:text-white"
+                className="sticky w-full flex flex-col items-center justify-center min-h-6vh h-auto  top-0 z-10 shadow-xl overflow-visible  bg-[#f5f5dc]  dark:bg-slate-700 dark:text-white"
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 whileInView={{
                     y: scrollDirection === "down" ? "-6vh" : "0",
@@ -75,14 +75,14 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
                 </div>
             </motion.header>
 
-            <main className="relative w-full min-h-[88vh] flex flex-col   justify-start items-center 
-                            bg-gradient-to-l from-[#f5f5dc]  via-white to-[#f5f5dc] 
+            <main className="relative w-full min-h-[88vh] flex flex-col   justify-start  items-center 
+                            bg-gradient-to-l from-[#f5f5dc]  via-white to-[#f5f5dc]  
                             dark:bg-gradient-to-b dark:from-slate-700 dark:via-slate-400/50 dark:to-slate-800">
                 {children}
             </main>
                 
 
-            <footer className="dark:bg-slate-800 border-t-[1px]bg-sky-300 dark:border-none border-black/20 bg-[#f5f5dc] relative bottom-0 w-full h-[auto] p-5 flex items-center justify-center gap-4">
+            <footer className="dark:bg-slate-800 border-t-[1px]  dark:border-none border-black/20 bg-[#f5f5dc] relative bottom-0 w-full h-[auto] p-5 flex items-center justify-center gap-4">
                     <Socials />
             </footer>
         </div>

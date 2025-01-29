@@ -16,6 +16,7 @@ import FadeInOut from "@/Components/Animations/FadeInOut";
 import ProductCarousel from "@/Pages/Home/ProductCarousel";
 import StatisticsGrid from "./Home/StatisticsGrid";
 import StarsGrid from "./Home/StarsGrid";
+import Products from "./Home/Products";
 
 
 
@@ -52,19 +53,9 @@ const Welcome: React.FC<WelcomeProps> = ({
         <Head title="Welcome" />
        
           <VideoPlayer src="/assets/videos/time_lapse.mp4" />
-      
 
- 
-        
-          <ProductCarousel  />
-        
-
- 
-          <StatisticsGrid />
-     
-      
-
-      
+          <Products />
+               
           <CustomerReviews />
        
 

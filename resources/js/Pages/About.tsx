@@ -4,8 +4,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
 import Section from '@/Pages/About/Section';
-import { motion } from "framer-motion";
-import ArrowIcon from "@/Components/Buttons/ArrowIcon";
+
+import DownwardArrow from "./About/DownwardArrow";
 
 interface AboutProps {
     auth: { user: any } | null;
@@ -21,17 +21,17 @@ const About: React.FC<AboutProps> = ({ auth }) => {
             content: ""
         },
         {
-            title: "Who are we?",
+            title: "WHO ARE WE?",
             subtitle: "We are a passionate and emerging company dedicated to the fascinating world of mycology.",
             content: "At our core, we are driven by a deep respect for fungi and the scientific and creative potential they hold for humanity."
         },
         {
-            title: "What do we do?",
+            title: "WHAT DO WE DO?",
             subtitle: "We are dedicated to offering premium products and services to enthusiasts and professionals alike.",
             content: "Whether you're a curious beginner or an experienced mycologist, we aim to provide top-quality products and expert resources that inspire and support your mycological journey. Currently, we specialize in selling high-quality spores for a variety of mycological applications."
         },
         {
-            title: "Future Plans",
+            title: "FUTURE PLANS",
             subtitle: "Our vision is to become the leading and most trusted company in the UK for all types of mycological supplies.",
             content: "In the near future, we plan to expand our product range to include medicinal and gourmet mushrooms, infused products, a broad selection of spores from many different species, comprehensive grow kits ranging from simple setups to large-scale, our own self-produced substrate, agar, and affordable laminar flow hoods."
         }
@@ -41,12 +41,15 @@ const About: React.FC<AboutProps> = ({ auth }) => {
         <Layout>
             <Head title="About" />
 
-            <div className="min-h-screen relative w-full flex flex-col justify-center items-center ">
+            <div className="min-h-screen relative w-full flex flex-col justify-center items-center  ">
+                
+
+                
+
+               
+
                 
                 
-
-
-
 
                 {/* Sections */}
                 {sections.map((section, index) => (

@@ -1,9 +1,12 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+
+
+
 import { Autoplay } from "swiper/modules";
 import StarsGrid from "./StarsGrid";
-import FadeInOut from "@/Components/Animations/FadeInOut";
+
 
 interface Review {
   customerName: string;
@@ -78,14 +81,18 @@ const renderStars = (rating: number) =>
 
 const CustomerReviews: React.FC = () => (
   <div className="w-full h-full dark:bg-gradient-to-b dark:from-slate-500 dark:to-slate-800"> 
-    <FadeInOut>
       <section
         className="min-h-screen h-[94vh] font-Poppins w-full flex flex-col justify-center items-center 
         "
       >
           
             <div className="text-center mb-8">
-              <h1 className="text-7xl font-Audrey text-black dark:text-white text-shadow-beige-glow">
+              <h1 className="text-7xl font-Audrey text-black  dark:text-transparent dark:bg-clip-text 
+            
+              dark:bg-gradient-to-t  dark:from-[#e7e77a] dark:to-white 
+              leading-tight
+              dark:text-#f5f5dc
+              dark:text-shadow-beige-glow">
                 CUSTOMER REVIEWS
               </h1>
               <p className="font-Poppins text-gray-600 dark:text-gray-400">
@@ -151,7 +158,6 @@ const CustomerReviews: React.FC = () => (
           </div>
         
       </section>
-    </FadeInOut>
   </div>
 );
 

@@ -16,17 +16,17 @@ export default function StatisticsGrid() {
     const items = [
         { id: 1, title: "REVIEWS", number: 200 },
         { id: 2, title: "SALES", number: 156 },
-        { id: 8, title: "DELIVERIES", number: 420 },
-        { id: 9, title: "SPORES SOLD", number: 69 },
-        { id: 10, title: "KITS SOLD", number: 666 },
-        { id: 11, title: "SPAWN SOLD", number: 999 },
+        { id: 3, title: "DELIVERIES", number: 420 },
+        { id: 4, title: "SPORES SOLD", number: 69 },
+        { id: 5, title: "KITS SOLD", number: 666 },
+        { id: 6, title: "SPAWN SOLD", number: 999 },
       ];
 
     
 
   return (
     <div className="relative h-[30vh] w-full 
-     shadow-md dark:shadow-md
+     
     dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-500">
       <FadeInOut>
         <Swiper
@@ -39,7 +39,7 @@ export default function StatisticsGrid() {
           }}
           loop={true}
           modules={[Autoplay, Pagination, Navigation]}
-          className="mySwiper w-[80%] h-full"
+          className="mySwiper w-[70%] h-full"
         >
           {items.map((item) => (
             <SwiperSlide key={item.id}>
@@ -48,7 +48,7 @@ export default function StatisticsGrid() {
                   {item.title}
                 </div>
                 <div className="text-center  font-Poppins text-5xl">
-                  <SlotCounter value={item.number} animateOnVisible={{ triggerOnce: false, rootMargin: '0px 0px -100px 0px' }} startValue={999}/>
+                  <SlotCounter value={item.number} animateOnVisible={{ triggerOnce: true, rootMargin: '0px 0px 0px 0px' }} startValue={999}/>
                 </div>
               </div>
             </SwiperSlide>
