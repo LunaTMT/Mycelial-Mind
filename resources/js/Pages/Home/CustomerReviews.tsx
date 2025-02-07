@@ -82,11 +82,11 @@ const renderStars = (rating: number) =>
 const CustomerReviews: React.FC = () => (
   <div className="w-full h-full dark:bg-gradient-to-b dark:from-slate-500 dark:to-slate-800"> 
       <section
-        className="min-h-screen h-[94vh] font-Poppins w-full flex flex-col justify-center items-center 
+        className="min-h-screen h-[94vh]  font-Poppins w-full flex flex-col justify-center items-center 
         "
       >
           
-            <div className="text-center mb-8">
+            <div className="text-center mb-2  ">
               <h1 className="text-7xl font-Audrey text-black  dark:text-transparent dark:bg-clip-text 
             
               dark:bg-gradient-to-t  dark:from-[#e7e77a] dark:to-white 
@@ -112,7 +112,7 @@ const CustomerReviews: React.FC = () => (
             >
               {reviews.map((review, index) => (
                 <SwiperSlide key={index}>
-                  <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg flex flex-col justify-between h-full dark:bg-gradient-to-b dark:from-transparent dark:to-slate-800">
+                  <div className="bg-white dark:bg-gray-700 p-6  rounded-lg shadow-lg flex flex-col justify-between h-full dark:bg-gradient-to-b dark:from-transparent dark:to-slate-800">
                     <div className="mb-4">
                       <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
                         {review.customerName}
@@ -142,13 +142,16 @@ const CustomerReviews: React.FC = () => (
           <StarsGrid />
 
           <div className="flex justify-center items-center flex-col mt-8">
-            <a
-              href="https://www.trustpilot.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-400 text-black font-semibold py-3 px-8 rounded-full transform hover:scale-105 transition-all duration-300  hover:shadow-[0_0_5px_#FFD700,0_0_15px_#FFD700,0_0_25px_#FFD700]"
-            >
-              Leave a Review on Trustpilot
+          <a
+                  href="https://www.trustpilot.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block 
+                  bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-400 text-black font-semibold text-lg py-3 px-10 rounded-full 
+                  transform hover:scale-105 transition-all duration-300 hover:shadow-[0_0_5px_#FFD700,0_0_15px_#FFD700,0_0_25px_#FFD700]
+                  font-Poppins"
+                >
+              LEAVE A REVIEW
             </a>
 
 

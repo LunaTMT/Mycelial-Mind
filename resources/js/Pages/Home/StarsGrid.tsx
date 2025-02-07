@@ -19,7 +19,7 @@ export default function StarsGrid() {
     ];
 
   return (
-    <div className="relative h-[20vh] w-full">
+    <div className="relative h-[10vh] w-full">
       <Swiper
         effect="fade"
         slidesPerView={5}
@@ -35,11 +35,11 @@ export default function StarsGrid() {
         {items.map((item) => (
           <SwiperSlide key={item.id}>
             <div className="rounded-lg w-full h-full text-black dark:text-white gap-5 flex flex-col justify-center items-center">
-              <div className="text-center text-5xl font-extralight font-Poppins">
+              <div className="text-center text-3xl font-extralight font-Poppins">
                 {item.number}
               </div>
               <div
-                className="text-center text-2xl text-yellow-500 dark:text-yellow-400 dark:text-shadow-golden-glow"
+                className="text-center text-2xl text-yellow-500 dark:text-yellow-400"
                 
               >
                 {item.title}

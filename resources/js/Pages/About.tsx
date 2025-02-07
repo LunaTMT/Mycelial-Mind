@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import GuestLayout from '@/Layouts/GuestLayout';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import { motion, useScroll, useTransform } from "framer-motion";
 
 import Section from '@/Pages/About/Section';
-
 import DownwardArrow from "./About/DownwardArrow";
 
 interface AboutProps {
@@ -37,30 +37,40 @@ const About: React.FC<AboutProps> = ({ auth }) => {
         }
     ];
 
+    // Track the last section
+    const lastSectionRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: lastSectionRef,
+        offset: ["start end", "end start"],
+    });
+
+    // Arrow visibility follows last section
+    const arrowOpacity = useTransform(scrollYProgress, [0, 0, 0.7, 0.8], [0, 1, 1, 0]);
+
     return (
         <Layout>
             <Head title="About" />
 
-            <div className="min-h-screen relative w-full flex flex-col justify-center items-center  ">
-                
-
-                
-
-               
-
-                
-                
-
+            <div className="min-h-screen relative w-full flex flex-col justify-center items-center">
                 {/* Sections */}
                 {sections.map((section, index) => (
                     <Section
                         key={index}
-                        index={index} // Pass index to determine animation behavior
+                        index={index}
                         title={section.title}
                         subtitle={section.subtitle}
                         content={section.content}
+                        
                     />
                 ))}
+
+                {/* Downward Arrow fixed to bottom with fade animation */}
+                <motion.div
+                    className="fixed bottom-[25%] left-1/2 transform -translate-x-1/2"
+                    style={{ opacity: arrowOpacity }}
+                >
+                    <DownwardArrow />
+                </motion.div>
             </div>
         </Layout>
     );

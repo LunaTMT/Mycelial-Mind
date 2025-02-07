@@ -30,7 +30,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
         Your browser does not support the video tag.
       </video>
 
-      
+      {/* Gradient Overlay (Bottom) */}
+      <div className="absolute bottom-0 left-0 w-full h-[80%] bg-gradient-to-t from-white via-transparent to-transparent dark:from-slate-800  pointer-events-none" />
+
       {/* Content */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center gap-5">
         {/* Logo */}
