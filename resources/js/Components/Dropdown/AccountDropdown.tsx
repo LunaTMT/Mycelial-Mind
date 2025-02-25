@@ -5,7 +5,7 @@ import { Inertia } from '@inertiajs/inertia';
 const AccountDropdown = () => {
     const menuItems = [
         { label: "PROFILE", onClick: () => Inertia.get('/profile') },
-        { label: "ORDERS", onClick: () => console.log("Orders clicked") },
+        { label: "ORDERS", onClick: () => Inertia.get('/orders') },
         { label: "SHIPPING", onClick: () => console.log("Shipping clicked") },
         { label: "LOG OUT", onClick: () => Inertia.post('/logout', {}, { preserveScroll: true }) },
     ];

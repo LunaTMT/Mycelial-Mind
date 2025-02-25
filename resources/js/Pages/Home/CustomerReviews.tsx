@@ -112,7 +112,7 @@ const CustomerReviews: React.FC = () => (
             >
               {reviews.map((review, index) => (
                 <SwiperSlide key={index}>
-                  <div className="bg-white dark:bg-gray-700 p-6  rounded-lg shadow-lg flex flex-col justify-between h-full dark:bg-gradient-to-b dark:from-transparent dark:to-slate-800">
+                  <div className="bg-white  p-6  rounded-lg shadow-lg flex flex-col justify-between h-full  dark:bg-transparent dark:bg-gradient-to-b dark:from-transparent dark:to-slate-800/90">
                     <div className="mb-4">
                       <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
                         {review.customerName}
@@ -139,7 +139,7 @@ const CustomerReviews: React.FC = () => (
             </div>
           )}
 
-          <StarsGrid />
+       
 
           <div className="flex justify-center items-center flex-col mt-8">
           <a

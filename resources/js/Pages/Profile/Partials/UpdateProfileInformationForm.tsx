@@ -31,10 +31,10 @@ export default function UpdateProfileInformation({
 
     return (
         <section
-            className={`rounded-lg shadow-md p-5 bg-white dark:bg-slate-700  border border-gray-200 dark:border-slate-600  ${className}`}
+            className={` bg-white dark:bg-slate-700 max-w-xl  ${className}`}
         >
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-slate-100">
+                <h2 className="text-lg font-medium text-gray-900 dark:text-slate-100 ">
                     Profile Information
                 </h2>
 
@@ -53,13 +53,14 @@ export default function UpdateProfileInformation({
 
                     <TextInput
                         id="name"
-                        className="mt-1 block w-full dark:bg-slate-800 dark:text-slate-100 dark:border-slate-600 focus:dark:border-indigo-500 focus:ring-indigo-500"
+                        className="mt-1 block w-full"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
                         required
                         isFocused
                         autoComplete="name"
                     />
+
 
                     <InputError
                         className="mt-2 dark:text-red-400"
@@ -77,7 +78,7 @@ export default function UpdateProfileInformation({
                     <TextInput
                         id="email"
                         type="email"
-                        className="mt-1 block w-full dark:bg-slate-800 dark:text-slate-100 dark:border-slate-600 focus:dark:border-indigo-500 focus:ring-indigo-500"
+                        className="mt-1 block w-full"
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
                         required
@@ -113,9 +114,9 @@ export default function UpdateProfileInformation({
                     </div>
                 )}
 
-                <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>
-                        Save
+                <div className="flex items-center gap-4 ">
+                    <PrimaryButton className="rounded-lg w-1/4" disabled={processing}>
+                        UPDATE
                     </PrimaryButton>
 
                     <Transition

@@ -50,20 +50,17 @@ class ItemController extends Controller
         }
     }
 
-    
-    
-    
-
     public function store(Request $request)
     {
         try {
             Log::info('Store method called.');
 
-            // Validate input data including images
+            // Validate input data including images and description
             $data = $request->validate([
                 'name'      => 'required|string|max:255',
                 'category'  => 'nullable|string',
                 'price'     => 'required|numeric',
+                'description' => 'nullable|string|max:1000', // Add description validation
                 'stock'     => 'nullable|integer',
                 'images'    => 'nullable|array|max:5',
                 'images.*'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
@@ -71,11 +68,12 @@ class ItemController extends Controller
 
             Log::info('Validated data: ', $data);
 
-            // Create the item in your database
+            // Create the item in your database with the description
             $item = Item::create([
                 'name'      => $data['name'],
                 'category'  => $data['category'] ?? 'Uncategorized',
                 'price'     => $data['price'],
+                'description' => $data['description'] ?? null,  // Store description
                 'stock'     => $data['stock'] ?? 0,
             ]);
 
@@ -100,7 +98,7 @@ class ItemController extends Controller
 
             $product = Product::create([
                 'name' => $data['name'],
-                'description' => "Category: " . ($data['category'] ?? 'Uncategorized'),
+                'description' => $data['description'] ?? "Category: " . ($data['category'] ?? 'Uncategorized'),  // Store description in Stripe
             ]);
 
             Log::info('Stripe product created: ', $product->toArray());
@@ -160,35 +158,28 @@ class ItemController extends Controller
     {
         try {
             $item = Item::findOrFail($id);
-
             $data = $request->validate([
                 'name' => 'sometimes|string|max:255',
                 'description' => 'nullable|string',
                 'price' => 'sometimes|numeric',
                 'stock' => 'sometimes|integer',
             ]);
-
-            // Update the item in the database
+    
             $item->update($data);
-
-            // Update the corresponding product and price in Stripe
-            Stripe::setApiKey(env('STRIPE_SECRET'));
-
-            $product = Product::retrieve($item->stripe_product_id);
-            $product->name = $data['name'] ?? $product->name;
-            $product->description = $data['description'] ?? $product->description;
-            $product->save();
-
-            $price = Price::retrieve($item->stripe_price_id);
-            $price->unit_amount = intval($data['price'] * 100); // Convert to cents
-            $price->save();
-
-            return response()->json($item);
+    
+            if ($request->has('current_url')) {
+                $currentUrl = $request->input('current_url');
+                return redirect($currentUrl)->with('message', 'Stock updated successfully.');
+            }
+    
+            // Fallback redirection
+            return redirect()->route('item', ['id' => $item->id]);
         } catch (\Exception $e) {
-            Log::error('Error updating item: ' . $e->getMessage());
             return response()->json(['error' => 'Unable to update item'], 500);
         }
     }
+    
+    
 
     public function destroy($id)
     {
@@ -231,6 +222,20 @@ class ItemController extends Controller
             return response()->json(['error' => 'Unable to delete item'], 500);
         }
     }
+
+    public function getStock($id)
+    {
+        try {
+            $item = Item::findOrFail($id);
+            return response()->json(['stock' => $item->stock]);
+        } catch (\Exception $e) {
+            Log::error("Error fetching stock for item ID $id: " . $e->getMessage());
+            return response()->json(['error' => 'Unable to fetch stock'], 500);
+        }
+    }
+
     
 
-}    
+}
+
+

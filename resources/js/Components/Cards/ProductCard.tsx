@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
-import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import Swal from 'sweetalert2';
-
 import { Inertia } from '@inertiajs/inertia';
 import { usePage } from '@inertiajs/react';
+import { useShop } from '@/Contexts/ShopContext'; // Import the ShopContext
 
 interface ProductCardProps {
     product: any;
@@ -14,7 +14,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const { auth } = usePage().props as any;
     const role = auth?.user?.role;
     const images = JSON.parse(product.images);
-    
+    const { filterVisible } = useShop(); // Access filterVisible from ShopContext
+
     const confirmDelete = (itemId: number) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -40,7 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     };
 
     return (
-        <div className="relative dark:bg-gray-800 rounded-md ">
+        <div className="relative dark:bg-gradient-to-t dark:from-slate-700 via-transparent to-transparent rounded-md ">
             {role === 'admin' && (
                 <div className="absolute top-2 right-2 flex gap-2">
                     {/* Close/Delete Button */}
@@ -50,22 +51,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     >
                         <AiOutlineClose size={20} />
                     </button>
-
-
                 </div>
             )}
 
-            <Link href={route('item', { id: product.id })}>
+            {/* Link with filterVisible as a query parameter */}
+            <Link href={route('item', { id: product.id})}>
+              
                 <img
                     src={images && images[0] ? `/${images[0]}` : 'assets/images/missing_image.png'}
                     alt="Product Image"
-                    className="w-full object-cover rounded-t-md"
+                    className="w-full  object-cover rounded-t-md"
                 />
-                <div className="w-full h-auto flex flex-col items-start p-2 bg-white dark:bg-slate-700/75 rounded-b-md font-Poppins">
+                
+                <div className="w-full   flex  flex-col items-center justify-center  p-2  rounded-b-md font-Poppins ">
+
                     <p className="text-center text-gray-700 dark:text-gray-300 italic">{product.category}</p>
                     <p className="text-center text-gray-800 dark:text-white">{product.name}</p>
-                    <p className="text-center text-lg text-gray-900 dark:text-gray-200 font-semibold">{product.price}</p>
+                    <p className="text-center text-lg text-gray-900 dark:text-gray-200 font-semibold">£{product.price}</p>
                 </div>
+              
             </Link>
         </div>
     );

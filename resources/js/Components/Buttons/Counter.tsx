@@ -9,10 +9,10 @@ interface CounterProps {
 
 const Counter: React.FC<CounterProps> = ({ quantity, onQuantityChange, onRemove }) => {
     return (
-        <div className="flex items-center justify-center w-full h-10 bg-white border rounded-full shadow-md">
+        <div className="flex items-center justify-center font-Poppins w-full h-full text-xl dark:text-white rounded-full ">
             {/* Minus Button or Delete Button */}
             <button
-                className="w-8  h-full flex items-center justify-center text-black rounded-l-full focus:outline-none"
+                className="w-full h-full flex items-center justify-center  rounded-l-full focus:outline-none"
                 onClick={() => {
                     if (quantity > 1) {
                         onQuantityChange(quantity - 1); // Decrease quantity
@@ -29,15 +29,15 @@ const Counter: React.FC<CounterProps> = ({ quantity, onQuantityChange, onRemove 
             </button>
 
             {/* Quantity Value */}
-            <div className="flex items-center justify-center w-14 h-full bg-transparent">
-                <span className="text-black">{quantity}</span>
+            <div className="flex items-center justify-center w-full h-full bg-transparent">
+                <span className="">{quantity}</span>
             </div>
 
 
 
             {/* Plus Button */}
             <button
-                className="w-8 h-full flex items-center justify-center text-black rounded-r-full focus:outline-none"
+                className="w-full h-full flex items-center justify-center  rounded-r-full focus:outline-none"
                 onClick={() => {
                     // Ensure quantity doesn't exceed stock
                     onQuantityChange(quantity + 1);

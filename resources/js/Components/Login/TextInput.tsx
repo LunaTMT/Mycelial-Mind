@@ -31,11 +31,16 @@ export default forwardRef(function TextInput(
         <input
             {...props}
             type={type}
-            className={
-                'rounded-md border-gray-300 shadow-sm  focus:ring-sky-500  ' +
-                className
-            }
+            className={`rounded-md border-gray-300 shadow-sm 
+            focus:ring-[0.2px]
+            focus:border-yellow-500  focus:ring-yellow-500 
+            
+            
+            dark:bg-slate-800 dark:text-slate-100 dark:border-slate-600 "
+            
+            ${className}`}
             ref={localRef}
         />
+
     );
 });

@@ -5,11 +5,12 @@ import { useDarkMode } from '@/Contexts/DarkModeContext';
 import { useCart } from "@/Contexts/CartContext";
 import { motion } from 'framer-motion';
 
-import Socials from '@/Components/Menu/Socials';
+
 import NavLinks from '@/Components/Nav/NavLinks';
-import DarkModeToggle from '@/Components/Buttons/DarkModeButton';
 import CartButton from '@/Components/Buttons/CartButton';
 import AccountDropdown from '@/Components/Dropdown/AccountDropdown';
+import Footer from './Footer';
+
 
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
@@ -37,7 +38,7 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
 
             
             <motion.header      
-                className="sticky w-full flex flex-col items-center justify-center min-h-6vh h-auto  top-0 z-10 shadow-xl overflow-visible  bg-[#f5f5dc]  dark:bg-slate-700 dark:text-white"
+                className="sticky w-full flex flex-col items-center justify-center min-h-6vh h-auto  top-0 z-10 shadow-xl overflow-visible  bg-white  dark:bg-slate-700 dark:text-white"
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 whileInView={{
                     y: scrollDirection === "down" ? "-6vh" : "0",
@@ -81,10 +82,11 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
                 {children}
             </main>
                 
+            <Footer />
 
-            <footer className="dark:bg-slate-800 border-t-[1px]  dark:border-none border-black/20 bg-[#f5f5dc] relative bottom-0 w-full h-[auto] p-5 flex items-center justify-center gap-4">
-                    <Socials />
-            </footer>
+
+
+
         </div>
     );
 }

@@ -3,6 +3,7 @@ import './bootstrap';
 
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+
 import { createRoot } from 'react-dom/client';
 
 import { CartProvider } from '../js/Contexts/CartContext';
@@ -21,11 +22,7 @@ const lenis = new Lenis({
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) =>
-        resolvePageComponent(
-            `./Pages/${name}.tsx`,
-            import.meta.glob('./Pages/**/*.tsx'),
-        ),
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.tsx`, import.meta.glob('./Pages/**/*.tsx')),
     setup({ el, App, props }) {
         const root = createRoot(el);
         root.render(
@@ -37,8 +34,5 @@ createInertiaApp({
                 </NavProvider>
             </DarkModeProvider>
         );
-    },
-    progress: {
-        color: '#4B5563',
     },
 });

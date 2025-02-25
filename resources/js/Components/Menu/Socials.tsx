@@ -14,13 +14,7 @@ export default function Socials() {
                     className="w-12 h-12 rounded-md text-gray-800 dark:text-white hover:filter hover:brightness-125 transition-all" 
                 />
             </a>
-            <a 
 
-            >
-                <FaSquareXTwitter 
-                    className="w-12 h-12 rounded-md text-gray-800 dark:text-white hover:filter hover:brightness-125 transition-all" 
-                />
-            </a>
         </>
     );
 }

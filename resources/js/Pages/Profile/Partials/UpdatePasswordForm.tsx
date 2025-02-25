@@ -50,7 +50,7 @@ export default function UpdatePasswordForm({
 
     return (
         <section
-            className={`p-6 rounded-lg shadow-md bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 ${className}`}
+            className={`bg-white dark:bg-slate-700 max-w-xl `}
         >
             <header>
                 <h2 className="text-lg font-medium text-gray-900 dark:text-slate-100">
@@ -79,7 +79,7 @@ export default function UpdatePasswordForm({
                             setData('current_password', e.target.value)
                         }
                         type="password"
-                        className="mt-1 block w-full dark:bg-slate-800 dark:text-slate-100 dark:border-slate-600 focus:dark:border-indigo-500 focus:ring-indigo-500"
+                        className="mt-1 block w-full "
                         autoComplete="current-password"
                     />
 
@@ -137,8 +137,8 @@ export default function UpdatePasswordForm({
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>
-                        Save
+                    <PrimaryButton className="rounded-lg w-1/4" disabled={processing}>
+                        UPDATE
                     </PrimaryButton>
 
                     <Transition
